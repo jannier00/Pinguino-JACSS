@@ -1,0 +1,100 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005     MAIN.dato
+006     lcd_init.i
+006     @PSTRINGC_91.@SCRATCH1
+007     lcd_init.@SCRATCH1
+007     @PSTRINGC_91.@SCRATCH2
+008     lcd_putc.c
+009     lcd_gotoxy.x
+009     @delay_ms1.P1
+00A     lcd_gotoxy.y
+00B     lcd_gotoxy.address
+00C     lcd_gotoxy.@SCRATCH1
+00D     lcd_send_byte.address
+00E     lcd_send_byte.n
+00F     lcd_read_byte.low
+00F     lcd_send_byte.@SCRATCH1
+010     lcd_send_nibble.nibble
+010     lcd_read_byte.high
+011.0   lcd_read_nibble.retval_0
+011     lcd_read_nibble.retval
+011.1   lcd_read_nibble.retval_1
+011.2   lcd_read_nibble.retval_2
+011.3   lcd_read_nibble.retval_3
+011     lcd_read_byte.@SCRATCH1
+025     g_InBootloader
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+202C  @delay_ms1
+2008  LCD_INIT_STRING
+2054  lcd_send_nibble
+209A  lcd_read_nibble
+20CC  lcd_read_byte
+20F0  lcd_send_byte
+2132  lcd_init
+2180  lcd_gotoxy
+21A2  lcd_putc
+2206  MAIN
+201C  @const103
+21E6  @PSTRINGC_91
+202A  @const105
+2206  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicI2C\
+
+Project Files:
+    ReceptorEsclavo.c                                       [12-jun-13 17:53  CRC=FB917D99]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 16:02  CRC=9D64384A]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 12:51  CRC=21A70465]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c [11-jun-13 17:29  CRC=A9E4CCCC]
+
+Source signature=0E6653E0
+
+Units:
+    C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicI2C\ReceptorEsclavo (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      ReceptorEsclavo.err
+    Ext Symbols: ReceptorEsclavo.esym
+    INHX32:      ReceptorEsclavo.hex
+    Symbols:     ReceptorEsclavo.sym
+    List:        ReceptorEsclavo.lst
+    Debug/COFF:  ReceptorEsclavo.cof
+    Project:     ReceptorEsclavo.PJT
+    Call Tree:   ReceptorEsclavo.tre
+    Statistics:  ReceptorEsclavo.STA

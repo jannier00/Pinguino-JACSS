@@ -1,0 +1,56 @@
+
+ROM used: 554 (2%)
+          558 (2%) including unused fragments
+
+          1 Average locations per line
+          7 Average locations per statement
+
+RAM used: 5 (0%) at main() level
+          17 (1%) worst case
+
+Stack used: 6 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   30     7   9  LCDHolamundo.c
+  462     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  411    75  91  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\lcd.c
+----- -----
+ 1036    82 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   4   1             @delay_ms1
+0     20   2   0             @const77
+0     70   6   3   587  6.0  lcd_read_byte
+0     12   1   0    59  4.2  lcd_read_nibble
+0     32   3   1   172  3.4  lcd_send_nibble
+0     58   5   3   447  4.6  lcd_send_byte
+0    100   9   2   717  5.9  lcd_init
+0     34   3   4   191  5.8  lcd_gotoxy
+0     82   7   1   354  4.7  lcd_putc
+0     56   5   0   136  2.0  MAIN
+0     12   1   0             @const103
+0     34   3   2             @PSTRINGC_94
+
+Program metrics:
+    Functions               8
+    Statements              82
+    Comments                278
+    Volume (V)              4055
+    Difficilty (D)          35.3
+    Effort to implement (E) 143177
+    Time to implement (T)   2 hours, 13 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   8
+    Maintainability (MI)    115
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   550  24018  
+
+
+

@@ -1,0 +1,310 @@
+CCS PCH C Compiler, Version 4.120, 5967               21-mar-13 13:11
+
+               Filename: C:\Users\Jannier\Documents\G-PIC\Programas\Interrupciones\Externa\Interrup.lst
+
+               ROM used: 252 bytes (1%)
+                         Largest free fragment is 24320
+               RAM used: 27 (1%) at main() level
+                         27 (1%) worst case
+               Stack:    1 worst case (0 in main + 1 for interrupts)
+
+*
+2000:  GOTO   20B6
+*
+2008:  MOVWF  04
+200A:  MOVFF  FD8,05
+200E:  MOVFF  FE0,06
+2012:  MOVLB  0
+2014:  MOVFF  FE9,0C
+2018:  MOVFF  FEA,07
+201C:  MOVFF  FE1,08
+2020:  MOVFF  FE2,09
+2024:  MOVFF  FD9,0A
+2028:  MOVFF  FDA,0B
+202C:  MOVFF  FF3,12
+2030:  MOVFF  FF4,13
+2034:  MOVFF  FFA,14
+2038:  MOVFF  FF5,15
+203C:  MOVFF  FF6,16
+2040:  MOVFF  FF7,17
+2044:  MOVFF  00,0E
+2048:  MOVFF  01,0F
+204C:  MOVFF  02,10
+2050:  MOVFF  03,11
+2054:  BTFSS  FF2.4
+2056:  GOTO   2060
+205A:  BTFSC  FF2.1
+205C:  GOTO   20AE
+2060:  MOVFF  0E,00
+2064:  MOVFF  0F,01
+2068:  MOVFF  10,02
+206C:  MOVFF  11,03
+2070:  MOVFF  0C,FE9
+2074:  MOVFF  07,FEA
+2078:  BSF    07.7
+207A:  MOVFF  08,FE1
+207E:  MOVFF  09,FE2
+2082:  MOVFF  0A,FD9
+2086:  MOVFF  0B,FDA
+208A:  MOVFF  12,FF3
+208E:  MOVFF  13,FF4
+2092:  MOVFF  14,FFA
+2096:  MOVFF  15,FF5
+209A:  MOVFF  16,FF6
+209E:  MOVFF  17,FF7
+20A2:  MOVF   04,W
+20A4:  MOVFF  06,FE0
+20A8:  MOVFF  05,FD8
+20AC:  RETFIE 0
+.................... //****************************************************************************************** 
+.................... /////////////       CONFIGURACION DE LA INTERRUPCION EXT POR RB0          ////////////////// 
+.................... //****************************************************************************************** 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... //#device ADC = 10 //Define la resolucion del ADC, comentar en caso de usar 8 
+.................... #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN 
+.................... #use delay(clock=48000000) 
+.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... ////                     USB_BOOTLOADER.H                              //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example USB bootloader (ex_usb_bootloader                 //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  For more documentation see ex_usb_bootloader.c                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... //// VERSION HISTORY                                                   //// 
+.................... ////                                                                   //// 
+.................... //// March 5th, 2009:                                                  //// 
+.................... ////   Cleanup for Wizard.                                             //// 
+.................... ////   PIC24 Initial release.                                          //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2009 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... //how big is the bootloader? 
+.................... //the bootloader will reside from address 0x0000 to this location.  the 
+.................... //application will then sit at this location+1 to the end of program memory. 
+.................... //#if defined(__DEBUG) 
+.................... #define LOADER_SIZE        (0x1FFF) 
+.................... //#else 
+.................... //#define LOADER_SIZE        (0x17FF) 
+.................... //#endif 
+....................  
+.................... //the loader and application need a common flag that determines if we are in 
+.................... //the bootloader or application, that way the ISR knows where to go.  this 
+.................... //is the location in ram that is reserved for this flag. 
+.................... #define LOC_IN_LOADER_FLAG  0x25 
+....................  
+.................... //// --- end configuration --- //////////////////////////////////////////// 
+....................  
+.................... #reserve LOC_IN_LOADER_FLAG 
+....................  
+.................... int8 g_InBootloader; 
+.................... #locate g_InBootloader=LOC_IN_LOADER_FLAG 
+....................  
+.................... #define LOADER_START       (0) 
+.................... #define LOADER_END         (LOADER_SIZE) 
+.................... #define APPLICATION_START  (LOADER_SIZE+1) 
+.................... #if defined(__USB_87J50__) 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-9) //configuration bits 
+.................... #else 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-1) 
+.................... #endif  
+.................... #define APPLICATION_ISR    (APPLICATION_START+8) 
+....................  
+.................... #ifdef _bootloader 
+....................  /* 
+....................   Provide an empty application, so if you load this .HEX file into the pic 
+....................   without an application this will prevent the pic from executing unknown code. 
+....................  */ 
+....................  #org APPLICATION_START,APPLICATION_START+0xF 
+....................  void BlankApplication(void)  
+....................  { 
+....................    while(TRUE); 
+....................  } 
+....................  
+....................  //we need to prevent the loader from using application space 
+....................  #if (APPLICATION_END > 0x10000) 
+....................    #org APPLICATION_START+0x10, 0xFFFF {} 
+....................    #if (APPLICATION_END > 0x20000) 
+....................       #org 0x10000, 0x1FFFF {} 
+....................       #org 0x20000, APPLICATION_END {} 
+....................    #else 
+....................       #org 0x10000, APPLICATION_END {} 
+....................    #endif 
+....................  #else 
+....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
+....................  #endif 
+....................  
+....................    #define  USB_CONFIG_PID       0x0034 
+....................  
+....................    #define USB_STRINGS_OVERWRITTEN 
+....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
+....................  
+....................    // Here is where the "CCS" Manufacturer string and "SERIAL DEMO" are stored. 
+....................    // Strings are saved as unicode. 
+....................    // These strings are mostly only displayed during the add hardware wizard. 
+....................    // Once the operating system drivers have been installed it will usually display 
+....................    // the name from the drivers .INF. 
+....................    char const USB_STRING_DESC[]={ 
+....................       //string 0 
+....................             4, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             0x09,0x04,   //Microsoft Defined for US-English 
+....................       //string 1  - manufacturer 
+....................             8, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'C',0, 
+....................             'S',0, 
+....................       //string 2 - product 
+....................             30, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'D',0, 
+....................             'C',0, 
+....................             ' ',0, 
+....................             'B',0, 
+....................             'o',0, 
+....................             'o',0, 
+....................             't',0, 
+....................             'l',0, 
+....................             'o',0, 
+....................             'a',0, 
+....................             'd',0, 
+....................             'e',0, 
+....................             'r',0 
+....................    }; 
+.................... #endif   //_bootloader 
+....................  
+.................... #ifndef _bootloader 
+....................  //in the application, this moves the reset and isr vector out of the bootload 
+....................  //space.  it then reserves the loader space from being used by the application. 
+....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
+....................  #org 0, LOADER_END {} 
+.................... #endif 
+....................  
+....................  
+.................... //****************************************************************************************** 
+.................... ///////////////////////ASIGNACION DE NOMBRES A LOS RESPECTIVOS PUERTOS////////////////////// 
+....................  
+.................... #BYTE PORTB=0xf81 
+.................... #BYTE PORTD=0xf83 
+....................  
+.................... //***************************************************************************************** 
+.................... ////LAS FUNC. FAST_IO EVITAN RECONFIGURAR LOS PUERTOS CON LAS FUNCIONES OUTPUT E INPUT///// 
+....................  
+.................... #USE FAST_IO(A)                   
+.................... #USE FAST_IO(B)                   
+.................... #USE FAST_IO(C)  
+.................... #USE FAST_IO(D) 
+.................... #USE FAST_IO(E) 
+....................  
+.................... //**************************************************************************************** 
+.................... ////////////////////////////////DEFINICION DE VARIABLES/////////////////////////////////// 
+.................... INT8 CONT=0; 
+.................... //**************************************************************************************** 
+.................... ////////////////////DEFINICION DE LAS FUNCIONES DE PROGRAMA/////////////////////////////// 
+.................... VOID CONTROL_EXT(); 
+.................... //**************************************************************************************** 
+.................... ///////////////    FUNCION DE INTERRUPCION EXTERNA POR RB0            //////////////////// 
+.................... //////    ESTA FUNCION SE EJECUTA CUANDO SE DETECTA UN FLANCO DE BAJADA EN RBO   ///////// 
+.................... /// POR CADA INTERRUPCION SE INCREMENTA EL VALOR DEL PUERTO D Y SE MUESTRA EN 8 LEDS  //// 
+....................  
+.................... #INT_EXT 
+.................... VOID CONTROL_EXT() 
+.................... { 
+.................... PORTD++;                //INCREMENTA EL VALOR DEL PUERTO 
+20AE:  INCF   F83,F
+.................... } 
+....................  
+.................... //*************************************************************************************** 
+.................... ////////////////////////FUNCION PRINCIPAL (MAIN)///////////////////////////////////////// 
+....................  
+20B0:  BCF    FF2.1
+20B2:  GOTO   2060
+.................... VOID MAIN (VOID) 
+.................... { 
+20B6:  CLRF   FF8
+20B8:  BCF    FD0.7
+20BA:  BSF    07.7
+20BC:  CLRF   FEA
+20BE:  CLRF   FE9
+20C0:  CLRF   19
+20C2:  MOVF   FC1,W
+20C4:  ANDLW  C0
+20C6:  IORLW  0F
+20C8:  MOVWF  FC1
+20CA:  MOVLW  07
+20CC:  MOVWF  FB4
+.................... //////////////////////  CONFIGURACION DE PUERTOS  /////////////////////////////////////// 
+.................... SET_TRIS_B(0B00000001); //SE CONFIGURA RB0 COMO ENTRADA 
+20CE:  MOVLW  01
+20D0:  MOVWF  F93
+.................... SET_TRIS_D(0);          //SE CONFIGURA EL PUERTO D COMO SALIDA PARA LOS LEDS 
+20D2:  MOVLW  00
+20D4:  MOVWF  F95
+.................... PORTB=0; 
+20D6:  CLRF   F81
+.................... PORTD=0; 
+20D8:  CLRF   F83
+....................  
+.................... /// SE HABILITA LA INTERRUPCION EXT Y SE HABILITAN INTERRUPCIONES GLOBALES ADEMAS SE /// 
+.................... //  ACTIVAN LAS RESISTENCIAS DE PULL-UP DEL PUERTO B Y SE SELECCIONA FLANCO DE BAJA  /// 
+....................  
+.................... SETUP_ADC_PORTS(NO_ANALOGS);     //NO CANALES ANALOGOS TODOS DIGITALES 
+20DA:  MOVF   FC1,W
+20DC:  ANDLW  C0
+20DE:  IORLW  0F
+20E0:  MOVWF  FC1
+.................... SETUP_ADC(ADC_OFF);              //NO SE UTILIZA CONVERSOR A/D 
+20E2:  BCF    FC2.0
+.................... ENABLE_INTERRUPTS(INT_EXT);                              
+20E4:  BSF    FF2.4
+.................... ENABLE_INTERRUPTS(GLOBAL);  
+20E6:  MOVLW  C0
+20E8:  IORWF  FF2,F
+.................... PORT_B_PULLUPS(TRUE);  
+20EA:  BCF    FF1.7
+.................... EXT_INT_EDGE(H_TO_L); 
+20EC:  BCF    FF1.6
+....................  
+....................  
+.................... WHILE(1) 
+.................... {                 //CONDICION DE REPOSO 
+.................... SLEEP(); 
+20EE:  MOVFF  FD3,00
+20F2:  MOVLW  7C
+20F4:  ANDWF  FD3,F
+20F6:  SLEEP 
+20F8:  MOVFF  00,FD3
+.................... } 
+20FC:  BRA    20EE
+.................... } 
+20FE:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV20 VREGEN NOWDT WDT32768
+   Word  3: 8500   CCP2C1 NOPBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

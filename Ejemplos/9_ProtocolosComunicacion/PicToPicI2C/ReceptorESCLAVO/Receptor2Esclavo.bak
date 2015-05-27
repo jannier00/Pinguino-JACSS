@@ -1,0 +1,40 @@
+////////////////////////////////////////////////////////////////////////////////
+//                    COMUNICACIÓN I2C EN TRE DOS PIC                         //
+//                                                                            //
+//                      Aplicación para PIC ESCLAVO                           //
+//                                                                            //
+//       El PIC maestro lee teclado y envía el dato al PIC esclavo via I2C    //
+//                      que lo mostrará en un lcd.                            //
+//                                                                            //
+//                            (c) RobotyPic                                   //
+////////////////////////////////////////////////////////////////////////////////
+#include <18F4550.h>
+//#device adc = 10 
+#fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
+#use delay(clock=48000000)  //#use delay(clock=20000000)
+#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#use standard_io(c)
+#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
+//#include <kbd2.c>  //Libreria para Teclado Matricial 4x4
+#use I2C(SLAVE, SDA=PIN_B0 ,SLOW, SCL=PIN_B1, ADDRESS=0xA2, FORCE_HW)
+
+
+void main() {
+
+   char dato;
+   usbInit();     //Inicializa la comunicacion
+   
+
+   while (1) {
+   
+         // Recepción por comunicación I2C 
+         
+         if ( i2c_poll( )) {
+            dato=i2c_read();
+             printf(usbWrite,"%c\n\r",dato);  //Salto de linea " \n "  Retorno de cursor " \r "
+               delay_us(200);    //Pausa de 1 s.                  //Muestra dato recibido por pantalla
+         if (dato=='*') printf(usbWrite,"presiono *");;   //Si es * borra la pantalla lcd
+         }
+   }
+}
+

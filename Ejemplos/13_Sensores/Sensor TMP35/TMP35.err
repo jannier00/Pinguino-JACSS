@@ -1,0 +1,6 @@
+>>> Warning 203 "C:\Program Files (x86)\PICC\drivers\usb\pic18_usb.c" Line 531(1,1): Condition always TRUE
+>>> Warning 216 "TMP35.c" Line 44(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_token_reset)
+>>> Warning 216 "TMP35.c" Line 44(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_tbe)
+>>> Warning 216 "TMP35.c" Line 44(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_cdc_flush_out_buffer)
+      Memory usage:   ROM=20%      RAM=21% - 24%
+      0 Errors,  4 Warnings.

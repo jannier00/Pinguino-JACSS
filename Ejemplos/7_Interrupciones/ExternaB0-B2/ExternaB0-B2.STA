@@ -1,0 +1,49 @@
+
+ROM used: 832 (3%)
+          836 (3%) including unused fragments
+
+          1 Average locations per line
+          16 Average locations per statement
+
+RAM used: 48 (2%) at main() level
+          52 (3%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  122    53 100  ExternaB0-B2.c
+  462     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+----- -----
+  717    53 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   2   1             @delay_ms1
+0     78   5   1   152  1.8  CONTROL_EXT
+0    132   8   1   295  1.9  CONTROL_EXT1
+0    132   8   1   295  1.9  CONTROL_EXT2
+0     86   5   0   375  2.8  MAIN
+
+Program metrics:
+    Functions               4
+    Statements              53
+    Comments                187
+    Volume (V)              1550
+    Difficilty (D)          8.3
+    Effort to implement (E) 12847
+    Time to implement (T)   12 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    52
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-0216E   360  0  
+02170-07FFE   468  23740  
+
+
+

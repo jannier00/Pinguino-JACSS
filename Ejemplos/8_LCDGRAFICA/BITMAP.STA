@@ -1,0 +1,63 @@
+
+ROM used: 4226 (13%)
+          4230 (13%) including unused fragments
+
+          3 Average locations per line
+          19 Average locations per statement
+
+RAM used: 1017 (50%) at main() level
+          1038 (51%) worst case
+
+Stack used: 5 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  121    45  20  BITMAP.c
+  462     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  833   183  80  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia_LCD.c
+----- -----
+ 1549   228 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   0   1             @delay_ms1
+0     34   0   1             @delay_us1
+0     54   1   3   289  5.5  nokia_write_dorc
+0     20   0   1    78  1.3  nokia_write_data
+0     20   0   1    78  1.3  nokia_write_command
+0     34   0   5             @MUL1616
+0     34   0   3   106  2.8  nokia_gotoxy
+0     50   1   2   131  3.5  nokia_borra_pantalla
+0     68   1   3   144  3.9  nokia_imprime_memoria
+0     46   1   4   105  3.4  nokia_borra_memoria
+0    588   7  25  1113 10.7  nokia_bitmap
+0     78   1   4    80  3.0  @DIVS88
+0    132   2   0   344  1.4  Lcd_init
+0    192   2   0             @const197
+0    518   6   0  1082  6.9  @const199
+0    518   6   0  1100  9.0  @const201
+0    518   6   0             @const203
+0    518   6   0    78  2.8  @const205
+0    760   9 508  1616  3.4  MAIN
+
+Program metrics:
+    Functions               14
+    Statements              228
+    Comments                640
+    Volume (V)              9768
+    Difficilty (D)          59.4
+    Effort to implement (E) 580661
+    Time to implement (T)   8 hours, 58 minutes
+    Est Delivered Bugs (B)  2
+    Cyclomatic Complexity   22
+    Maintainability (MI)    48
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE  4222  20346  
+
+
+

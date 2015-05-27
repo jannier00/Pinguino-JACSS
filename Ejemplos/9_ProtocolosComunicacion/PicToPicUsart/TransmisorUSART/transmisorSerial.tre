@@ -1,0 +1,9 @@
+ÀÄtransmisorSerial
+   ÀÄMAIN  0/74  Ram=1
+      ÃÄ??0??
+      ÃÄkbd_init  0/4  Ram=0
+      ÃÄkbd_getc  0/184  Ram=4
+      ³  ÃÄ@goto10056  0/34  Ram=0
+      ³  ÀÄ@const68  0/32  Ram=0
+      ÃÄ@PUTCHARI_BIU_1  0/10  Ram=0
+      ÀÄ@delay_us1  0/34  Ram=1

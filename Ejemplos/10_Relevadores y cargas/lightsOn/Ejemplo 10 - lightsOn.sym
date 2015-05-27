@@ -1,0 +1,119 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+017     @INTERRUPT_AREA
+018     @INTERRUPT_AREA
+019.0   _PWM0_Flag
+019.1   _PWM1_Flag
+019.2   _PWM2_Flag
+019.3   _PWM3_Flag
+019.4   _PWM4_Flag
+019.5   _PWM5_Flag
+019.6   _PWM6_Flag
+019.7   _PWM7_Flag
+01A.0   _PWM8_Flag
+01A.1   _PWM9_Flag
+01A.2   _PWM10_Flag
+01A.3   _PWM11_Flag
+01A.4   analogWrite._T3_Config_Flag
+01A.5   analogWrite._T2_Config_Flag
+01B     _PWM0_DutyCycle
+01C     _PWM1_DutyCycle
+01D     _PWM2_DutyCycle
+01E     _PWM3_DutyCycle
+01F     _PWM4_DutyCycle
+020     _PWM5_DutyCycle
+021     _PWM6_DutyCycle
+022     _PWM7_DutyCycle
+023     _PWM8_DutyCycle
+024     _PWM9_DutyCycle
+025     g_InBootloader
+026     _PWM10_DutyCycle
+027     _PWM11_DutyCycle
+028     Timer3_Interrupt.T3_Counter
+029     MAIN.@SCRATCH1
+02A     @delay_ms1.P1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+21B8  @delay_ms1
+20AE  Timer3_Interrupt
+21E2  MAIN
+21E2  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Relevadores y cargas\Ejemplo 10 - lightsOn\
+
+Project Files:
+    Ejemplo 10 - lightsOn.c                                 [27-ene-13 21:00  CRC=AAEB5401]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Cabecera JACSS.c [12-mar-12 17:35  CRC=3DBE24E2]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Arduino Functions.c [15-mar-12 19:24  CRC=ED898A0E]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\analogWrite.c [12-mar-12 17:20  CRC=FAB0266E]
+
+Source signature=8A9E8C7C
+
+Units:
+    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Relevadores y cargas\Ejemplo 10 - lightsOn\Ejemplo 10 - lightsOn (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      Ejemplo 10 - lightsOn.err
+    Ext Symbols: Ejemplo 10 - lightsOn.esym
+    INHX32:      Ejemplo 10 - lightsOn.hex
+    Symbols:     Ejemplo 10 - lightsOn.sym
+    List:        Ejemplo 10 - lightsOn.lst
+    Debug/COFF:  Ejemplo 10 - lightsOn.cof
+    Project:     Ejemplo 10 - lightsOn.PJT
+    Call Tree:   Ejemplo 10 - lightsOn.tre
+    Statistics:  Ejemplo 10 - lightsOn.STA

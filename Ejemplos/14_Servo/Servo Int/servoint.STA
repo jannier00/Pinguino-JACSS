@@ -1,0 +1,48 @@
+
+ROM used: 436 (1%)
+          440 (1%) including unused fragments
+
+          1 Average locations per line
+          19 Average locations per statement
+
+RAM used: 32 (2%) at main() level
+          37 (2%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   45    23 100  servoint.c
+  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+----- -----
+  640    23 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     32   4   1             @delay_us1
+0    122  14   1   351  6.2  TIMER2_isr
+0     32   4   5   154  2.6  @MUL1616
+0     80   9   0   223  4.1  MAIN
+
+Program metrics:
+    Functions               3
+    Statements              23
+    Comments                154
+    Volume (V)              955
+    Difficilty (D)          12.7
+    Effort to implement (E) 12108
+    Time to implement (T)   11 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   4
+    Maintainability (MI)    58
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-020AC   166  0  
+020AE-07FFE   266  24136  
+
+
+

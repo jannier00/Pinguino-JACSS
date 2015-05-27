@@ -1,0 +1,46 @@
+
+ROM used: 348 (1%)
+          352 (1%) including unused fragments
+
+          1 Average locations per line
+          15 Average locations per statement
+
+RAM used: 32 (2%) at main() level
+          32 (2%) worst case
+
+Stack used: 1 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   66    23 100  pwmsoft.c
+  462     0   0  ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+----- -----
+  661    23 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     52   7   0   149  4.3  TIMER2_isr
+0    126  18   0   391  3.3  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              23
+    Comments                162
+    Volume (V)              633
+    Difficilty (D)          7.8
+    Effort to implement (E) 4959
+    Time to implement (T)   5 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    150
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-020AC   166  0  
+020AE-07FFE   178  24224  
+
+
+

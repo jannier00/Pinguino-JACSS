@@ -1,0 +1,83 @@
+
+ROM used: 15228 (46%)
+          15232 (46%) including unused fragments
+
+          4 Average locations per line
+          23 Average locations per statement
+
+RAM used: 1265 (62%) at main() level
+          1335 (65%) worst case
+
+Stack used: 5 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  425   220  33  LCDGRAFICA.c
+  462     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+ 2220   257  39  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h
+  833   183  28  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia_LCD.c
+----- -----
+ 4073   660 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   0   1             @delay_ms1
+0     34   0   1             @delay_us1
+0    122   0  10             @FLT
+0     60   0   4             @SFTOI
+0     54   0   2             @ITOF
+0    246   1  11             @MULFF
+0    632   2  16             @ADDFF
+0    350   1  14             @DIVFF
+0     82   0   2             @SITOF
+0    904   3  46  1146  9.9  cos
+0     76   0   8    44  1.9  sin
+0    504   2   0             @const207
+0    212   1   0             @const209
+0    700   2   0             @const211
+0    200   1   0             @const215
+0    200   1   0             @const217
+0     54   0   3   289  5.5  nokia_write_dorc
+0     20   0   1    78  1.3  nokia_write_data
+0     20   0   1    78  1.3  nokia_write_command
+0     34   0   5             @MUL1616
+0     34   0   3   106  2.8  nokia_gotoxy
+0     50   0   2   131  3.5  nokia_borra_pantalla
+0     68   0   3   144  3.9  nokia_imprime_memoria
+0     46   0   4   105  3.4  nokia_borra_memoria
+0    204   1   8   370  8.0  nokia_punto
+0    762   3  27  1666  9.5  nokia_linea
+0    208   1   8   784  6.3  nokia_rectangulo
+0    352   1   7   234  6.2  arcocoseno
+0    680   2  18  1559  7.4  nokia_circulo
+0    596   2  25  1113 10.7  nokia_bitmap
+0     76   0   4             @DIVS88
+0    642   2  26  1786 13.0  nokia_texto
+0    132   0   0   344  1.4  Lcd_init
+0    184   1   0             @const316
+0    230   1   0             @const318
+0     80   0   0             @const320
+0     24   0   0             @const322
+0   6312  21 756 16224 12.4  MAIN
+
+Program metrics:
+    Functions               18
+    Statements              660
+    Comments                908
+    Volume (V)              35225
+    Difficilty (D)          110.0
+    Effort to implement (E) 3876144
+    Time to implement (T)   59 hours, 49 minutes
+    Est Delivered Bugs (B)  8
+    Cyclomatic Complexity   59
+    Maintainability (MI)    22
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE  15224  9344  
+
+
+

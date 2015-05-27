@@ -1,0 +1,7 @@
+ÀÄEjemplo 5 - dcMotorControl
+   ÃÄMAIN  0/72  Ram=1
+   ³  ÃÄ??0??
+   ³  ÃÄanalogWrite  0/460  Ram=2
+   ³  ³  ÀÄ@DIV88  0/42  Ram=3
+   ³  ÀÄ@delay_ms1  0/42  Ram=1
+   ÀÄTimer3_Interrupt  0/266  Ram=0

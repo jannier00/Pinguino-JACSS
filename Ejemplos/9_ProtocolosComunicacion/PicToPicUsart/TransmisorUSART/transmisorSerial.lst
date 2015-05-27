@@ -1,0 +1,469 @@
+CCS PCH C Compiler, Version 4.120, 5967               10-jun-13 16:12
+
+               Filename: C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicUsart\transmisorSerial.lst
+
+               ROM used: 376 bytes (1%)
+                         Largest free fragment is 24196
+               RAM used: 10 (0%) at main() level
+                         14 (1%) worst case
+               Stack:    2 locations
+
+*
+2000:  GOTO   2132
+.................... /*--------------------------------------------------------*\ 
+.................... |  Comunicación entre dos PIC's por USART. Transmisor     |                 
+.................... \*--------------------------------------------------------*/ 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... //#device adc = 10  
+.................... #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN 
+.................... #use delay(clock=48000000)  //#use delay(clock=20000000) 
+*
+2110:  MOVLW  01
+2112:  SUBWF  09,F
+2114:  BNC   212E
+2116:  CLRF   FEA
+2118:  MOVLW  09
+211A:  MOVWF  FE9
+211C:  MOVF   FEF,W
+211E:  BZ    212E
+2120:  MOVLW  02
+2122:  MOVWF  00
+2124:  DECFSZ 00,F
+2126:  BRA    2124
+2128:  BRA    212A
+212A:  DECFSZ FEF,F
+212C:  BRA    2120
+212E:  GOTO   2178 (RETURN)
+.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... ////                     USB_BOOTLOADER.H                              //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example USB bootloader (ex_usb_bootloader                 //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  For more documentation see ex_usb_bootloader.c                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... //// VERSION HISTORY                                                   //// 
+.................... ////                                                                   //// 
+.................... //// March 5th, 2009:                                                  //// 
+.................... ////   Cleanup for Wizard.                                             //// 
+.................... ////   PIC24 Initial release.                                          //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2009 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... //how big is the bootloader? 
+.................... //the bootloader will reside from address 0x0000 to this location.  the 
+.................... //application will then sit at this location+1 to the end of program memory. 
+.................... //#if defined(__DEBUG) 
+.................... #define LOADER_SIZE        (0x1FFF) 
+.................... //#else 
+.................... //#define LOADER_SIZE        (0x17FF) 
+.................... //#endif 
+....................  
+.................... //the loader and application need a common flag that determines if we are in 
+.................... //the bootloader or application, that way the ISR knows where to go.  this 
+.................... //is the location in ram that is reserved for this flag. 
+.................... #define LOC_IN_LOADER_FLAG  0x25 
+....................  
+.................... //// --- end configuration --- //////////////////////////////////////////// 
+....................  
+.................... #reserve LOC_IN_LOADER_FLAG 
+....................  
+.................... int8 g_InBootloader; 
+.................... #locate g_InBootloader=LOC_IN_LOADER_FLAG 
+....................  
+.................... #define LOADER_START       (0) 
+.................... #define LOADER_END         (LOADER_SIZE) 
+.................... #define APPLICATION_START  (LOADER_SIZE+1) 
+.................... #if defined(__USB_87J50__) 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-9) //configuration bits 
+.................... #else 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-1) 
+.................... #endif  
+.................... #define APPLICATION_ISR    (APPLICATION_START+8) 
+....................  
+.................... #ifdef _bootloader 
+....................  /* 
+....................   Provide an empty application, so if you load this .HEX file into the pic 
+....................   without an application this will prevent the pic from executing unknown code. 
+....................  */ 
+....................  #org APPLICATION_START,APPLICATION_START+0xF 
+....................  void BlankApplication(void)  
+....................  { 
+....................    while(TRUE); 
+....................  } 
+....................  
+....................  //we need to prevent the loader from using application space 
+....................  #if (APPLICATION_END > 0x10000) 
+....................    #org APPLICATION_START+0x10, 0xFFFF {} 
+....................    #if (APPLICATION_END > 0x20000) 
+....................       #org 0x10000, 0x1FFFF {} 
+....................       #org 0x20000, APPLICATION_END {} 
+....................    #else 
+....................       #org 0x10000, APPLICATION_END {} 
+....................    #endif 
+....................  #else 
+....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
+....................  #endif 
+....................  
+....................    #define  USB_CONFIG_PID       0x0034 
+....................  
+....................    #define USB_STRINGS_OVERWRITTEN 
+....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
+....................  
+....................    // Here is where the "CCS" Manufacturer string and "SERIAL DEMO" are stored. 
+....................    // Strings are saved as unicode. 
+....................    // These strings are mostly only displayed during the add hardware wizard. 
+....................    // Once the operating system drivers have been installed it will usually display 
+....................    // the name from the drivers .INF. 
+....................    char const USB_STRING_DESC[]={ 
+....................       //string 0 
+....................             4, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             0x09,0x04,   //Microsoft Defined for US-English 
+....................       //string 1  - manufacturer 
+....................             8, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'C',0, 
+....................             'S',0, 
+....................       //string 2 - product 
+....................             30, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'D',0, 
+....................             'C',0, 
+....................             ' ',0, 
+....................             'B',0, 
+....................             'o',0, 
+....................             'o',0, 
+....................             't',0, 
+....................             'l',0, 
+....................             'o',0, 
+....................             'a',0, 
+....................             'd',0, 
+....................             'e',0, 
+....................             'r',0 
+....................    }; 
+.................... #endif   //_bootloader 
+....................  
+.................... #ifndef _bootloader 
+....................  //in the application, this moves the reset and isr vector out of the bootload 
+....................  //space.  it then reserves the loader space from being used by the application. 
+....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
+....................  #org 0, LOADER_END {} 
+.................... #endif 
+....................  
+.................... //#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion. 
+.................... #include <kbd2.c>  //Libreria para Teclado Matricial 4x4 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                     KBD_LIB.C by Redraven                         //// 
+.................... ////                                                                   //// 
+.................... ////                     Derived from KBDD.C                           //// 
+.................... ////                  Generic keypad scan driver                       //// 
+.................... ////                                                                   //// 
+.................... ////  kbd_init()   Must be called before any other function.           //// 
+.................... ////                                                                   //// 
+.................... ////  c = kbd_getc(c)  Will return a key value if pressed or /0 if not //// 
+.................... ////                   This function should be called frequently so as //// 
+.................... ////                   not to miss a key press.                        //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,1997 Custom Computer Services            //// 
+.................... //// This source code may only be used by licensed users of the CCS C   //// 
+.................... //// compiler.  This source code may only be distributed to other       //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction  //// 
+.................... //// or distribution is permitted without written permission.           //// 
+.................... //// Derivative programs created using this software in object code     //// 
+.................... //// form are not restricted in any way.                                //// 
+.................... //////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... ////////////////// The following defines the keypad layout on port D 
+....................  
+.................... // Un-comment the following define to use port B 
+.................... #define use_portb_kbd TRUE 
+....................  
+.................... // Make sure the port used has pull-up resistors (or the LCD) on 
+.................... // the column pins 
+....................  
+....................  
+.................... #if defined(__PCH__) 
+.................... #if defined use_portb_kbd 
+....................    #byte kbd = 0xF81              // This puts the entire structure 
+.................... #else 
+....................    #byte kbd = 0xF83              // This puts the entire structure 
+.................... #endif 
+.................... #else 
+.................... #if defined use_portb_kbd 
+....................    #byte kbd = 6                  // on to port B (at address 6) 
+.................... #else 
+....................    #byte kbd = 8                  // on to port D (at address 8) 
+.................... #endif 
+.................... #endif 
+....................  
+.................... #if defined use_portb_kbd 
+....................    #define set_tris_kbd(x) set_tris_b(x) 
+.................... #else 
+....................    #define set_tris_kbd(x) set_tris_d(x) 
+.................... #endif 
+....................  
+.................... //Keypad connection:   (for example column 0 is B0) 
+....................  
+.................... #define COL0 (1 << 0) // PIN_B0 
+.................... #define COL1 (1 << 1) // PIN_B1 
+.................... #define COL2 (1 << 2) // PIN_B2 
+.................... #define COL3 (1 << 3) // PIN_B3 
+....................  
+.................... #define ROW0 (1 << 4) // PIN_B4 
+.................... #define ROW1 (1 << 5) // PIN_B5 
+.................... #define ROW2 (1 << 6) // PIN_B6 
+.................... #define ROW3 (1 << 7) // PIN_B7 
+....................  
+.................... #define ALL_ROWS (ROW0|ROW1|ROW2|ROW3) 
+.................... #define ALL_PINS (ALL_ROWS|COL0|COL1|COL2|COL3) 
+....................  
+.................... // Keypad layout: 
+.................... char const KEYS[4][4] = {{'1','2','3','A'}, 
+....................                          {'4','5','6','B'}, 
+....................                          {'7','8','9','C'}, 
+....................                          {'*','0','#','D'}}; 
+....................  
+.................... #define KBD_DEBOUNCE_FACTOR 33    // Set this number to apx n/333 where 
+....................                                   // n is the number of times you expect 
+....................                                   // to call kbd_getc each second 
+....................  
+.................... void kbd_init() { 
+.................... } 
+*
+2028:  GOTO   2162 (RETURN)
+....................  
+.................... char kbd_getc( ) { 
+....................    static byte kbd_call_count; 
+....................    static short int kbd_down; 
+....................    static char last_key; 
+....................    static byte col; 
+....................  
+....................    byte kchar; 
+....................    byte row; 
+....................  
+....................    kchar='\0'; 
+202C:  CLRF   09
+....................    if(++kbd_call_count>KBD_DEBOUNCE_FACTOR) { 
+202E:  INCF   04,F
+2030:  MOVF   04,W
+2032:  SUBLW  21
+2034:  BC    20D8
+....................        switch (col) { 
+2036:  MOVF   07,W
+2038:  ADDLW  FC
+203A:  BC    2062
+203C:  ADDLW  04
+203E:  GOTO   20E4
+....................          case 0   : set_tris_kbd(ALL_PINS&~COL0); 
+2042:  MOVLW  FE
+2044:  MOVWF  F93
+....................                     kbd=~COL0&ALL_PINS; 
+2046:  MOVWF  F81
+....................                     break; 
+2048:  BRA    2062
+....................          case 1   : set_tris_kbd(ALL_PINS&~COL1); 
+204A:  MOVLW  FD
+204C:  MOVWF  F93
+....................                     kbd=~COL1&ALL_PINS; 
+204E:  MOVWF  F81
+....................                     break; 
+2050:  BRA    2062
+....................          case 2   : set_tris_kbd(ALL_PINS&~COL2); 
+2052:  MOVLW  FB
+2054:  MOVWF  F93
+....................                     kbd=~COL2&ALL_PINS; 
+2056:  MOVWF  F81
+....................                     break; 
+2058:  BRA    2062
+....................          case 3   : set_tris_kbd(ALL_PINS&~COL3); 
+205A:  MOVLW  F7
+205C:  MOVWF  F93
+....................                     kbd=~COL3&ALL_PINS; 
+205E:  MOVWF  F81
+....................                     break; 
+2060:  BRA    2062
+....................        } 
+....................  
+....................        if(kbd_down) { 
+2062:  BTFSS  05.0
+2064:  BRA    2078
+....................          if((kbd & (ALL_ROWS))==(ALL_ROWS)) { 
+2066:  MOVF   F81,W
+2068:  ANDLW  F0
+206A:  SUBLW  F0
+206C:  BNZ   2076
+....................            kbd_down=false; 
+206E:  BCF    05.0
+....................            kchar=last_key; 
+2070:  MOVFF  06,09
+....................            last_key='\0'; 
+2074:  CLRF   06
+....................          } 
+....................        } else { 
+2076:  BRA    20D6
+....................           if((kbd & (ALL_ROWS))!=(ALL_ROWS)) { 
+2078:  MOVF   F81,W
+207A:  ANDLW  F0
+207C:  SUBLW  F0
+207E:  BZ    20CC
+....................              if((kbd & ROW0)==0) 
+2080:  MOVF   F81,W
+2082:  ANDLW  10
+2084:  BNZ   208A
+....................                row=0; 
+2086:  CLRF   0A
+....................              else if((kbd & ROW1)==0) 
+2088:  BRA    20AC
+208A:  MOVF   F81,W
+208C:  ANDLW  20
+208E:  BNZ   2096
+....................                row=1; 
+2090:  MOVLW  01
+2092:  MOVWF  0A
+....................              else if((kbd & ROW2)==0) 
+2094:  BRA    20AC
+2096:  MOVF   F81,W
+2098:  ANDLW  40
+209A:  BNZ   20A2
+....................                row=2; 
+209C:  MOVLW  02
+209E:  MOVWF  0A
+....................              else if((kbd & ROW3)==0) 
+20A0:  BRA    20AC
+20A2:  MOVF   F81,W
+20A4:  ANDLW  80
+20A6:  BNZ   20AC
+....................                row=3; 
+20A8:  MOVLW  03
+20AA:  MOVWF  0A
+....................              last_key =KEYS[row][col]; 
+20AC:  MOVF   0A,W
+20AE:  MULLW  04
+20B0:  MOVF   FF3,W
+20B2:  CLRF   0C
+20B4:  MOVWF  0B
+20B6:  CLRF   03
+20B8:  MOVF   07,W
+20BA:  ADDWF  0B,W
+20BC:  MOVWF  01
+20BE:  MOVF   0C,W
+20C0:  ADDWFC 03,F
+20C2:  MOVF   01,W
+20C4:  RCALL  2008
+20C6:  MOVWF  06
+....................              kbd_down = true; 
+20C8:  BSF    05.0
+....................           } else { 
+20CA:  BRA    20D6
+....................              ++col; 
+20CC:  INCF   07,F
+....................              if(col==4) 
+20CE:  MOVF   07,W
+20D0:  SUBLW  04
+20D2:  BNZ   20D6
+....................                col=0; 
+20D4:  CLRF   07
+....................           } 
+....................        } 
+....................       kbd_call_count=0; 
+20D6:  CLRF   04
+....................    } 
+....................   set_tris_kbd(ALL_PINS); 
+20D8:  MOVLW  FF
+20DA:  MOVWF  F93
+....................   return(kchar); 
+20DC:  MOVFF  09,01
+.................... } 
+20E0:  GOTO   2166 (RETURN)
+....................  
+.................... #use rs232(uart1, baud=9600)//usart1 -->ajuste de XMIT y RCV para la USART 1 
+*
+2106:  BTFSS  F9E.4
+2108:  BRA    2106
+210A:  MOVWF  FAD
+210C:  GOTO   2172 (RETURN)
+....................  
+.................... void main() { 
+*
+2132:  CLRF   FF8
+2134:  BCF    FD0.7
+2136:  CLRF   FEA
+2138:  CLRF   FE9
+213A:  BSF    FB8.3
+213C:  MOVLW  E1
+213E:  MOVWF  FAF
+2140:  MOVLW  04
+2142:  MOVWF  FB0
+2144:  MOVLW  A6
+2146:  MOVWF  FAC
+2148:  MOVLW  90
+214A:  MOVWF  FAB
+214C:  MOVF   FC1,W
+214E:  ANDLW  C0
+2150:  IORLW  0F
+2152:  MOVWF  FC1
+2154:  MOVLW  07
+2156:  MOVWF  FB4
+2158:  CLRF   04
+215A:  BCF    05.0
+215C:  CLRF   06
+215E:  CLRF   07
+....................       char c; 
+....................       kbd_init(); //inizializo drivers teclado 
+2160:  BRA    2028
+....................       PORT_B_PULLUPS(TRUE); //Activan resistencias de pull-up 
+2162:  BCF    FF1.7
+....................        
+....................       while(true) 
+....................          { 
+....................          c = kbd_getc(); 
+2164:  BRA    202C
+2166:  MOVFF  01,08
+....................          if(c != 0 )//si se ha pulsado una tecla    
+216A:  MOVF   08,F
+216C:  BZ    2178
+....................          {  
+....................             putc(c);//Envía el caracter vía serie por la USART del PIC 
+216E:  MOVF   08,W
+2170:  BRA    2106
+....................             delay_us(100);    //Pausa de 1 s. 
+2172:  MOVLW  64
+2174:  MOVWF  09
+2176:  BRA    2110
+....................          } 
+....................       } 
+2178:  BRA    2164
+.................... } 
+217A:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV20 VREGEN NOWDT WDT32768
+   Word  3: 8500   CCP2C1 NOPBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

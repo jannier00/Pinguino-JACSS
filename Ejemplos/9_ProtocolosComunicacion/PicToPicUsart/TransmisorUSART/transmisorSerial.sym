@@ -1,0 +1,82 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     kbd_getc.kbd_call_count
+005.0   kbd_getc.kbd_down
+006     kbd_getc.last_key
+007     kbd_getc.col
+008     MAIN.c
+009     @delay_us1.P1
+009     kbd_getc.kchar
+00A     kbd_getc.row
+00B     kbd_getc.@SCRATCH1
+00C     kbd_getc.@SCRATCH2
+025     g_InBootloader
+F81     kbd
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+2110  @delay_us1
+2008  KEYS
+2028  kbd_init
+202C  kbd_getc
+20E4  @goto10056
+2106  @PUTCHARI_BIU_1
+2132  MAIN
+2132  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicUsart\
+
+Project Files:
+    transmisorSerial.c                                      [10-jun-13 16:12  CRC=B64B5C91]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 16:02  CRC=9D64384A]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 12:51  CRC=21A70465]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\kbd2.c [10-jun-13 12:53  CRC=ADACD6A8]
+
+Source signature=D0B04690
+
+Units:
+    C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicUsart\transmisorSerial (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      transmisorSerial.err
+    Ext Symbols: transmisorSerial.esym
+    INHX32:      transmisorSerial.hex
+    Symbols:     transmisorSerial.sym
+    List:        transmisorSerial.lst
+    Debug/COFF:  transmisorSerial.cof
+    Project:     transmisorSerial.PJT
+    Call Tree:   transmisorSerial.tre
+    Statistics:  transmisorSerial.STA

@@ -1,0 +1,61 @@
+////////////////////////////////////////////////////////////////////////////////
+//                    COMUNICACIÓN I2C EN TRE DOS PIC                         //
+//                                                                            //
+//                      Aplicación para PIC MAESTRO                           //
+//                                                                            //
+//       El PIC maestro lee teclado y envía el dato al PIC esclavo via I2C    //
+//                      que lo mostrará en un lcd.                            //
+//                                                                            //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+#include <18F4550.h>
+//#device adc = 10 
+#fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
+#use delay(clock=48000000)  //#use delay(clock=20000000)
+#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+//#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
+#include <kbd2_1.c>  //Libreria para Teclado Matricial 4x4
+#use i2c(MASTER, SDA=PIN_C6, SLOW, SCL=PIN_C7, NOFORCE_SW)
+
+//#define use_portb_kbd TRUE       //Configuración puerto b para lectura teclado
+
+#use standard_io(b)
+#use standard_io(c)
+
+
+int tecla;                       //Dato a transmitir
+   
+/******************************************************************************/
+/***************************** Envío I2C **************************************/
+    
+void envio_I2C (){
+   
+       i2c_start();         //Comienzo de la comunicación I2C ...
+      i2c_write(0xA0);     //...con la dirección del PIC esclavo...
+      i2c_write(tecla);    // Envia dato
+      i2c_stop();          //Finalización de la transmisión
+      i2c_start();         //Comienzo de la comunicación I2C ...
+      i2c_write(0xA2);     //...con la dirección del PIC esclavo...
+      i2c_write(tecla);    // Envia dato
+      i2c_stop();          //Finalización de la transmisión
+  }
+
+/******************************************************************************/
+/*************************** FUNCIÓN PRINCIPAL ********************************/
+
+void main(){
+
+   kbd_init();                   //Inicializa función de teclado
+   port_b_pullups(TRUE);         
+    
+   while (true){
+      
+// Lectura del teclado     
+      tecla=kbd_getc();       //En "tecla" valor de la tecla pulsada
+      if(tecla!=0){           //Si se pulsa teclado...
+            envio_I2C();      //...se envía el dato
+            delay_ms(100);
+      }
+   }
+}
+

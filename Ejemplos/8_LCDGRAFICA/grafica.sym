@@ -1,0 +1,103 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     lcdcontrast
+005     MAIN.i
+006-00F MAIN.fName
+010-019 MAIN.lName
+01A-01B clearram.ddram
+01A-01B putstr.message
+01A     MAIN.@SCRATCH1
+01B     @delay_ms1.P1
+01C     cursorxy.x
+01C     putstr.@SCRATCH1
+01D     putlcdchar.character
+01D     cursorxy.y
+01E-01F putlcdchar.tablept
+01E     cursorxy.@SCRATCH1
+01F     writecom.command_in
+020-021 putlcdchar.characterint
+022     putlcdchar.count
+023     putlcdchar.char_column
+025     g_InBootloader
+026-027 @MUL1616.P1
+026     writedata.data_in
+026     putlcdchar.@SCRATCH1
+027     clockdata.bits_in
+027     putlcdchar.@SCRATCH2
+028-029 @MUL1616.P1
+028     clockdata.bitcnt
+029     clockdata.@SCRATCH1
+02A     @MUL1616.@SCRATCH1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+2008  table
+228A  initlcd
+2222  writecom
+2250  writedata
+21F6  clockdata
+2264  clearram
+2236  cursorxy
+2316  putlcdchar
+22F6  @MUL1616
+2374  putstr
+22D0  @delay_ms1
+23A4  MAIN
+23A4  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\PROGRA\Documents\Codigos CCS\LCDGRAFICA\
+
+Project Files:
+    grafica.c                                               [17-jun-13 16:39  CRC=1DF5EC30]
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
+    ..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia3310Driver.c [17-jun-13 16:09  CRC=ABABDF57]
+
+Source signature=3458E78D
+
+Units:
+    C:\Users\PROGRA\Documents\Codigos CCS\LCDGRAFICA\grafica (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      grafica.err
+    Ext Symbols: grafica.esym
+    INHX32:      grafica.hex
+    Symbols:     grafica.sym
+    List:        grafica.lst
+    Debug/COFF:  grafica.cof
+    Project:     grafica.PJT
+    Call Tree:   grafica.tre
+    Statistics:  grafica.STA

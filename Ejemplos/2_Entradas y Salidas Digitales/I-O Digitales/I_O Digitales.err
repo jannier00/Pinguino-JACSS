@@ -1,0 +1,3 @@
+>>> Warning 203 "C:\Program Files (x86)\PICC\drivers\usb\pic18_usb.c" Line 531(1,1): Condition always TRUE
+*** Error 115 "I_O Digitales.c" Line 25(68,69): Printf format (%) invalid  ::
+      1 Errors,  1 Warnings.

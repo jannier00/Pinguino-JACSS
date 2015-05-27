@@ -1,0 +1,118 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     CONT
+025     g_InBootloader
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     @INTERRUPT_AREA
+029     @INTERRUPT_AREA
+02A     @INTERRUPT_AREA
+02B     @INTERRUPT_AREA
+02C     @INTERRUPT_AREA
+02D     @INTERRUPT_AREA
+02E     @INTERRUPT_AREA
+02F     @INTERRUPT_AREA
+030     @INTERRUPT_AREA
+031     @INTERRUPT_AREA
+032     @INTERRUPT_AREA
+033     @INTERRUPT_AREA
+034     @INTERRUPT_AREA
+035     @INTERRUPT_AREA
+036     @INTERRUPT_AREA
+037     @INTERRUPT_AREA
+038     @INTERRUPT_AREA
+039     @INTERRUPT_AREA
+03A     @INTERRUPT_AREA
+03B     @INTERRUPT_AREA
+03C     @INTERRUPT_AREA
+03D     @INTERRUPT_AREA
+03E     @INTERRUPT_AREA
+03F     @INTERRUPT_AREA
+040     @INTERRUPT_AREA
+041     @INTERRUPT_AREA
+042     @INTERRUPT_AREA
+043     @INTERRUPT_AREA
+044     @INTERRUPT_AREA
+045     @INTERRUPT_AREA
+046     @INTERRUPT_AREA
+047     @INTERRUPT_AREA
+048     @INTERRUPT_AREA
+049     @INTERRUPT_AREA
+04A     @INTERRUPT_AREA
+04B     @INTERRUPT_AREA
+04C     @INTERRUPT_AREA
+04D     @INTERRUPT_AREA
+04E     @INTERRUPT_AREA
+04F     @INTERRUPT_AREA
+050     CONTROL_EXT2.@SCRATCH1
+052     CONTROL_EXT.@SCRATCH1
+052     CONTROL_EXT1.@SCRATCH1
+053     @delay_ms1.P1
+F81     PORTB
+F82     PORTC
+F83     PSP_DATA
+F83     PORTD
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+2170  @delay_ms1
+2198  CONTROL_EXT
+21E6  CONTROL_EXT1
+226A  CONTROL_EXT2
+22EE  MAIN
+22EE  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\G-PIC\Programas\Interrupciones\ExternaB0-B2\
+
+Project Files:
+    ExternaB0-B2.c                                          [21-mar-13 13:11  CRC=85B361BE]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
+
+Source signature=6665A2D2
+
+Units:
+    C:\Users\Jannier\Documents\G-PIC\Programas\Interrupciones\ExternaB0-B2\ExternaB0-B2 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      ExternaB0-B2.err
+    Ext Symbols: ExternaB0-B2.esym
+    INHX32:      ExternaB0-B2.hex
+    Symbols:     ExternaB0-B2.sym
+    List:        ExternaB0-B2.lst
+    Debug/COFF:  ExternaB0-B2.cof
+    Project:     ExternaB0-B2.PJT
+    Call Tree:   ExternaB0-B2.tre
+    Statistics:  ExternaB0-B2.STA

@@ -1,0 +1,45 @@
+
+ROM used: 160 (0%)
+          164 (1%) including unused fragments
+
+          0 Average locations per line
+          16 Average locations per statement
+
+RAM used: 8 (0%) at main() level
+          9 (0%) worst case
+
+Stack used: 1 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   36    10 100  TrasmisorMasterSPI.c
+  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+----- -----
+  631    10 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     42  13   1             @delay_ms1
+0    114  36   3   267  2.8  main
+
+Program metrics:
+    Functions               1
+    Statements              10
+    Comments                161
+    Volume (V)              270
+    Difficilty (D)          2.7
+    Effort to implement (E) 722
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    140
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   156  24412  
+
+
+

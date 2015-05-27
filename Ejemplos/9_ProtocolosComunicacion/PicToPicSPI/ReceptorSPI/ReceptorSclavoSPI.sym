@@ -1,0 +1,104 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005-006 MAIN.dato
+007     lcd_init.i
+007-008 @PRINTF_LD_89.P1
+008     lcd_init.@SCRATCH1
+009     @PRINTF_LD_89.@SCRATCH1
+00A     @PRINTF_LD_89.@SCRATCH2
+00B     @PRINTF_LD_89.@SCRATCH3
+00C     @PRINTF_LD_89.@SCRATCH4
+00D     @PRINTF_LD_89.@SCRATCH5
+00E     @PRINTF_LD_89.@SCRATCH6
+00F     @PRINTF_LD_89.@SCRATCH7
+010     lcd_putc.c
+011     lcd_gotoxy.x
+011     @delay_ms1.P1
+012     lcd_gotoxy.y
+013     lcd_gotoxy.address
+014     lcd_gotoxy.@SCRATCH1
+015     lcd_send_byte.address
+016     lcd_send_byte.n
+017     lcd_read_byte.low
+017     lcd_send_byte.@SCRATCH1
+018     lcd_read_byte.high
+018     lcd_send_nibble.nibble
+019     lcd_read_nibble.retval
+019.0   lcd_read_nibble.retval_0
+019.1   lcd_read_nibble.retval_1
+019.2   lcd_read_nibble.retval_2
+019.3   lcd_read_nibble.retval_3
+019     lcd_read_byte.@SCRATCH1
+025     g_InBootloader
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+201C  @delay_ms1
+2008  LCD_INIT_STRING
+2044  lcd_send_nibble
+208A  lcd_read_nibble
+20BC  lcd_read_byte
+20E0  lcd_send_byte
+2122  lcd_init
+2170  lcd_gotoxy
+2192  lcd_putc
+22C2  MAIN
+21D6  @PRINTF_LD_89
+22C2  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicISP\
+
+Project Files:
+    ReceptorSclavoISP.c                                     [14-jun-13 11:59  CRC=29E347A0]
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
+    ..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c [11-jun-13 17:29  CRC=A9E4CCCC]
+
+Source signature=3CB81DE7
+
+Units:
+    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicISP\ReceptorSclavoISP (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      ReceptorSclavoISP.err
+    Ext Symbols: ReceptorSclavoISP.esym
+    INHX32:      ReceptorSclavoISP.hex
+    Symbols:     ReceptorSclavoISP.sym
+    List:        ReceptorSclavoISP.lst
+    Debug/COFF:  ReceptorSclavoISP.cof
+    Project:     ReceptorSclavoISP.PJT
+    Call Tree:   ReceptorSclavoISP.tre
+    Statistics:  ReceptorSclavoISP.STA

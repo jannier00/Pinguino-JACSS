@@ -1,0 +1,861 @@
+CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 10:58
+
+               Filename: C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking Libreria\Ejemplo 1 - Led blinking.lst
+
+               ROM used: 546 bytes (2%)
+                         Largest free fragment is 24026
+               RAM used: 42 (2%) at main() level
+                         43 (2%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+2000:  GOTO   21E0
+*
+2008:  MOVWF  04
+200A:  MOVFF  FD8,05
+200E:  MOVFF  FE0,06
+2012:  MOVLB  0
+2014:  MOVFF  FE9,0C
+2018:  MOVFF  FEA,07
+201C:  MOVFF  FE1,08
+2020:  MOVFF  FE2,09
+2024:  MOVFF  FD9,0A
+2028:  MOVFF  FDA,0B
+202C:  MOVFF  FF3,12
+2030:  MOVFF  FF4,13
+2034:  MOVFF  FFA,14
+2038:  MOVFF  FF5,15
+203C:  MOVFF  FF6,16
+2040:  MOVFF  FF7,17
+2044:  MOVFF  00,0E
+2048:  MOVFF  01,0F
+204C:  MOVFF  02,10
+2050:  MOVFF  03,11
+2054:  BTFSS  FA0.1
+2056:  GOTO   2060
+205A:  BTFSC  FA1.1
+205C:  GOTO   20AE
+2060:  MOVFF  0E,00
+2064:  MOVFF  0F,01
+2068:  MOVFF  10,02
+206C:  MOVFF  11,03
+2070:  MOVFF  0C,FE9
+2074:  MOVFF  07,FEA
+2078:  BSF    07.7
+207A:  MOVFF  08,FE1
+207E:  MOVFF  09,FE2
+2082:  MOVFF  0A,FD9
+2086:  MOVFF  0B,FDA
+208A:  MOVFF  12,FF3
+208E:  MOVFF  13,FF4
+2092:  MOVFF  14,FFA
+2096:  MOVFF  15,FF5
+209A:  MOVFF  16,FF6
+209E:  MOVFF  17,FF7
+20A2:  MOVF   04,W
+20A4:  MOVFF  06,FE0
+20A8:  MOVFF  05,FD8
+20AC:  RETFIE 0
+.................... /* 
+....................    Led blinking 
+....................    Enciende un led por 1 segundo, luego lo apaga por 1 segundo, de forma 
+....................    repetitiva 
+.................... */ 
+.................... #include <Cabecera JACSS.c>             //Incluye las librerias necesarias 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... //#device ADC = 10 //Define la resolucion del ADC, comentar en caso de usar 8 
+.................... #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN 
+.................... #use delay(clock=48000000) 
+*
+21B8:  CLRF   FEA
+21BA:  MOVLW  2A
+21BC:  MOVWF  FE9
+21BE:  MOVF   FEF,W
+21C0:  BZ    21DE
+21C2:  MOVLW  0F
+21C4:  MOVWF  01
+21C6:  CLRF   00
+21C8:  DECFSZ 00,F
+21CA:  BRA    21C8
+21CC:  DECFSZ 01,F
+21CE:  BRA    21C6
+21D0:  MOVLW  8F
+21D2:  MOVWF  00
+21D4:  DECFSZ 00,F
+21D6:  BRA    21D4
+21D8:  NOP   
+21DA:  DECFSZ FEF,F
+21DC:  BRA    21C2
+21DE:  RETURN 0
+.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... ////                     USB_BOOTLOADER.H                              //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example USB bootloader (ex_usb_bootloader                 //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  For more documentation see ex_usb_bootloader.c                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... //// VERSION HISTORY                                                   //// 
+.................... ////                                                                   //// 
+.................... //// March 5th, 2009:                                                  //// 
+.................... ////   Cleanup for Wizard.                                             //// 
+.................... ////   PIC24 Initial release.                                          //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2009 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... //how big is the bootloader? 
+.................... //the bootloader will reside from address 0x0000 to this location.  the 
+.................... //application will then sit at this location+1 to the end of program memory. 
+.................... //#if defined(__DEBUG) 
+.................... #define LOADER_SIZE        (0x1FFF) 
+.................... //#else 
+.................... //#define LOADER_SIZE        (0x17FF) 
+.................... //#endif 
+....................  
+.................... //the loader and application need a common flag that determines if we are in 
+.................... //the bootloader or application, that way the ISR knows where to go.  this 
+.................... //is the location in ram that is reserved for this flag. 
+.................... #define LOC_IN_LOADER_FLAG  0x25 
+....................  
+.................... //// --- end configuration --- //////////////////////////////////////////// 
+....................  
+.................... #reserve LOC_IN_LOADER_FLAG 
+....................  
+.................... int8 g_InBootloader; 
+.................... #locate g_InBootloader=LOC_IN_LOADER_FLAG 
+....................  
+.................... #define LOADER_START       (0) 
+.................... #define LOADER_END         (LOADER_SIZE) 
+.................... #define APPLICATION_START  (LOADER_SIZE+1) 
+.................... #if defined(__USB_87J50__) 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-9) //configuration bits 
+.................... #else 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-1) 
+.................... #endif  
+.................... #define APPLICATION_ISR    (APPLICATION_START+8) 
+....................  
+.................... #ifdef _bootloader 
+....................  /* 
+....................   Provide an empty application, so if you load this .HEX file into the pic 
+....................   without an application this will prevent the pic from executing unknown code. 
+....................  */ 
+....................  #org APPLICATION_START,APPLICATION_START+0xF 
+....................  void BlankApplication(void)  
+....................  { 
+....................    while(TRUE); 
+....................  } 
+....................  
+....................  //we need to prevent the loader from using application space 
+....................  #if (APPLICATION_END > 0x10000) 
+....................    #org APPLICATION_START+0x10, 0xFFFF {} 
+....................    #if (APPLICATION_END > 0x20000) 
+....................       #org 0x10000, 0x1FFFF {} 
+....................       #org 0x20000, APPLICATION_END {} 
+....................    #else 
+....................       #org 0x10000, APPLICATION_END {} 
+....................    #endif 
+....................  #else 
+....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
+....................  #endif 
+....................  
+....................    #define  USB_CONFIG_PID       0x0034 
+....................  
+....................    #define USB_STRINGS_OVERWRITTEN 
+....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
+....................  
+....................    // Here is where the "CCS" Manufacturer string and "SERIAL DEMO" are stored. 
+....................    // Strings are saved as unicode. 
+....................    // These strings are mostly only displayed during the add hardware wizard. 
+....................    // Once the operating system drivers have been installed it will usually display 
+....................    // the name from the drivers .INF. 
+....................    char const USB_STRING_DESC[]={ 
+....................       //string 0 
+....................             4, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             0x09,0x04,   //Microsoft Defined for US-English 
+....................       //string 1  - manufacturer 
+....................             8, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'C',0, 
+....................             'S',0, 
+....................       //string 2 - product 
+....................             30, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'D',0, 
+....................             'C',0, 
+....................             ' ',0, 
+....................             'B',0, 
+....................             'o',0, 
+....................             'o',0, 
+....................             't',0, 
+....................             'l',0, 
+....................             'o',0, 
+....................             'a',0, 
+....................             'd',0, 
+....................             'e',0, 
+....................             'r',0 
+....................    }; 
+.................... #endif   //_bootloader 
+....................  
+.................... #ifndef _bootloader 
+....................  //in the application, this moves the reset and isr vector out of the bootload 
+....................  //space.  it then reserves the loader space from being used by the application. 
+....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
+....................  #org 0, LOADER_END {} 
+.................... #endif 
+....................  
+.................... #include <Arduino Functions.c> 
+.................... /*  
+.................... This library includes the definitions to translate the most common Arduino 
+.................... functions to the CCS built-in functions. To see the reference of each 
+.................... instruction please refer to the CCS Help File for each CCS functions. 
+....................  
+.................... Esta librería incluye las definiciones para traducir las funciones de Arduino 
+.................... más comunes a las funciones incluidas en CCS. Para obtener la referencia de cada  
+.................... función de CCS favor de ver el archivo Help del CCS. 
+.................... */ 
+....................  
+.................... /* Additional libraries */ 
+.................... #include <analogWrite.c> 
+.................... /*                                     PWM.c 
+....................  
+.................... Esta libreria contiene funciones diseñadas para la facil y rapida programacion 
+.................... de salidas PWM por software a traves del uso del Timer3, al igual que las dos 
+.................... salidas de PWM por hardware en Pin_C1 y Pin_C2. 
+....................  
+.................... La salida de PWM por software tiene una frecuencia aproximada de 250Hz y puede 
+.................... configurar el ciclo de trabajo entre 0% y 100%, en intervalos de 10%. 
+....................  
+.................... La salida de PWM por hardware tiene una frecuencia aproximada de 30kHz y puede 
+.................... configurar un ciclo de trabajo entre 0% y 100%, en intervalos de 1%. 
+....................  
+.................... Los Pins de salida del PWM se seleccionan definiendo PWMx_PIN donde x puede ser 
+.................... desde 0 hasta 11. Los pines PWM por default son los siguientes: 
+....................  
+....................          PWM0_PIN    PIN_B0    
+....................          PWM1_PIN    PIN_B1 
+....................          PWM2_PIN    PIN_B2 
+....................          PWM3_PIN    PIN_B3 
+....................          PWM4_PIN    PIN_B4 
+....................          PWM5_PIN    PIN_B5 
+....................          PWM6_PIN    PIN_B6 
+....................          PWM7_PIN    PIN_B7 
+....................          PWM8_PIN    PIN_D0 
+....................          PWM9_PIN    PIN_D1 
+....................          PWM10_PIN   PIN_D2 
+....................          PWM11_PIN   PIN_A4 
+....................           
+....................          PIN_C1 
+....................          PIN_C2 
+....................              
+....................    En caso de seleccionar el Pin_C1 o el Pin_C2 se activará el PWM por hardware 
+....................    del pin seleccionado con un ciclo configurable entre 0% y 100% en intervalos 
+....................    de 1% 
+.................... */ 
+.................... #ifndef __Software_PWM__ 
+.................... #define __Software_PWM__ 
+....................  
+.................... int1 _PWM0_Flag,_PWM1_Flag,_PWM2_Flag,_PWM3_Flag,_PWM4_Flag,_PWM5_Flag, 
+....................      _PWM6_Flag,_PWM7_Flag,_PWM8_Flag,_PWM9_Flag,_PWM10_Flag,_PWM11_Flag; 
+....................  
+.................... int8 _PWM0_DutyCycle,_PWM1_DutyCycle,_PWM2_DutyCycle,_PWM3_DutyCycle, 
+....................      _PWM4_DutyCycle,_PWM5_DutyCycle,_PWM6_DutyCycle,_PWM7_DutyCycle, 
+....................      _PWM8_DutyCycle,_PWM9_DutyCycle,_PWM10_DutyCycle,_PWM11_DutyCycle; 
+....................  
+.................... #ifndef PWM0_PIN 
+....................    #define PWM0_PIN  PIN_B0       //Pin para PWM0 
+.................... #endif 
+.................... #ifndef PWM1_PIN 
+....................    #define PWM1_PIN  PIN_B1       //Pin para PWM1 
+.................... #endif 
+.................... #ifndef PWM2_PIN 
+....................    #define PWM2_PIN  PIN_B2       //Pin para PWM2 
+.................... #endif 
+.................... #ifndef PWM3_PIN 
+....................    #define PWM3_PIN  PIN_B3       //Pin para PWM3 
+.................... #endif 
+.................... #ifndef PWM4_PIN 
+....................    #define PWM4_PIN  PIN_B4       //Pin para PWM4 
+.................... #endif 
+.................... #ifndef PWM5_PIN 
+....................    #define PWM5_PIN  PIN_B5       //Pin para PWM5 
+.................... #endif 
+.................... #ifndef PWM6_PIN 
+....................    #define PWM6_PIN  PIN_B6       //Pin para PWM6 
+.................... #endif 
+.................... #ifndef PWM7_PIN 
+....................    #define PWM7_PIN  PIN_B7       //Pin para PWM7 
+.................... #endif 
+.................... #ifndef PWM8_PIN 
+....................    #define PWM8_PIN  PIN_D0       //Pin para PWM8 
+.................... #endif 
+.................... #ifndef PWM9_PIN 
+....................    #define PWM9_PIN  PIN_D1       //Pin para PWM9 
+.................... #endif 
+.................... #ifndef PWM10_PIN 
+....................    #define PWM10_PIN PIN_D2       //Pin para PWM10 
+.................... #endif 
+.................... #ifndef PWM11_PIN              
+....................    #define PWM11_PIN PIN_A4       //Pin para PWM11 
+.................... #endif 
+....................  
+.................... #define _Set_PWM_Timer3 63135 
+.................... #define _totalResolution 10 
+....................  
+....................  
+.................... //****************************************************************************/ 
+.................... //                         analogWrite(PWMx,DutyCycle) 
+.................... // 
+.................... //Funcion que permite la configuracion de PWM por software en cualquier PIN 
+.................... //digital disponible. En caso de necesitar mas pines PWM es posible agregarlos  
+.................... //añadiendo mas "case" siguiendo la secuencia en las variables. 
+.................... // 
+.................... // PWMx => Especifica el numero de PWM, cada salida debe tener uno diferente 
+.................... // DutyCycle => Porcentaje de ciclo de trabajo del PWM. Es un valor de 0 a 100 
+.................... // 
+.................... // Ejemplo: 
+.................... //          PWM_Output(0,50);   //Salida PWM0 de 50% 
+.................... //          PWM_Output(1,0);    //Salida PWM1 de 0% 
+.................... //                              //y apaga el PWM para uso como I/O 
+.................... //****************************************************************************// 
+.................... void analogWrite(int8 _PWMx, int8 _DutyCycle) 
+.................... { 
+....................    static int1 _T3_Config_Flag = False, _T2_Config_Flag = False; 
+....................    //Pregunta si el Timer3 ya ha sido configurado 
+....................    //Si el Pin corresponde a un pin de PWM por hardware, no configura el timer3 
+....................    if(!_T3_Config_Flag && _PWMx != Pin_C1 && _PWMx != Pin_C2)  
+....................    { 
+....................       setup_timer_3(T3_INTERNAL | T3_DIV_BY_2); 
+....................       set_timer3(_Set_PWM_Timer3); 
+....................        
+....................       enable_interrupts(GLOBAL); 
+....................       enable_interrupts(INT_TIMER3); 
+....................       _T3_Config_Flag = True;    //Indica que el Timer3 ya ha sido configurado 
+....................    }    
+....................     
+....................    //Si no es un pin de PWM por hardware, divide entre 5 el ciclo de trabajo  
+....................    //para convertirlo en un valor entre 0 y 20 
+....................    if(_PWMx != Pin_C1 && _PWMx != Pin_C2)    _DutyCycle /= 10; 
+....................    else 
+....................    { 
+....................       if(!_T2_Config_Flag)          //Configura por única vez el Timer2 
+....................       {   
+....................          setup_timer_2(T2_DIV_BY_4, 100, 1); 
+....................          _T2_Config_Flag = True; 
+....................       } 
+....................    } 
+....................            
+....................     
+....................    if(_DutyCycle == 0) 
+....................    { 
+....................       switch(_PWMx)                  //Desactiva la salida PWM en el PIN deseado 
+....................       {                  
+....................          case 0: 
+....................             _PWM0_Flag = False; 
+....................             output_low(PWM0_PIN); 
+....................             break; 
+....................          case 1: 
+....................             _PWM1_Flag = False; 
+....................             output_low(PWM1_PIN); 
+....................             break; 
+....................          case 2: 
+....................             _PWM2_Flag = False; 
+....................             output_low(PWM2_PIN); 
+....................             break;    
+....................          case 3: 
+....................             _PWM3_Flag = False; 
+....................             output_low(PWM3_PIN); 
+....................             break; 
+....................          case 4: 
+....................             _PWM4_Flag = False; 
+....................             output_low(PWM4_PIN); 
+....................             break; 
+....................          case 5: 
+....................             _PWM5_Flag = False; 
+....................             output_low(PWM5_PIN); 
+....................             break;    
+....................          case 6: 
+....................             _PWM6_Flag = False; 
+....................             output_low(PWM6_PIN); 
+....................             break;    
+....................          case 7: 
+....................             _PWM7_Flag = False; 
+....................             output_low(PWM7_PIN); 
+....................             break; 
+....................          case 8: 
+....................             _PWM8_Flag = False; 
+....................             output_low(PWM8_PIN); 
+....................             break; 
+....................          case 9: 
+....................             _PWM9_Flag = False; 
+....................             output_low(PWM9_PIN); 
+....................             break; 
+....................          case 10: 
+....................             _PWM10_Flag = False; 
+....................             output_low(PWM10_PIN); 
+....................             break; 
+....................          case 11: 
+....................             _PWM11_Flag = False; 
+....................             output_low(PWM11_PIN); 
+....................             break;  
+....................          case Pin_C1: 
+....................             setup_ccp2(CCP_OFF); 
+....................             output_low(Pin_C1); 
+....................             break; 
+....................          case Pin_C2: 
+....................             setup_ccp1(CCP_OFF); 
+....................             output_low(Pin_C2); 
+....................             break;             
+....................          default: 
+....................          break; 
+....................       } 
+....................    } 
+....................    else 
+....................    { 
+....................       switch(_PWMx)                    //Asigna una salida PWM en el PIN deseado 
+....................       {                  
+....................          case 0: 
+....................             _PWM0_Flag = True; 
+....................             _PWM0_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 1: 
+....................             _PWM1_Flag = True; 
+....................             _PWM1_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 2: 
+....................             _PWM2_Flag = True; 
+....................             _PWM2_DutyCycle = _DutyCycle; 
+....................             break;    
+....................          case 3: 
+....................             _PWM3_Flag = True; 
+....................             _PWM3_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 4: 
+....................             _PWM4_Flag = True; 
+....................             _PWM4_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 5: 
+....................             _PWM5_Flag = True; 
+....................             _PWM5_DutyCycle = _DutyCycle; 
+....................             break;    
+....................          case 6: 
+....................             _PWM6_Flag = True; 
+....................             _PWM6_DutyCycle = _DutyCycle; 
+....................             break;    
+....................          case 7: 
+....................             _PWM7_Flag = True; 
+....................             _PWM7_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 8: 
+....................             _PWM8_Flag = True; 
+....................             _PWM8_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 9: 
+....................             _PWM9_Flag = True; 
+....................             _PWM9_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 10: 
+....................             _PWM10_Flag = True; 
+....................             _PWM10_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case 11: 
+....................             _PWM11_Flag = True; 
+....................             _PWM11_DutyCycle = _DutyCycle; 
+....................             break; 
+....................          case Pin_C1:                        //PWM por hardware 
+....................             setup_ccp2(CCP_PWM); 
+....................             set_pwm2_duty(_DutyCycle); 
+....................             break; 
+....................          case Pin_C2: 
+....................             setup_ccp1(CCP_PWM);             //PWM por hardware 
+....................             set_pwm1_duty(_DutyCycle); 
+....................             break; 
+....................          default: 
+....................          break; 
+....................       } 
+....................    } 
+.................... } 
+....................  
+.................... //****************************************************************************// 
+.................... //                               Timer3_Interrupt() 
+.................... //****************************************************************************// 
+.................... #INT_TIMER3 
+.................... void Timer3_Interrupt() 
+.................... {    
+....................    set_timer3(_Set_PWM_Timer3); 
+*
+20AE:  MOVLW  F6
+20B0:  MOVWF  FB3
+20B2:  MOVLW  9F
+20B4:  MOVWF  FB2
+....................    static int8 T3_Counter = 1; 
+....................     
+....................    if(_PWM0_Flag) 
+20B6:  BTFSS  19.0
+20B8:  BRA    20CA
+....................    { 
+....................       if (T3_Counter <= _PWM0_DutyCycle) output_high(PWM0_PIN);  
+20BA:  MOVF   28,W
+20BC:  SUBWF  1B,W
+20BE:  BNC   20C6
+20C0:  BCF    F93.0
+20C2:  BSF    F8A.0
+....................       else output_low(PWM0_PIN); 
+20C4:  BRA    20CA
+20C6:  BCF    F93.0
+20C8:  BCF    F8A.0
+....................    } 
+....................     
+....................    if(_PWM1_Flag) 
+20CA:  BTFSS  19.1
+20CC:  BRA    20DE
+....................    { 
+....................       if (T3_Counter <= _PWM1_DutyCycle) output_high(PWM1_PIN);  
+20CE:  MOVF   28,W
+20D0:  SUBWF  1C,W
+20D2:  BNC   20DA
+20D4:  BCF    F93.1
+20D6:  BSF    F8A.1
+....................       else output_low(PWM1_PIN); 
+20D8:  BRA    20DE
+20DA:  BCF    F93.1
+20DC:  BCF    F8A.1
+....................    } 
+....................     
+....................    if(_PWM2_Flag) 
+20DE:  BTFSS  19.2
+20E0:  BRA    20F2
+....................    { 
+....................       if (T3_Counter <= _PWM2_DutyCycle) output_high(PWM2_PIN);  
+20E2:  MOVF   28,W
+20E4:  SUBWF  1D,W
+20E6:  BNC   20EE
+20E8:  BCF    F93.2
+20EA:  BSF    F8A.2
+....................       else output_low(PWM2_PIN); 
+20EC:  BRA    20F2
+20EE:  BCF    F93.2
+20F0:  BCF    F8A.2
+....................    } 
+....................     
+....................    if(_PWM3_Flag) 
+20F2:  BTFSS  19.3
+20F4:  BRA    2106
+....................    { 
+....................       if (T3_Counter <= _PWM3_DutyCycle) output_high(PWM3_PIN);  
+20F6:  MOVF   28,W
+20F8:  SUBWF  1E,W
+20FA:  BNC   2102
+20FC:  BCF    F93.3
+20FE:  BSF    F8A.3
+....................       else output_low(PWM3_PIN); 
+2100:  BRA    2106
+2102:  BCF    F93.3
+2104:  BCF    F8A.3
+....................    } 
+....................     
+....................    if(_PWM4_Flag) 
+2106:  BTFSS  19.4
+2108:  BRA    211A
+....................    { 
+....................       if (T3_Counter <= _PWM4_DutyCycle) output_high(PWM4_PIN);  
+210A:  MOVF   28,W
+210C:  SUBWF  1F,W
+210E:  BNC   2116
+2110:  BCF    F93.4
+2112:  BSF    F8A.4
+....................       else output_low(PWM4_PIN); 
+2114:  BRA    211A
+2116:  BCF    F93.4
+2118:  BCF    F8A.4
+....................    } 
+....................     
+....................    if(_PWM5_Flag) 
+211A:  BTFSS  19.5
+211C:  BRA    212E
+....................    { 
+....................       if (T3_Counter <= _PWM5_DutyCycle) output_high(PWM5_PIN);  
+211E:  MOVF   28,W
+2120:  SUBWF  20,W
+2122:  BNC   212A
+2124:  BCF    F93.5
+2126:  BSF    F8A.5
+....................       else output_low(PWM5_PIN); 
+2128:  BRA    212E
+212A:  BCF    F93.5
+212C:  BCF    F8A.5
+....................    } 
+....................     
+....................    if(_PWM6_Flag) 
+212E:  BTFSS  19.6
+2130:  BRA    2142
+....................    { 
+....................       if (T3_Counter <= _PWM6_DutyCycle) output_high(PWM6_PIN);  
+2132:  MOVF   28,W
+2134:  SUBWF  21,W
+2136:  BNC   213E
+2138:  BCF    F93.6
+213A:  BSF    F8A.6
+....................       else output_low(PWM6_PIN); 
+213C:  BRA    2142
+213E:  BCF    F93.6
+2140:  BCF    F8A.6
+....................    } 
+....................     
+....................    if(_PWM7_Flag) 
+2142:  BTFSS  19.7
+2144:  BRA    2156
+....................    { 
+....................       if (T3_Counter <= _PWM7_DutyCycle) output_high(PWM7_PIN);  
+2146:  MOVF   28,W
+2148:  SUBWF  22,W
+214A:  BNC   2152
+214C:  BCF    F93.7
+214E:  BSF    F8A.7
+....................       else output_low(PWM7_PIN); 
+2150:  BRA    2156
+2152:  BCF    F93.7
+2154:  BCF    F8A.7
+....................    } 
+....................     
+....................    if(_PWM8_Flag) 
+2156:  BTFSS  1A.0
+2158:  BRA    216A
+....................    { 
+....................       if (T3_Counter <= _PWM8_DutyCycle) output_high(PWM8_PIN);  
+215A:  MOVF   28,W
+215C:  SUBWF  23,W
+215E:  BNC   2166
+2160:  BCF    F95.0
+2162:  BSF    F8C.0
+....................       else output_low(PWM8_PIN); 
+2164:  BRA    216A
+2166:  BCF    F95.0
+2168:  BCF    F8C.0
+....................    } 
+....................     
+....................    if(_PWM9_Flag) 
+216A:  BTFSS  1A.1
+216C:  BRA    217E
+....................    { 
+....................       if (T3_Counter <= _PWM9_DutyCycle) output_high(PWM9_PIN);  
+216E:  MOVF   28,W
+2170:  SUBWF  24,W
+2172:  BNC   217A
+2174:  BCF    F95.1
+2176:  BSF    F8C.1
+....................       else output_low(PWM9_PIN); 
+2178:  BRA    217E
+217A:  BCF    F95.1
+217C:  BCF    F8C.1
+....................    } 
+....................     
+....................    if(_PWM10_Flag) 
+217E:  BTFSS  1A.2
+2180:  BRA    2192
+....................    { 
+....................       if (T3_Counter <= _PWM10_DutyCycle) output_high(PWM10_PIN);  
+2182:  MOVF   28,W
+2184:  SUBWF  26,W
+2186:  BNC   218E
+2188:  BCF    F95.2
+218A:  BSF    F8C.2
+....................       else output_low(PWM10_PIN); 
+218C:  BRA    2192
+218E:  BCF    F95.2
+2190:  BCF    F8C.2
+....................    } 
+....................     
+....................    if(_PWM11_Flag) 
+2192:  BTFSS  1A.3
+2194:  BRA    21A6
+....................    { 
+....................       if (T3_Counter <= _PWM11_DutyCycle) output_high(PWM11_PIN);  
+2196:  MOVF   28,W
+2198:  SUBWF  27,W
+219A:  BNC   21A2
+219C:  BCF    F92.4
+219E:  BSF    F89.4
+....................       else output_low(PWM11_PIN); 
+21A0:  BRA    21A6
+21A2:  BCF    F92.4
+21A4:  BCF    F89.4
+....................    } 
+....................     
+....................    T3_Counter ++; 
+21A6:  INCF   28,F
+....................    if(T3_Counter > _totalResolution) T3_Counter = 1; 
+21A8:  MOVF   28,W
+21AA:  SUBLW  0A
+21AC:  BC    21B2
+21AE:  MOVLW  01
+21B0:  MOVWF  28
+.................... } 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... /* Reserved words and names definitions */ 
+.................... #define digitalToggle   output_toggle 
+.................... #define digitalWrite    output_bit 
+.................... #define digitalRead     input 
+....................  
+.................... //****************************************************************************// 
+.................... //                               analogRead(_Channel) 
+.................... //Lee cualquiera de las entradas analógicas de la G-PiC Lite!. No es necesario 
+.................... //poner un delay entre cada lectura, pues este tiempo está incluido dentro de la 
+.................... //función. 
+.................... // 
+.................... //NOTA: Se emplea para lecturas de 8 bits de resolucion 
+.................... //****************************************************************************// 
+.................... #define AN0  0 
+.................... #define A1  1 
+.................... #define A2  2 
+.................... #define A3  3 
+.................... #define A4  4 
+.................... #define A5  5 
+.................... #define A6  6 
+.................... #define A7  7 
+.................... #define A8  8 
+.................... #define A9  9 
+.................... #define A10 10 
+.................... #define A11 11 
+.................... #define A12 12 
+....................  
+21B2:  BCF    FA1.1
+21B4:  GOTO   2060
+.................... int8 analogRead(int8 _Channel) 
+.................... { 
+....................    int8 _adcReading; 
+....................     
+....................    setup_adc(ADC_CLOCK_INTERNAL); 
+....................    setup_adc_ports(ALL_ANALOG); 
+....................    set_adc_channel(_Channel); 
+....................    delay_us(10); 
+....................     
+....................    _adcReading = read_adc(); 
+....................       
+....................    setup_adc_ports(NO_ANALOGS); 
+....................    return(_adcReading); 
+.................... } 
+....................  
+....................  
+....................  
+....................  
+....................  
+.................... /* 
+....................    convert255to100(_value); 
+....................     
+....................    Recibe una variable con valores entre 0-255 y convierte los valores en un 
+....................    rango entre 0-100. 
+....................    Esta función es particularmente útil para asignar valores de porcentaje PWM 
+.................... */ 
+.................... int8 convert255to100(int8 _value) 
+.................... { 
+....................    return((_value*100.0)/255.0); 
+.................... } 
+.................... /******************************************************************************/ 
+....................  
+.................... /* 
+....................    convertDECtoVolt(_value) 
+....................    Recibe una variable con valores entre 0-255 y lo convierte a su equivalente 
+....................    en voltaje entre 0V y 5V. Util para variables que contengan valores analógicos 
+.................... */ 
+.................... float convertDECtoVolt(float _value) 
+.................... { 
+....................    _value = (_value*5)/255; 
+....................    return(_value); 
+.................... } 
+.................... /******************************************************************************/ 
+....................  
+.................... /* 
+....................    convertDECtoDegree(_value) 
+....................    Convierte el valor analogico leido de un LM35 y lo convierte en su equivalente 
+....................    en grados. 
+.................... */ 
+.................... float convertDECtoDegree(float _value) 
+.................... { 
+....................    _value = 100*(_value*5)/255; 
+....................    return(_value); 
+.................... } 
+.................... /******************************************************************************/ 
+....................  
+....................  
+.................... #define ledPin Pin_A4               //Etiqueta al Pin_A4 con el nombre de ledPin 
+....................  
+.................... void main() 
+.................... { 
+*
+21E0:  CLRF   FF8
+21E2:  BCF    FD0.7
+21E4:  BSF    07.7
+21E6:  CLRF   FEA
+21E8:  CLRF   FE9
+21EA:  BCF    1A.4
+21EC:  BCF    1A.5
+21EE:  MOVLW  01
+21F0:  MOVWF  28
+21F2:  MOVF   FC1,W
+21F4:  ANDLW  C0
+21F6:  IORLW  0F
+21F8:  MOVWF  FC1
+21FA:  MOVLW  07
+21FC:  MOVWF  FB4
+....................    while(true) 
+....................    { 
+....................       digitalWrite(ledPin, 0);    //Enciende el led 
+21FE:  BCF    F89.4
+2200:  BCF    F92.4
+....................       delay_ms(500);               //Espera 1 segundo 
+2202:  MOVLW  02
+2204:  MOVWF  29
+2206:  MOVLW  FA
+2208:  MOVWF  2A
+220A:  RCALL  21B8
+220C:  DECFSZ 29,F
+220E:  BRA    2206
+....................       digitalWrite(ledPin, 1);   //Apaga el led 
+2210:  BSF    F89.4
+2212:  BCF    F92.4
+....................       delay_ms(500);               //Espera 1 segundo 
+2214:  MOVLW  02
+2216:  MOVWF  29
+2218:  MOVLW  FA
+221A:  MOVWF  2A
+221C:  RCALL  21B8
+221E:  DECFSZ 29,F
+2220:  BRA    2218
+....................    } 
+2222:  BRA    21FE
+.................... } 
+2224:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV20 VREGEN NOWDT WDT32768
+   Word  3: 8500   CCP2C1 NOPBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

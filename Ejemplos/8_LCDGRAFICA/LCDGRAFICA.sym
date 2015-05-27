@@ -1,0 +1,306 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+025     g_InBootloader
+026-21D MemoriaVideo
+21E-221 atan2.y
+21E     MAIN.a
+21F-220 MAIN.j
+221-222 MAIN.k
+222-225 atan2.x
+223-224 MAIN.offset
+225-226 MAIN.l
+226-229 atan2.z
+227-228 MAIN.i
+229-237 MAIN.str1
+22A.0   atan2.sign
+22B     atan2.quad
+238-241 MAIN.str2
+242-249 MAIN.str3
+24A-254 MAIN.str4
+255-25B MAIN.str5
+25C-26A MAIN.str6
+26B-271 MAIN.str7
+272-278 MAIN.str8
+279-282 MAIN.str9
+283-28B MAIN.str10
+28C-293 MAIN.str11
+294-2A2 MAIN.str12
+2A3-2B1 MAIN.str13
+2B2-2BE MAIN.str14
+2BF-2CD MAIN.str15
+2CE-2DB MAIN.str16
+2DC-2E7 MAIN.str17
+2E8-2F0 MAIN.str18
+2F1-2FE MAIN.str19
+2FF-302 MAIN.str20
+303-306 MAIN.str21
+307-315 MAIN.str22
+316-50D MAIN.Temp
+50E-50F nokia_imprime_memoria.ddram
+50E     @delay_us1.P1
+50E     nokia_rectangulo.x1
+50E     nokia_circulo.x
+50E-50F nokia_borra_pantalla.ddram
+50E-50F nokia_borra_memoria.ddram
+50E     MAIN.@SCRATCH1
+50F     @delay_ms1.P1
+50F     nokia_circulo.y
+50F     nokia_rectangulo.y1
+50F     MAIN.@SCRATCH2
+510     nokia_gotoxy.xnokia
+510     nokia_circulo.radio
+510     nokia_rectangulo.x2
+510     nokia_texto.x
+510-511 @SITOF.P1
+510     nokia_imprime_memoria.@SCRATCH1
+510     nokia_borra_memoria.@SCRATCH1
+510     MAIN.@SCRATCH3
+511     nokia_rectangulo.y2
+511     nokia_gotoxy.ynokia
+511     nokia_write_data.bytefornokia_data
+511     nokia_texto.y
+511     nokia_circulo.estilo
+511     nokia_bitmap.x
+511     nokia_borra_memoria.@SCRATCH2
+511     MAIN.@SCRATCH4
+512     nokia_texto.fuente
+512     nokia_rectangulo.estilo
+512-515 sin.x
+512     nokia_circulo.color
+512     nokia_bitmap.y
+512     nokia_gotoxy.@SCRATCH1
+513     nokia_circulo.i
+513-514 nokia_texto.caracter
+513     nokia_write_command.bytefornokia_command
+513-514 nokia_bitmap.bitmap
+513     nokia_rectangulo.color
+514     nokia_write_dorc.bytefornokia
+514-515 nokia_rectangulo.i
+514-517 nokia_circulo.xx
+515-516 nokia_texto.ind_bitmap
+515     nokia_write_dorc.caa
+515     nokia_bitmap.ancho
+516     nokia_bitmap.alto
+516     sin.@SCRATCH1
+516     nokia_write_dorc.@SCRATCH1
+517-518 nokia_bitmap.ind_bitmap
+517-518 nokia_texto.ind_memoria
+517     sin.@SCRATCH2
+518-51B nokia_circulo.antxx
+518     sin.@SCRATCH3
+519-51A nokia_bitmap.ind_memoria
+519-51A nokia_texto.xx
+519     sin.@SCRATCH4
+51A-51D cos.x
+51B-51C nokia_bitmap.xx
+51B-51C nokia_texto.desplazamiento
+51C     nokia_circulo.@SCRATCH1
+51D     arcocoseno.perimetro
+51D-51E nokia_bitmap.yy
+51D     nokia_texto.letra
+51D     nokia_circulo.@SCRATCH2
+51E-521 cos.y
+51E     arcocoseno.radio
+51E     nokia_texto.alto
+51E     nokia_circulo.@SCRATCH3
+51F-520 nokia_bitmap.desplazamiento
+51F     arcocoseno.j
+51F     nokia_texto.ancho
+51F     nokia_circulo.@SCRATCH4
+520     nokia_texto.EscribirByte
+520     nokia_linea.x1
+520     arcocoseno.@SCRATCH1
+521     @DIVS88.P1
+521     nokia_linea.y1
+521     arcocoseno.@SCRATCH2
+521     nokia_bitmap.@SCRATCH1
+521     nokia_texto.@SCRATCH1
+522     @DIVS88.P1
+522-525 cos.t
+522     nokia_linea.x2
+522     arcocoseno.@SCRATCH3
+522     nokia_bitmap.@SCRATCH2
+522     nokia_texto.@SCRATCH2
+523     nokia_linea.y2
+523     arcocoseno.@SCRATCH4
+523     nokia_bitmap.@SCRATCH3
+523     @DIVS88.@SCRATCH1
+523     nokia_texto.@SCRATCH3
+524     nokia_linea.color
+524     nokia_bitmap.@SCRATCH4
+524     @DIVS88.@SCRATCH2
+524     nokia_texto.@SCRATCH4
+525     nokia_linea.TramoX
+525     nokia_bitmap.@SCRATCH5
+525     nokia_texto.@SCRATCH5
+526     nokia_linea.TramoY
+526-529 cos.t2
+526     nokia_bitmap.@SCRATCH6
+526     nokia_texto.@SCRATCH6
+527     nokia_linea.MenorX
+527     nokia_bitmap.@SCRATCH7
+527     nokia_texto.@SCRATCH7
+528     nokia_linea.MenorY
+528     nokia_bitmap.@SCRATCH8
+528     nokia_texto.@SCRATCH8
+529     nokia_linea.MayorX
+529     nokia_bitmap.@SCRATCH9
+529     nokia_texto.@SCRATCH9
+52A     cos.quad
+52A     nokia_linea.MayorY
+52B     nokia_linea.TramoMax
+52B     cos.i
+52C     nokia_linea.i
+52C-52F cos.frac
+52D     nokia_linea.xx
+52E     nokia_linea.yy
+52F-532 nokia_linea.OffsetX
+530-543 cos.p
+533-536 nokia_linea.OffsetY
+537     nokia_punto.x
+537     nokia_linea.@SCRATCH1
+538     nokia_punto.y
+538     nokia_linea.@SCRATCH2
+539     nokia_punto.color
+539     nokia_linea.@SCRATCH3
+53A-53B nokia_punto.ddram
+53A     nokia_linea.@SCRATCH4
+53B-53E @DIVFF.P1
+53C     nokia_punto.@SCRATCH1
+53D     nokia_punto.@SCRATCH2
+53E-53F @MUL1616.P1
+53E     nokia_punto.@SCRATCH3
+53F-542 @DIVFF.P1
+540-541 @MUL1616.P1
+542     @MUL1616.@SCRATCH1
+543     @DIVFF.@SCRATCH1
+544-547 @SFTOI.P1
+544-547 @FLT.P2
+544     @DIVFF.@SCRATCH2
+544     cos.@SCRATCH1
+545     @DIVFF.@SCRATCH3
+545     cos.@SCRATCH2
+546     @DIVFF.@SCRATCH4
+546     cos.@SCRATCH3
+547     @DIVFF.@SCRATCH5
+547     cos.@SCRATCH4
+548-54B @ADDFF.P1
+548-54B @FLT.P2
+548-54B @MULFF.P3
+548-549 @ITOF.P4
+548     @DIVFF.@SCRATCH6
+54C-54F @ADDFF.P1
+54C-54F @MULFF.P2
+54C     @FLT.@SCRATCH1
+54D     @FLT.@SCRATCH2
+550     @MULFF.@SCRATCH1
+550     @ADDFF.@SCRATCH1
+551     @MULFF.@SCRATCH2
+551     @ADDFF.@SCRATCH2
+552     @MULFF.@SCRATCH3
+552     @ADDFF.@SCRATCH3
+553     @ADDFF.@SCRATCH4
+554     @ADDFF.@SCRATCH5
+555     @ADDFF.@SCRATCH6
+556     @ADDFF.@SCRATCH7
+557     @ADDFF.@SCRATCH8
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+2948  @delay_ms1
+2926  @delay_us1
+3326  @FLT
+33A0  @SFTOI
+33DC  @ITOF
+2E5A  @MULFF
+30AE  @ADDFF
+2F50  @DIVFF
+2E08  @SITOF
+3412  cos
+379A  sin
+2008  ASCII_TABLE
+2200  Fuente_3_6
+22D4  Fuente_7_8
+2590  senos
+2658  cosenos
+2970  nokia_write_dorc
+29DC  nokia_write_data
+29A6  nokia_write_command
+2AA6  @MUL1616
+29BA  nokia_gotoxy
+29F0  nokia_borra_pantalla
+2D96  nokia_imprime_memoria
+2DDA  nokia_borra_memoria
+37E6  nokia_punto
+38B2  nokia_linea
+3BAC  nokia_rectangulo
+3C7C  arcocoseno
+3DDC  nokia_circulo
+4084  nokia_bitmap
+2AC8  @DIVS88
+2B14  nokia_texto
+2A22  Lcd_init
+2720  logonokia
+27D8  logodspic
+28BE  nocturno
+290E  bola
+42D8  MAIN
+42D8  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\8_LCDGRAFICA\
+
+Project Files:
+    LCDGRAFICA.c                                            [02-abr.-14 22:04  CRC=6E47E2B2]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr.-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr.-09 11:51  CRC=21A70465]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h [11-abr.-11 09:02  CRC=A2852B04]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia_LCD.c [28-jun.-13 15:40  CRC=51314734]
+
+Source signature=723AD8CD
+
+Units:
+    C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\8_LCDGRAFICA\LCDGRAFICA (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      LCDGRAFICA.err
+    Ext Symbols: LCDGRAFICA.esym
+    INHX32:      LCDGRAFICA.hex
+    Symbols:     LCDGRAFICA.sym
+    List:        LCDGRAFICA.lst
+    Debug/COFF:  LCDGRAFICA.cof
+    Project:     LCDGRAFICA.PJT
+    Call Tree:   LCDGRAFICA.tre
+    Statistics:  LCDGRAFICA.STA

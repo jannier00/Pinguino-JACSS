@@ -1,0 +1,55 @@
+
+ROM used: 804 (2%)
+          808 (2%) including unused fragments
+
+          1 Average locations per line
+          10 Average locations per statement
+
+RAM used: 7 (0%) at main() level
+          26 (1%) worst case
+
+Stack used: 6 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   37     9  12  ReceptorSclavoISP.c
+  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  238    69  88  ..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c
+----- -----
+  870    78 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   2   1             @delay_ms1
+0     20   1   0   331  2.8  @const67
+0     70   4   1   328  2.7  lcd_send_nibble
+0     50   3   1   362  2.3  lcd_read_nibble
+0     36   2   3   165  3.3  lcd_read_byte
+0     66   4   3   319  4.1  lcd_send_byte
+0     78   5   2   384  4.4  lcd_init
+0     34   2   4   186  5.5  lcd_gotoxy
+0     68   4   1   275  3.9  lcd_putc
+0    102   6   2   233  3.4  MAIN
+0    236  15   9             @PRINTF_LD_89
+
+Program metrics:
+    Functions               9
+    Statements              78
+    Comments                205
+    Volume (V)              4161
+    Difficilty (D)          31.9
+    Effort to implement (E) 132883
+    Time to implement (T)   2 hours, 3 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   10
+    Maintainability (MI)    149
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   800  23768  
+
+
+

@@ -1,0 +1,839 @@
+CCS PCH C Compiler, Version 4.120, 5967               17-jun-13 16:55
+
+               Filename: C:\Users\PROGRA\Documents\Codigos CCS\LCDGRAFICA\grafica.lst
+
+               ROM used: 1134 bytes (3%)
+                         Largest free fragment is 23438
+               RAM used: 28 (1%) at main() level
+                         43 (2%) worst case
+               Stack:    5 locations
+
+*
+2000:  GOTO   23A4
+.................... #include <18F4550.h>  
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN 
+.................... //#use delay(clock=48000000)  //#use delay(clock=20000000) 
+.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... ////                     USB_BOOTLOADER.H                              //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example USB bootloader (ex_usb_bootloader                 //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  For more documentation see ex_usb_bootloader.c                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... //// VERSION HISTORY                                                   //// 
+.................... ////                                                                   //// 
+.................... //// March 5th, 2009:                                                  //// 
+.................... ////   Cleanup for Wizard.                                             //// 
+.................... ////   PIC24 Initial release.                                          //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2009 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... //how big is the bootloader? 
+.................... //the bootloader will reside from address 0x0000 to this location.  the 
+.................... //application will then sit at this location+1 to the end of program memory. 
+.................... //#if defined(__DEBUG) 
+.................... #define LOADER_SIZE        (0x1FFF) 
+.................... //#else 
+.................... //#define LOADER_SIZE        (0x17FF) 
+.................... //#endif 
+....................  
+.................... //the loader and application need a common flag that determines if we are in 
+.................... //the bootloader or application, that way the ISR knows where to go.  this 
+.................... //is the location in ram that is reserved for this flag. 
+.................... #define LOC_IN_LOADER_FLAG  0x25 
+....................  
+.................... //// --- end configuration --- //////////////////////////////////////////// 
+....................  
+.................... #reserve LOC_IN_LOADER_FLAG 
+....................  
+.................... int8 g_InBootloader; 
+.................... #locate g_InBootloader=LOC_IN_LOADER_FLAG 
+....................  
+.................... #define LOADER_START       (0) 
+.................... #define LOADER_END         (LOADER_SIZE) 
+.................... #define APPLICATION_START  (LOADER_SIZE+1) 
+.................... #if defined(__USB_87J50__) 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-9) //configuration bits 
+.................... #else 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-1) 
+.................... #endif  
+.................... #define APPLICATION_ISR    (APPLICATION_START+8) 
+....................  
+.................... #ifdef _bootloader 
+....................  /* 
+....................   Provide an empty application, so if you load this .HEX file into the pic 
+....................   without an application this will prevent the pic from executing unknown code. 
+....................  */ 
+....................  #org APPLICATION_START,APPLICATION_START+0xF 
+....................  void BlankApplication(void)  
+....................  { 
+....................    while(TRUE); 
+....................  } 
+....................  
+....................  //we need to prevent the loader from using application space 
+....................  #if (APPLICATION_END > 0x10000) 
+....................    #org APPLICATION_START+0x10, 0xFFFF {} 
+....................    #if (APPLICATION_END > 0x20000) 
+....................       #org 0x10000, 0x1FFFF {} 
+....................       #org 0x20000, APPLICATION_END {} 
+....................    #else 
+....................       #org 0x10000, APPLICATION_END {} 
+....................    #endif 
+....................  #else 
+....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
+....................  #endif 
+....................  
+....................    #define  USB_CONFIG_PID       0x0034 
+....................  
+....................    #define USB_STRINGS_OVERWRITTEN 
+....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
+....................  
+....................    // Here is where the "CCS" Manufacturer string and "SERIAL DEMO" are stored. 
+....................    // Strings are saved as unicode. 
+....................    // These strings are mostly only displayed during the add hardware wizard. 
+....................    // Once the operating system drivers have been installed it will usually display 
+....................    // the name from the drivers .INF. 
+....................    char const USB_STRING_DESC[]={ 
+....................       //string 0 
+....................             4, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             0x09,0x04,   //Microsoft Defined for US-English 
+....................       //string 1  - manufacturer 
+....................             8, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'C',0, 
+....................             'S',0, 
+....................       //string 2 - product 
+....................             30, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'D',0, 
+....................             'C',0, 
+....................             ' ',0, 
+....................             'B',0, 
+....................             'o',0, 
+....................             'o',0, 
+....................             't',0, 
+....................             'l',0, 
+....................             'o',0, 
+....................             'a',0, 
+....................             'd',0, 
+....................             'e',0, 
+....................             'r',0 
+....................    }; 
+.................... #endif   //_bootloader 
+....................  
+.................... #ifndef _bootloader 
+....................  //in the application, this moves the reset and isr vector out of the bootload 
+....................  //space.  it then reserves the loader space from being used by the application. 
+....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
+....................  #org 0, LOADER_END {} 
+.................... #endif 
+....................  
+.................... #include <nokia3310Driver.c>  
+....................  /*  
+....................       Nokia 3310 LCD Demo. Codes are partially modified from Michel  
+....................       Bavin's CCS C Codes for Nokia 3310 Graphical LCD  
+....................       (LPH7779) routines version 3 from http://users.skynet.be/bk317494/  
+....................        
+....................    Connection:  
+....................    - get the pinout of the 3310 screen online  
+....................    - how the 3310 pins are connected to the PIC pin are defined by the define statements below:  
+....................      
+....................        #define SCK          PIN_D7               // Connections between PIC and LCD.  
+....................       #define SDI          PIN_D6  
+....................       #define D_C          PIN_D5  
+....................       #define _SCE         PIN_D4  
+....................       #define _RES         PIN_D3  
+....................      
+....................    The above shows that by default, pins D3 to D7 are used by this code.  
+....................    You can change by modifying the #define statements below.  
+....................      
+....................    The 480-byte large array "Table" is used to define the font used for the display.  
+....................    The comment on each line of the code for declaring the array shows the character that line defines.  
+....................    DO NOT MESS WITH THIS TABLE AT ALL UNLESS YOU NEED TO CHANGE THE STYLE WITH WHICH A PARTICULAR CHARACTER IS DISPLAYED  
+....................      
+....................    Contrastup and contrastdown increase or reduce the contrast by a small amount respectively each time they are called  
+....................      
+....................    Initlcd must be called before any other thing is done with or to the lcd. It needs to be called only once close to the beginning of your code.  
+....................    There is no need to call it again unless program execution resets for whatever reason  
+....................      
+....................      
+....................    Writecomm, Writedata,Clockdata : DO NOT these functions. They are called by some other functions.  
+....................      
+....................    Clearam clears the entire screen  
+....................      
+....................    Cursorxy places the cursor at a screen location. Note that the cursor itself is invisible. Use Cursor XY to  
+....................    determine where the next character you write will appear.  
+....................      
+....................    Putlcdchar allows you to write a single character to the LCD at the present cursor location. Character written with a foreground of  
+....................    black and a background of white.  
+....................      
+....................    Putlcdcharinv  writes a single character to the LCD. Difference is that the character is written with a foreground of white on a background of black.  
+....................      
+....................    putstr and putstrinv both write an array of chacters to the LCD. outstr writes with a forground of black on white while putstrinv  
+....................    writes with white on a black background.  
+....................    */  
+....................  
+.................... // Structures used by LCD  
+.................... #define SCK          PIN_D7               // Connections between PIC and LCD.  
+.................... #define SDI          PIN_D6  
+.................... #define D_C          PIN_D5  
+.................... #define _SCE         PIN_D4  
+.................... #define _RES         PIN_D3  
+....................  
+.................... int lcdcontrast = 216;           //Contrast initially set at 216  
+....................  
+.................... void initlcd(void);               // Initializes the LCD.  
+.................... void writecom(char);            // Writes a command.  
+.................... void writedata(char);            // Writes data to DDRAM to illuminate the pixels.  
+.................... void clockdata(char);            // Clocks in data into the PCD8544 controller.  
+.................... void clearram(void);            // Erase the DDRAM contents.  
+.................... void cursorxy(char,char);         // Position cursor to x,y.  
+.................... void putlcdchar(char);               // Write one character.  
+.................... void putlcdcharinv(char);               // Write one character.  
+.................... void putstr(char *message);         // Writes a string of characters.  
+.................... void putstrinv(char *message);         // Writes a string of characters.  
+....................  
+.................... const char table[480] = {  0x00,0x00,0x00,0x00,0x00,// 20 space      ASCII table for NOKIA LCD: 96 rows * 5 bytes= 480 bytes  
+....................                      0x00,0x00,0x5f,0x00,0x00,   // 21 !         Note that this is the same set of codes for character you  
+....................                      0x00,0x07,0x00,0x07,0x00,   // 22 "         would find on a HD44780 based character LCD. :)  
+....................                      0x14,0x7f,0x14,0x7f,0x14,   // 23 #         Also, given the size of the LCD (84 pixels by 48 pixels),  
+....................                      0x24,0x2a,0x7f,0x2a,0x12,   // 24 $         the maximum number of characters per row is only 14. :)  
+....................                      0x23,0x13,0x08,0x64,0x62,   // 25 %  
+....................                      0x36,0x49,0x55,0x22,0x50,   // 26 &  
+....................                      0x00,0x05,0x03,0x00,0x00,   // 27 '      KAY: 480 bytes above obtained only from fact that the table has 96 elements  
+....................                      0x00,0x1c,0x22,0x41,0x00,   // 28 (           and not from any physical limitation of the LCD itself  
+....................                      0x00,0x41,0x22,0x1c,0x00,   // 29 )  
+....................                      0x14,0x08,0x3e,0x08,0x14,   // 2a *  
+....................                      0x08,0x08,0x3e,0x08,0x08,   // 2b +  
+....................                      0x00,0x50,0x30,0x00,0x00,   // 2c ,  
+....................                      0x08,0x08,0x08,0x08,0x08,   // 2d -  
+....................                      0x00,0x70,0x70,0x70,0x00,   // 2e .   // changed from 0x00,0x60,0x60,0x00,0x00 on 27/02/09  
+....................                      0x20,0x10,0x08,0x04,0x02,   // 2f /  
+....................                      0x3e,0x51,0x49,0x45,0x3e,   // 30 0    //start  
+....................                      0x00,0x42,0x7f,0x40,0x00,   // 31 1  
+....................                      0x42,0x61,0x51,0x49,0x46,   // 32 2  
+....................                      0x21,0x41,0x45,0x4b,0x31,   // 33 3  
+....................                      0x18,0x14,0x12,0x7f,0x10,   // 34 4  
+....................                      0x27,0x45,0x45,0x45,0x39,   // 35 5  
+....................                      0x3c,0x4a,0x49,0x49,0x30,   // 36 6  
+....................                      0x01,0x71,0x09,0x05,0x03,   // 37 7  
+....................                      0x36,0x49,0x49,0x49,0x36,   // 38 8  
+....................                      0x06,0x49,0x49,0x29,0x1e,   // 39 9  
+....................                      0x00,0x36,0x36,0x00,0x00,   // 3a :  
+....................                      0x00,0x56,0x36,0x00,0x00,   // 3b ;  
+....................                      0x08,0x14,0x22,0x41,0x00,   // 3c <  
+....................                      0x14,0x14,0x14,0x14,0x14,   // 3d =  
+....................                      0x00,0x41,0x22,0x14,0x08,   // 3e >  
+....................                      0x02,0x01,0x51,0x09,0x06,   // 3f ?  
+....................                      0x32,0x49,0x79,0x41,0x3e,   // 40 @  
+....................                      0x7e,0x11,0x11,0x11,0x7e,   // 41 A  
+....................                      0x7f,0x49,0x49,0x49,0x36,   // 42 B  
+....................                      0x3e,0x41,0x41,0x41,0x22,   // 43 C  
+....................                      0x7f,0x41,0x41,0x22,0x1c,   // 44 D  
+....................                      0x7f,0x49,0x49,0x49,0x41,   // 45 E  
+....................                      0x7f,0x09,0x09,0x09,0x01,   // 46 F  
+....................                      0x3e,0x41,0x49,0x49,0x7a,   // 47 G  
+....................                      0x7f,0x08,0x08,0x08,0x7f,   // 48 H  
+....................                      0x00,0x41,0x7f,0x41,0x00,   // 49 I  
+....................                      0x20,0x40,0x41,0x3f,0x01,   // 4a J  
+....................                      0x7f,0x08,0x14,0x22,0x41,   // 4b K  
+....................                      0x7f,0x40,0x40,0x40,0x40,   // 4c L  
+....................                      0x7f,0x02,0x0c,0x02,0x7f,   // 4d M  
+....................                      0x7f,0x04,0x08,0x10,0x7f,   // 4e N  
+....................                      0x3e,0x41,0x41,0x41,0x3e,   // 4f O  
+....................                      0x7f,0x09,0x09,0x09,0x06,   // 50 P  
+....................                      0x3e,0x41,0x51,0x21,0x5e,   // 51 Q  
+....................                      0x7f,0x09,0x19,0x29,0x46,   // 52 R  
+....................                      0x46,0x49,0x49,0x49,0x31,   // 53 S  
+....................                      0x01,0x01,0x7f,0x01,0x01,   // 54 T  
+....................                      0x3f,0x40,0x40,0x40,0x3f,   // 55 U  
+....................                      0x1f,0x20,0x40,0x20,0x1f,   // 56 V  
+....................                      0x3f,0x40,0x38,0x40,0x3f,   // 57 W  
+....................                      0x63,0x14,0x08,0x14,0x63,   // 58 X  
+....................                      0x07,0x08,0x70,0x08,0x07,   // 59 Y  
+....................                      0x61,0x51,0x49,0x45,0x43,   // 5a Z  
+....................                      0x00,0x7f,0x41,0x41,0x00,   // 5b [  
+....................                      0x02,0x04,0x08,0x10,0x20,   // 5c Yen Currency Sign  
+....................                      0x00,0x41,0x41,0x7f,0x00,   // 5d ]  
+....................                      0x04,0x02,0x01,0x02,0x04,   // 5e ^  
+....................                      0x40,0x40,0x40,0x40,0x40,   // 5f _  
+....................                      0x00,0x01,0x02,0x04,0x00,   // 60 `  
+....................                      0x20,0x54,0x54,0x54,0x78,   // 61 a       
+....................                      0x7f,0x48,0x44,0x44,0x38,   // 62 b  
+....................                      0x38,0x44,0x44,0x44,0x20,   // 63 c  
+....................                      0x38,0x44,0x44,0x48,0x7f,   // 64 d  
+....................                      0x38,0x54,0x54,0x54,0x18,   // 65 e  
+....................                      0x08,0x7e,0x09,0x01,0x02,   // 66 f  
+....................                      0x0c,0x52,0x52,0x52,0x3e,   // 67 g  
+....................                      0x7f,0x08,0x04,0x04,0x78,   // 68 h  
+....................                      0x00,0x44,0x7d,0x40,0x00,   // 69 i  
+....................                      0x20,0x40,0x44,0x3d,0x00,   // 6a j  
+....................                      0x7f,0x10,0x28,0x44,0x00,   // 6b k  
+....................                      0x00,0x41,0x7f,0x40,0x00,   // 6c l  
+....................                      0x7c,0x04,0x18,0x04,0x78,   // 6d m  
+....................                      0x7c,0x08,0x04,0x04,0x78,   // 6e n  
+....................                      0x38,0x44,0x44,0x44,0x38,   // 6f o  
+....................                      0x7c,0x14,0x14,0x14,0x08,   // 70 p  
+....................                      0x08,0x14,0x14,0x18,0x7c,   // 71 q  
+....................                      0x7c,0x08,0x04,0x04,0x08,   // 72 r  
+....................                      0x48,0x54,0x54,0x54,0x20,   // 73 s  
+....................                      0x04,0x3f,0x44,0x40,0x20,   // 74 t  
+....................                      0x3c,0x40,0x40,0x20,0x7c,   // 75 u  
+....................                      0x1c,0x20,0x40,0x20,0x1c,   // 76 v  
+....................                      0x3c,0x40,0x30,0x40,0x3c,   // 77 w  
+....................                      0x44,0x28,0x10,0x28,0x44,   // 78 x  
+....................                      0x0c,0x50,0x50,0x50,0x3c,   // 79 y  
+....................                      0x44,0x64,0x54,0x4c,0x44,   // 7a z  
+....................                      0x00,0x08,0x36,0x41,0x00,   // 7b <  
+....................                      0x00,0x00,0x7f,0x00,0x00,   // 7c |  
+....................                      0x00,0x41,0x36,0x08,0x00,   // 7d >  
+....................                      0x10,0x08,0x08,0x10,0x08,   // 7e Right Arrow    ->  
+....................                      0x78,0x46,0x41,0x46,0x78};   // 7f Left Arrow   <-  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void contrastup(void)  
+.................... {  
+....................    //write 000100    001  
+....................    //000100 in ANY mode sets the mode (value of H and V etc)  
+....................    if(lcdcontrast<250)  
+....................    {  
+....................       writecom(0x21);      // Activate Chip and H=1.        bit PD=0, V=0, H=1  //  
+....................       lcdcontrast=lcdcontrast+5;  
+....................       writecom(lcdcontrast);      // Set LCD Voltage to about 7V.         //Kay changed from C2  
+....................       writecom(0x20);      // Horizontal addressing and H=0.  
+....................     }  
+....................  
+.................... }  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void contrastdown(void)  
+.................... {  
+....................    if(lcdcontrast>132)  
+....................    {  
+....................       writecom(0x21);      // Activate Chip and H=1.        bit PD=0, V=0, H=1  //  
+....................       lcdcontrast=lcdcontrast-5;  
+....................       writecom(lcdcontrast);      // Set LCD Voltage to about 7V.         //Kay changed from C2  
+....................       writecom(0x20);      // Horizontal addressing and H=0.  
+....................     }  
+.................... }  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void initlcd(void)  
+.................... {  
+....................    output_high(_RES);      // Set _RES HIGH.  
+*
+228A:  BCF    F95.3
+228C:  BSF    F8C.3
+....................    output_high(_SCE);      // Disable Chip.  
+228E:  BCF    F95.4
+2290:  BSF    F8C.4
+....................    output_low(_RES);       // Reset the LCD.  
+2292:  BCF    F95.3
+2294:  BCF    F8C.3
+....................    //delay_ms(100);          // Wait 100ms.  
+....................    output_high(_RES);      // Awake LCD from RESET state.  
+2296:  BCF    F95.3
+2298:  BSF    F8C.3
+....................  
+....................    writecom(0x21);      // Activate Chip and H=1.        bit PD=0, V=0, H=1  //  
+229A:  MOVLW  21
+229C:  MOVWF  1F
+229E:  RCALL  2222
+....................    writecom(lcdcontrast);      // Set LCD Voltage to about 7V.         //Kay changed from C2  
+22A0:  MOVFF  04,1F
+22A4:  RCALL  2222
+....................    writecom(0x13);      // Adjust voltage bias.  
+22A6:  MOVLW  13
+22A8:  MOVWF  1F
+22AA:  RCALL  2222
+....................    writecom(0x20);      // Horizontal addressing and H=0.      //Can change to vertical mode to draw screen, but hope no stress associated  
+22AC:  MOVLW  20
+22AE:  MOVWF  1F
+22B0:  RCALL  2222
+....................                                                                //H doesn't need to be set to 1 any more unless we need to change Bias or LCD Voltage  
+....................                                                                //to set to vertical address mode, writecom(0x22)  
+....................    writecom(0x09);      // Activate all segments.  
+22B2:  MOVLW  09
+22B4:  MOVWF  1F
+22B6:  RCALL  2222
+....................    clearram();          // Erase all pixel on the DDRAM.  
+22B8:  RCALL  2264
+....................    writecom(0x08);      // Blank the Display.  
+22BA:  MOVLW  08
+22BC:  MOVWF  1F
+22BE:  RCALL  2222
+....................    writecom(0x0C);      // Display Normal.  
+22C0:  MOVLW  0C
+22C2:  MOVWF  1F
+22C4:  RCALL  2222
+....................    cursorxy(0,0);       // Cursor Home.  
+22C6:  CLRF   1C
+22C8:  CLRF   1D
+22CA:  RCALL  2236
+.................... }  
+22CC:  GOTO   23F0 (RETURN)
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void writecom(char command_in)  
+.................... {  
+....................    output_low(D_C);              // Select Command register.  
+*
+2222:  BCF    F95.5
+2224:  BCF    F8C.5
+....................    output_low(_SCE);             // Select Chip.  
+2226:  BCF    F95.4
+2228:  BCF    F8C.4
+....................    clockdata(command_in);        // Clock in command bits.  
+222A:  MOVFF  1F,27
+222E:  RCALL  21F6
+....................    output_high(_SCE);            // Deselect Chip.  
+2230:  BCF    F95.4
+2232:  BSF    F8C.4
+.................... }  
+2234:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void writedata(char data_in)  
+.................... {  
+....................    output_high(D_C);             // Select Data register.  
+*
+2250:  BCF    F95.5
+2252:  BSF    F8C.5
+....................    output_low(_SCE);             // Select Chip.  
+2254:  BCF    F95.4
+2256:  BCF    F8C.4
+....................    clockdata(data_in);           // Clock in data bits.  
+2258:  MOVFF  26,27
+225C:  RCALL  21F6
+....................    output_high(_SCE);            // Deselect Chip.  
+225E:  BCF    F95.4
+2260:  BSF    F8C.4
+.................... }  
+2262:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void clockdata(char bits_in)  
+.................... {  
+....................    int bitcnt;  
+....................    for (bitcnt=8; bitcnt>0; bitcnt--)  
+*
+21F6:  MOVLW  08
+21F8:  MOVWF  28
+21FA:  MOVF   28,F
+21FC:  BZ    2220
+....................       {  
+....................       output_low(SCK);  
+21FE:  BCF    F95.7
+2200:  BCF    F8C.7
+....................             // Set Clock Idle level LOW.  
+....................          if ((bits_in&0x80)==0x80) {output_high(SDI);}      // PCD8544 clocks in the MSb first.  
+2202:  MOVF   27,W
+2204:  ANDLW  80
+2206:  SUBLW  80
+2208:  BNZ   2210
+220A:  BCF    F95.6
+220C:  BSF    F8C.6
+....................          else {output_low(SDI);}  
+220E:  BRA    2214
+2210:  BCF    F95.6
+2212:  BCF    F8C.6
+....................        output_high(SCK);                        // Data is clocked on the rising edge of SCK.  
+2214:  BCF    F95.7
+2216:  BSF    F8C.7
+....................                  //ADDED BY KAY  
+....................       bits_in=bits_in<<1;                  // Logical shift data by 1 bit left.  
+2218:  BCF    FD8.0
+221A:  RLCF   27,F
+....................       }  
+221C:  DECF   28,F
+221E:  BRA    21FA
+.................... }  
+2220:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... // CLEARRAM: clears the RAM by writing blanks to every single RAM location  
+.................... // Each RAM location controls 8 vertical pixels  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void clearram(void)  
+.................... {  
+....................    int16 ddram;  
+....................    cursorxy(0,0);                                 // Cursor Home.  
+*
+2264:  CLRF   1C
+2266:  CLRF   1D
+2268:  RCALL  2236
+....................    for (ddram=700;ddram>0;ddram--)   {writedata(0x00);}      // 6*84 = 504 DDRAM addresses.       //changed to 600 to troubleshoot  
+226A:  MOVLW  02
+226C:  MOVWF  1B
+226E:  MOVLW  BC
+2270:  MOVWF  1A
+2272:  MOVF   1A,F
+2274:  BNZ   227A
+2276:  MOVF   1B,F
+2278:  BZ    2288
+227A:  CLRF   26
+227C:  RCALL  2250
+227E:  MOVF   1A,W
+2280:  BTFSC  FD8.2
+2282:  DECF   1B,F
+2284:  DECF   1A,F
+2286:  BRA    2272
+.................... }  
+2288:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... // CURSORXY: Uses appropriate Command to take "cursor" to right RAM address.  
+.................... // This is probably done by specifying a RAM address to go to  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... void cursorxy(char x, char y)  
+.................... {  
+....................    writecom(0x40|(y&0x07));   // Y axis  
+*
+2236:  MOVF   1D,W
+2238:  ANDLW  07
+223A:  IORLW  40
+223C:  MOVWF  1E
+223E:  MOVWF  1F
+2240:  RCALL  2222
+....................    writecom(0x80|(x&0x7f));   // X axis  
+2242:  MOVF   1C,W
+2244:  ANDLW  7F
+2246:  IORLW  80
+2248:  MOVWF  1E
+224A:  MOVWF  1F
+224C:  RCALL  2222
+.................... }  
+224E:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void putlcdchar(char character)  
+.................... {  
+....................    int16 tablept;  
+....................    int16 characterint;  
+....................    int count;  
+....................    int char_column;  
+....................  
+....................    if ((character<0x20)||(character>0x7f)) {return;}// Exit function if character is not found.  
+*
+2316:  MOVF   1D,W
+2318:  SUBLW  1F
+231A:  BC    2322
+231C:  MOVF   1D,W
+231E:  SUBLW  7F
+2320:  BC    2324
+2322:  BRA    2370
+....................    characterint=character;  
+2324:  CLRF   21
+2326:  MOVFF  1D,20
+....................    tablept = ((5*characterint) - 160);                  // Point to the columns of the character in the table.  
+232A:  CLRF   27
+232C:  MOVLW  05
+232E:  MOVWF  26
+2330:  MOVFF  21,29
+2334:  MOVFF  20,28
+2338:  BRA    22F6
+233A:  MOVLW  A0
+233C:  SUBWF  01,W
+233E:  MOVWF  1E
+2340:  MOVLW  00
+2342:  SUBWFB 02,W
+2344:  MOVWF  1F
+....................  
+....................    for (count=5;count>0;count--)                     // Draw the columns to print the character.  
+2346:  MOVLW  05
+2348:  MOVWF  22
+234A:  MOVF   22,F
+234C:  BZ    236C
+....................    {  
+....................       char_column = table[tablept];  
+234E:  MOVFF  1F,03
+2352:  MOVF   1E,W
+2354:  MOVFF  1F,FF7
+2358:  RCALL  2008
+235A:  MOVWF  23
+....................       writedata(char_column);  
+235C:  MOVFF  23,26
+2360:  RCALL  2250
+....................       tablept++;  
+2362:  INCF   1E,F
+2364:  BTFSC  FD8.2
+2366:  INCF   1F,F
+....................    }  
+2368:  DECF   22,F
+236A:  BRA    234A
+....................    writedata(0x00);                              // 1 pixel spacing per character.  
+236C:  CLRF   26
+236E:  RCALL  2250
+.................... }  
+2370:  GOTO   23A0 (RETURN)
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void putlcdcharinv(char character)  
+.................... {  
+....................    int16 tablept;  
+....................    int16 characterint;  
+....................    int count;  
+....................    int char_column;  
+....................  
+....................    if ((character<0x20)||(character>0x7f)) {return;}// Exit function if character is not found.  
+....................    characterint=character;  
+....................     tablept = ((5*characterint) - 160);                   // Point to the columns of the character in the table.  
+....................  
+....................    for (count=5;count>0;count--)                     // Draw the columns to print the character.  
+....................    {  
+....................       char_column = table[tablept]^0xFF;  
+....................       writedata(char_column);  
+....................       tablept++;  
+....................    }  
+....................    writedata(0xFF);                              // 1 pixel spacing per character.  
+.................... }  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void putstr(char *message)  
+.................... {  
+....................  // int i=0;  
+....................    while(*message) {putlcdchar(*message++);}                        // Points to one ASCII to be written one at a time.  
+2374:  MOVFF  1B,03
+2378:  MOVFF  1A,FE9
+237C:  MOVFF  1B,FEA
+2380:  MOVF   FEF,F
+2382:  BZ    23A2
+2384:  MOVFF  1B,03
+2388:  MOVF   1A,W
+238A:  INCF   1A,F
+238C:  BTFSC  FD8.2
+238E:  INCF   1B,F
+2390:  MOVWF  FE9
+2392:  MOVFF  03,FEA
+2396:  MOVFF  FEF,1C
+239A:  MOVFF  1C,1D
+239E:  BRA    2316
+23A0:  BRA    2374
+.................... // while((i<30)&&(message[i]))  
+.................... // {  
+....................  // putchar(message[i]);  
+....................  // i++;  
+....................  //  }  
+....................   }  
+23A2:  RETURN 0
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+.................... ////////////////////////////////////////////////////////////////////////  
+.................... void putstrinv(char *message)  
+.................... {  
+....................    while(*message) {putlcdcharinv(*message++);}                        // Points to one ASCII to be written one at a time.  
+.................... }  
+.................... ////////////////////////////////////////////////////////////////////////  
+....................  
+....................  
+.................... /*#define SCK          PIN_D7               // Connections between PIC and LCD.  
+.................... #define SDI          PIN_D6  
+.................... #define D_C          PIN_D5  
+.................... #define _SCE         PIN_D4  
+.................... #define _RES         PIN_D3 */ 
+....................  
+.................... #use delay(clock=8000000)  
+*
+22D0:  CLRF   FEA
+22D2:  MOVLW  1B
+22D4:  MOVWF  FE9
+22D6:  MOVF   FEF,W
+22D8:  BZ    22F4
+22DA:  MOVLW  02
+22DC:  MOVWF  01
+22DE:  CLRF   00
+22E0:  DECFSZ 00,F
+22E2:  BRA    22E0
+22E4:  DECFSZ 01,F
+22E6:  BRA    22DE
+22E8:  MOVLW  97
+22EA:  MOVWF  00
+22EC:  DECFSZ 00,F
+22EE:  BRA    22EC
+22F0:  DECFSZ FEF,F
+22F2:  BRA    22DA
+22F4:  RETURN 0
+....................  
+.................... void main()  
+.................... {  
+*
+23A4:  CLRF   FF8
+23A6:  BCF    FD0.7
+23A8:  CLRF   FEA
+23AA:  CLRF   FE9
+23AC:  MOVLW  D8
+23AE:  MOVWF  04
+23B0:  MOVF   FC1,W
+23B2:  ANDLW  C0
+23B4:  IORLW  0F
+23B6:  MOVWF  FC1
+23B8:  MOVLW  07
+23BA:  MOVWF  FB4
+23BC:  CLRF   05
+.................... //Setup_Oscillator parameter not selected from Intr Oscillotar Config tab  
+....................  
+....................    // TODO: USER CODE!!  
+....................    int i=0;  
+....................      
+.................... //REmember, you must define and initialise all variables here!!!                                     
+....................   // TODO: USER CODE!!  
+.................... char fName[10]="Ade", lName[10]="Olusegun";   
+23BE:  MOVLW  41
+23C0:  MOVWF  06
+23C2:  MOVLW  64
+23C4:  MOVWF  07
+23C6:  MOVLW  65
+23C8:  MOVWF  08
+23CA:  CLRF   09
+23CC:  MOVLW  4F
+23CE:  MOVWF  10
+23D0:  MOVLW  6C
+23D2:  MOVWF  11
+23D4:  MOVLW  75
+23D6:  MOVWF  12
+23D8:  MOVLW  73
+23DA:  MOVWF  13
+23DC:  MOVLW  65
+23DE:  MOVWF  14
+23E0:  MOVLW  67
+23E2:  MOVWF  15
+23E4:  MOVLW  75
+23E6:  MOVWF  16
+23E8:  MOVLW  6E
+23EA:  MOVWF  17
+23EC:  CLRF   18
+.................... //you must call initlcd before doing anything else with lcd  
+.................... initlcd();  
+23EE:  BRA    228A
+....................  
+....................    while(true)  
+....................       {  
+....................           
+....................          clearram(); 
+23F0:  RCALL  2264
+....................          //delay_ms(500);  
+....................          delay_ms(50);  
+23F2:  MOVLW  32
+23F4:  MOVWF  1B
+23F6:  RCALL  22D0
+....................          //cursorxy(1,0);  
+....................          cursorxy(i,0);  
+23F8:  MOVFF  05,1C
+23FC:  CLRF   1D
+23FE:  RCALL  2236
+....................          //putstr(fName);         
+....................          putstr(fName);         
+2400:  CLRF   1B
+2402:  MOVLW  06
+2404:  MOVWF  1A
+2406:  RCALL  2374
+....................          // TODO: USER CODE!!  
+....................          cursorxy(30,0);  
+2408:  MOVLW  1E
+240A:  MOVWF  1C
+240C:  CLRF   1D
+240E:  RCALL  2236
+....................          putstr(lName);                                                           
+2410:  CLRF   1B
+2412:  MOVLW  10
+2414:  MOVWF  1A
+2416:  RCALL  2374
+....................          cursorxy(1,1);  
+2418:  MOVLW  01
+241A:  MOVWF  1C
+241C:  MOVWF  1D
+241E:  RCALL  2236
+....................          putstr(fName);         
+2420:  CLRF   1B
+2422:  MOVLW  06
+2424:  MOVWF  1A
+2426:  RCALL  2374
+....................          // TODO: USER CODE!!  
+....................          cursorxy(30,1);  
+2428:  MOVLW  1E
+242A:  MOVWF  1C
+242C:  MOVLW  01
+242E:  MOVWF  1D
+2430:  RCALL  2236
+....................          putstr(lName);   
+2432:  CLRF   1B
+2434:  MOVLW  10
+2436:  MOVWF  1A
+2438:  RCALL  2374
+....................          cursorxy(1,5);  
+243A:  MOVLW  01
+243C:  MOVWF  1C
+243E:  MOVLW  05
+2440:  MOVWF  1D
+2442:  RCALL  2236
+....................          putstr(fName);         
+2444:  CLRF   1B
+2446:  MOVLW  06
+2448:  MOVWF  1A
+244A:  RCALL  2374
+....................          // TODO: USER CODE!!  
+....................          cursorxy(30,5);  
+244C:  MOVLW  1E
+244E:  MOVWF  1C
+2450:  MOVLW  05
+2452:  MOVWF  1D
+2454:  RCALL  2236
+....................          putstr(lName);  
+2456:  CLRF   1B
+2458:  MOVLW  10
+245A:  MOVWF  1A
+245C:  RCALL  2374
+....................          delay_ms(400);           
+245E:  MOVLW  02
+2460:  MOVWF  1A
+2462:  MOVLW  C8
+2464:  MOVWF  1B
+2466:  RCALL  22D0
+2468:  DECFSZ 1A,F
+246A:  BRA    2462
+....................          i++;  
+246C:  INCF   05,F
+....................        }                                       
+246E:  BRA    23F0
+....................    //now you can call any function from the driver to modify brightness, determine where to write next, write a character, or a string.  
+.................... }  
+2470:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV20 VREGEN NOWDT WDT32768
+   Word  3: 8500   CCP2C1 NOPBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

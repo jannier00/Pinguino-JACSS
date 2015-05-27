@@ -1,0 +1,50 @@
+
+ROM used: 540 (2%)
+          544 (2%) including unused fragments
+
+          0 Average locations per line
+          3 Average locations per statement
+
+RAM used: 42 (2%) at main() level
+          43 (2%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   42     7   4  Ejemplo 10 - lightsOn.c
+   44     5   3  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Cabecera JACSS.c
+  462     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+   58     7   4  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Arduino Functions.c
+  346   170  90  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\analogWrite.c
+----- -----
+ 1085   189 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     42   4   1             @delay_ms1
+0    266  25   0  1663  3.8  Timer3_Interrupt
+0     62   6   1   132  3.0  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              189
+    Comments                398
+    Volume (V)              1936
+    Difficilty (D)          6.7
+    Effort to implement (E) 12946
+    Time to implement (T)   12 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   26
+    Maintainability (MI)    65
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-020AC   166  0  
+020AE-07FFE   370  24032  
+
+
+

@@ -1,0 +1,270 @@
+CCS PCH C Compiler, Version 4.120, 5967               18-jun-13 15:46
+
+               Filename: C:\Users\PROGRA\Documents\Codigos CCS\PicToPicSPI\TrasmisorMasterSPI.lst
+
+               ROM used: 160 bytes (0%)
+                         Largest free fragment is 24412
+               RAM used: 8 (0%) at main() level
+                         9 (0%) worst case
+               Stack:    1 locations
+
+*
+2000:  GOTO   2032
+.................... // COMUNICACION ISP ENTRE DOS PICS TRANSMISOR MASTER// 
+.................... #include <18F4550.h> 
+.................... //////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... #device PIC18F4550 
+.................... #list 
+....................  
+.................... //#device adc = 10  
+.................... #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN 
+.................... #use delay(clock=48000000)  //#use delay(clock=20000000) 
+*
+2008:  CLRF   FEA
+200A:  MOVLW  08
+200C:  MOVWF  FE9
+200E:  MOVF   FEF,W
+2010:  BZ    202E
+2012:  MOVLW  0F
+2014:  MOVWF  01
+2016:  CLRF   00
+2018:  DECFSZ 00,F
+201A:  BRA    2018
+201C:  DECFSZ 01,F
+201E:  BRA    2016
+2020:  MOVLW  8F
+2022:  MOVWF  00
+2024:  DECFSZ 00,F
+2026:  BRA    2024
+2028:  NOP   
+202A:  DECFSZ FEF,F
+202C:  BRA    2012
+202E:  GOTO   208A (RETURN)
+.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... ////                     USB_BOOTLOADER.H                              //// 
+.................... ////                                                                   //// 
+.................... ////  This include file must be included by any application loaded     //// 
+.................... ////  by the example USB bootloader (ex_usb_bootloader                 //// 
+.................... ////                                                                   //// 
+.................... ////  The directives in this file relocate the reset and interrupt     //// 
+.................... ////  vectors as well as reserving space for the bootloader.           //// 
+.................... ////                                                                   //// 
+.................... ////  For more documentation see ex_usb_bootloader.c                   //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////                                                                   //// 
+.................... //// VERSION HISTORY                                                   //// 
+.................... ////                                                                   //// 
+.................... //// March 5th, 2009:                                                  //// 
+.................... ////   Cleanup for Wizard.                                             //// 
+.................... ////   PIC24 Initial release.                                          //// 
+.................... ////                                                                   //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996,2009 Custom Computer Services           //// 
+.................... //// This source code may only be used by licensed users of the CCS    //// 
+.................... //// C compiler.  This source code may only be distributed to other    //// 
+.................... //// licensed users of the CCS C compiler.  No other use,              //// 
+.................... //// reproduction or distribution is permitted without written         //// 
+.................... //// permission.  Derivative programs created using this software      //// 
+.................... //// in object code form are not restricted in any way.                //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+....................  
+.................... //how big is the bootloader? 
+.................... //the bootloader will reside from address 0x0000 to this location.  the 
+.................... //application will then sit at this location+1 to the end of program memory. 
+.................... //#if defined(__DEBUG) 
+.................... #define LOADER_SIZE        (0x1FFF) 
+.................... //#else 
+.................... //#define LOADER_SIZE        (0x17FF) 
+.................... //#endif 
+....................  
+.................... //the loader and application need a common flag that determines if we are in 
+.................... //the bootloader or application, that way the ISR knows where to go.  this 
+.................... //is the location in ram that is reserved for this flag. 
+.................... #define LOC_IN_LOADER_FLAG  0x25 
+....................  
+.................... //// --- end configuration --- //////////////////////////////////////////// 
+....................  
+.................... #reserve LOC_IN_LOADER_FLAG 
+....................  
+.................... int8 g_InBootloader; 
+.................... #locate g_InBootloader=LOC_IN_LOADER_FLAG 
+....................  
+.................... #define LOADER_START       (0) 
+.................... #define LOADER_END         (LOADER_SIZE) 
+.................... #define APPLICATION_START  (LOADER_SIZE+1) 
+.................... #if defined(__USB_87J50__) 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-9) //configuration bits 
+.................... #else 
+....................  #define APPLICATION_END    (getenv("PROGRAM_MEMORY")-1) 
+.................... #endif  
+.................... #define APPLICATION_ISR    (APPLICATION_START+8) 
+....................  
+.................... #ifdef _bootloader 
+....................  /* 
+....................   Provide an empty application, so if you load this .HEX file into the pic 
+....................   without an application this will prevent the pic from executing unknown code. 
+....................  */ 
+....................  #org APPLICATION_START,APPLICATION_START+0xF 
+....................  void BlankApplication(void)  
+....................  { 
+....................    while(TRUE); 
+....................  } 
+....................  
+....................  //we need to prevent the loader from using application space 
+....................  #if (APPLICATION_END > 0x10000) 
+....................    #org APPLICATION_START+0x10, 0xFFFF {} 
+....................    #if (APPLICATION_END > 0x20000) 
+....................       #org 0x10000, 0x1FFFF {} 
+....................       #org 0x20000, APPLICATION_END {} 
+....................    #else 
+....................       #org 0x10000, APPLICATION_END {} 
+....................    #endif 
+....................  #else 
+....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
+....................  #endif 
+....................  
+....................    #define  USB_CONFIG_PID       0x0034 
+....................  
+....................    #define USB_STRINGS_OVERWRITTEN 
+....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
+....................  
+....................    // Here is where the "CCS" Manufacturer string and "SERIAL DEMO" are stored. 
+....................    // Strings are saved as unicode. 
+....................    // These strings are mostly only displayed during the add hardware wizard. 
+....................    // Once the operating system drivers have been installed it will usually display 
+....................    // the name from the drivers .INF. 
+....................    char const USB_STRING_DESC[]={ 
+....................       //string 0 
+....................             4, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             0x09,0x04,   //Microsoft Defined for US-English 
+....................       //string 1  - manufacturer 
+....................             8, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'C',0, 
+....................             'S',0, 
+....................       //string 2 - product 
+....................             30, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'C',0, 
+....................             'D',0, 
+....................             'C',0, 
+....................             ' ',0, 
+....................             'B',0, 
+....................             'o',0, 
+....................             'o',0, 
+....................             't',0, 
+....................             'l',0, 
+....................             'o',0, 
+....................             'a',0, 
+....................             'd',0, 
+....................             'e',0, 
+....................             'r',0 
+....................    }; 
+.................... #endif   //_bootloader 
+....................  
+.................... #ifndef _bootloader 
+....................  //in the application, this moves the reset and isr vector out of the bootload 
+....................  //space.  it then reserves the loader space from being used by the application. 
+....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
+....................  #org 0, LOADER_END {} 
+.................... #endif 
+....................  
+.................... //#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion. 
+....................  
+....................  
+.................... void main() 
+.................... { 
+2032:  CLRF   FF8
+2034:  BCF    FD0.7
+2036:  CLRF   FEA
+2038:  CLRF   FE9
+203A:  MOVF   FC1,W
+203C:  ANDLW  C0
+203E:  IORLW  0F
+2040:  MOVWF  FC1
+2042:  MOVLW  07
+2044:  MOVWF  FB4
+2046:  CLRF   05
+2048:  CLRF   07
+204A:  CLRF   06
+....................  
+....................    char dato=0; 
+....................    int16 lectura=0; 
+....................  
+....................    setup_adc_ports(AN0); 
+204C:  MOVF   FC1,W
+204E:  ANDLW  C0
+2050:  IORLW  0E
+2052:  MOVWF  FC1
+....................    setup_adc(ADC_CLOCK_INTERNAL); 
+2054:  BSF    FC0.0
+2056:  BSF    FC0.1
+2058:  BSF    FC0.2
+205A:  BCF    FC0.7
+205C:  BSF    FC2.0
+.................... //CONFIGURACIÓN BUS SPI------------------------------------------------------------- 
+....................  setup_spi(spi_master | spi_l_to_h | spi_clk_div_16);//Vamos a trabajar como maestro|que funciona en activo alto 
+205E:  BCF    FC6.5
+2060:  BCF    F94.7
+2062:  BSF    F93.0
+2064:  BCF    F93.1
+2066:  MOVLW  21
+2068:  MOVWF  FC6
+206A:  MOVLW  00
+206C:  MOVWF  FC7
+....................  //lcd_init(); 
+....................  set_adc_channel(0); 
+206E:  MOVWF  01
+2070:  MOVF   FC2,W
+2072:  ANDLW  C3
+2074:  IORWF  01,W
+2076:  MOVWF  FC2
+....................   
+....................  while(true) 
+....................  { 
+....................   set_adc_channel(0); 
+2078:  MOVLW  00
+207A:  MOVWF  01
+207C:  MOVF   FC2,W
+207E:  ANDLW  C3
+2080:  IORWF  01,W
+2082:  MOVWF  FC2
+....................   delay_ms(200); 
+2084:  MOVLW  C8
+2086:  MOVWF  08
+2088:  BRA    2008
+....................   lectura=read_adc(); 
+208A:  BSF    FC2.1
+208C:  BTFSC  FC2.1
+208E:  BRA    208C
+2090:  MOVF   FC4,W
+2092:  CLRF   07
+2094:  MOVWF  06
+....................   spi_write(lectura);//Escribir lo que haya en el pin A0 
+2096:  MOVF   FC9,W
+2098:  MOVFF  06,FC9
+209C:  RRCF   FC7,W
+209E:  BNC   209C
+....................   //lcd_gotoxy(1,1); 
+....................   //printf(lcd_putc," %Ld   ",lectura); 
+....................  // delay_ms(200); 
+....................  } 
+20A0:  BRA    2078
+.................... } 
+....................  
+....................  
+20A2:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV20 VREGEN NOWDT WDT32768
+   Word  3: 8500   CCP2C1 NOPBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

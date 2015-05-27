@@ -1,0 +1,51 @@
+
+ROM used: 324 (1%)
+          328 (1%) including unused fragments
+
+          0 Average locations per line
+          1 Average locations per statement
+
+RAM used: 36 (2%) at main() level
+          37 (2%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   37    16   3  timer0.c
+  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+ 1273   359  72  ..\..\..\..\..\Program Files (x86)\PICC\drivers\stdlib.h
+   32     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\stddef.h
+  409   121  24  ..\..\..\..\..\Program Files (x86)\PICC\drivers\string.h
+   28     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h
+  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+----- -----
+ 2374   496 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     42   6   1             @delay_ms1
+0     32   5   0    76  2.7  RTCC_isr
+0     80  12   0   219  3.2  MAIN
+
+Program metrics:
+    Functions               2
+    Statements              496
+    Comments                928
+    Volume (V)              354
+    Difficilty (D)          5.9
+    Effort to implement (E) 2088
+    Time to implement (T)   2 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    101
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-020AC   166  0  
+020AE-07FFE   154  24248  
+
+
+

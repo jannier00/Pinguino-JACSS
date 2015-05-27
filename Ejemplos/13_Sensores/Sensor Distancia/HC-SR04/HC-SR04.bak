@@ -1,0 +1,48 @@
+#include <18F4550.h>
+//#device ADC = 10 //Define la resolucion del ADC, comentar en caso de usar 8
+#fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
+#use delay(clock=48000000)
+#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para co
+// Defining the pins   
+#define trig pin_B1   // Pin Trig Salida 
+#define echo pin_B0   // Pin echo entrada 
+
+int16 distancia;   // Defining variables
+
+ 
+int16 mide_distancia(void){
+      int16 centimetros=0;
+      //pulso de disparo:
+      output_high(trig);
+      delay_us(10);
+      output_low(trig);
+      //espera flanco de subida por el pin echo
+      while(!input(echo));
+      //comienza a contar centimetros hasta que pin echo sea cero
+      while(input(echo)){
+      centimetros++;
+      delay_us(58);
+      }
+      //demora de seguridad y retorna con el valor de centimetros contados
+      delay_ms(50);
+      return(centimetros);
+ }
+//********************************************************************
+
+ void main()   
+ {   
+ usbInit();               // initiating the LCD
+ set_tris_b(0b00000001);
+ delay_ms(1000);  
+ printf(usbWrite, " Sonar test\n\r");// for LCD & MCU restart troubleshooting   
+ delay_ms(1000);               // Boot-up delay, for troubleshooting  
+
+   while (true){ // lazo infinito
+      distancia=mide_distancia(); // AQUI USAMOS NUESTRA FUNCION!!!
+
+      printf(usbWrite, "Distance = %Lu cm\n\r", distancia); //Display distance  
+      delay_ms(1000);  
+   }
+
+}// cierra main

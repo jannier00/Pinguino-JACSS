@@ -1,0 +1,131 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+025     g_InBootloader
+026-21D MemoriaVideo
+21E-415 MAIN.Temp
+416     nokia_bitmap.x
+416-417 nokia_imprime_memoria.ddram
+416-417 nokia_borra_memoria.ddram
+416-417 nokia_borra_pantalla.ddram
+416     @delay_us1.P1
+416     MAIN.@SCRATCH1
+417     nokia_bitmap.y
+417     @delay_ms1.P1
+417     MAIN.@SCRATCH2
+418     nokia_gotoxy.xnokia
+418-419 nokia_bitmap.bitmap
+418     nokia_imprime_memoria.@SCRATCH1
+418     nokia_borra_memoria.@SCRATCH1
+418     MAIN.@SCRATCH3
+419     nokia_gotoxy.ynokia
+419     nokia_write_data.bytefornokia_data
+419     nokia_borra_memoria.@SCRATCH2
+419     MAIN.@SCRATCH4
+41A     nokia_bitmap.ancho
+41A     nokia_gotoxy.@SCRATCH1
+41B     nokia_write_command.bytefornokia_command
+41B     nokia_bitmap.alto
+41C-41D nokia_bitmap.ind_bitmap
+41C     nokia_write_dorc.bytefornokia
+41D     nokia_write_dorc.caa
+41E-41F nokia_bitmap.ind_memoria
+41E     nokia_write_dorc.@SCRATCH1
+420-421 nokia_bitmap.xx
+422-423 nokia_bitmap.yy
+424-425 nokia_bitmap.desplazamiento
+426     @DIVS88.P1
+426     nokia_bitmap.@SCRATCH1
+427     @DIVS88.P1
+427     nokia_bitmap.@SCRATCH2
+428     nokia_bitmap.@SCRATCH3
+428     @DIVS88.@SCRATCH1
+429     nokia_bitmap.@SCRATCH4
+429     @DIVS88.@SCRATCH2
+42A-42B @MUL1616.P1
+42A     nokia_bitmap.@SCRATCH5
+42B     nokia_bitmap.@SCRATCH6
+42C-42D @MUL1616.P1
+42C     nokia_bitmap.@SCRATCH7
+42D     nokia_bitmap.@SCRATCH8
+42E     @MUL1616.@SCRATCH1
+42E     nokia_bitmap.@SCRATCH9
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+2902  @delay_ms1
+28E0  @delay_us1
+292A  nokia_write_dorc
+2996  nokia_write_data
+2960  nokia_write_command
+2A8E  @MUL1616
+2974  nokia_gotoxy
+29AA  nokia_borra_pantalla
+2D4A  nokia_imprime_memoria
+2A60  nokia_borra_memoria
+2AFE  nokia_bitmap
+2AB0  @DIVS88
+29DC  Lcd_init
+2008  OK
+20C8  image
+22CE  lol
+24D4  mejor
+26DA  far
+2D8E  MAIN
+2D8E  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\8_LCDGRAFICA\
+
+Project Files:
+    BITMAP.c                                                [02-abr.-14 22:06  CRC=C8D1630A]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr.-11 15:02  CRC=9D64384A]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr.-09 11:51  CRC=21A70465]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia_LCD.c [28-jun.-13 15:40  CRC=51314734]
+
+Source signature=2A3F2E21
+
+Units:
+    C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\8_LCDGRAFICA\BITMAP (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      BITMAP.err
+    Ext Symbols: BITMAP.esym
+    INHX32:      BITMAP.hex
+    Symbols:     BITMAP.sym
+    List:        BITMAP.lst
+    Debug/COFF:  BITMAP.cof
+    Project:     BITMAP.PJT
+    Call Tree:   BITMAP.tre
+    Statistics:  BITMAP.STA

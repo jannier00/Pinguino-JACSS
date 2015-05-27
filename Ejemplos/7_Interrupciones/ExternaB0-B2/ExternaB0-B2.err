@@ -1,0 +1,5 @@
+>>> Warning 225 "ExternaB0-B2.c" Line 42(1,1): Interrupt level changed  EXT: NORMAL=>HIGH
+>>> Warning 203 "ExternaB0-B2.c" Line 117(1,1): Condition always TRUE
+>>> Warning 202 "ExternaB0-B2.c" Line 30(6,10): Variable never used:   CONT
+      Memory usage:   ROM=3%      RAM=2% - 3%
+      0 Errors,  3 Warnings.

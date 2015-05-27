@@ -1,0 +1,52 @@
+
+ROM used: 626 (2%)
+          630 (2%) including unused fragments
+
+          1 Average locations per line
+          10 Average locations per statement
+
+RAM used: 10 (0%) at main() level
+          14 (1%) worst case
+
+Stack used: 2 worst case (out of 31 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   62    17  28  TransmisorMaster.c
+  462     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  135    43  72  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\kbd2_1.c
+----- -----
+  792    60 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     42   3   1             @delay_ms1
+0     32   3   0             @const68
+0      4   0   0     3  0.0  kbd_init
+0    184  15   4  5861 10.2  kbd_getc
+0     34   3   0             @goto10056
+0    108   9   1             @I2C_WRITE_1
+0    164  13   0   123  1.3  envio_I2C
+0     54   4   0   134  3.0  MAIN
+
+Program metrics:
+    Functions               4
+    Statements              60
+    Comments                246
+    Volume (V)              6536
+    Difficilty (D)          15.8
+    Effort to implement (E) 103185
+    Time to implement (T)   1 hours, 36 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   14
+    Maintainability (MI)    68
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   622  23946  
+
+
+
