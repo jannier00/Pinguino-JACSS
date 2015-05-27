@@ -1,0 +1,53 @@
+000     @SCRATCH
+001     @SCRATCH
+002     @SCRATCH
+003     @SCRATCH
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PROGRAM_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    C:\Users\Jannier\Documents\G-PIC\CDC Bootloader JACSS\
+
+Project Files:
+    config18F4550Trainer.c                                  [08-mar-12 18:43  CRC=DEB70F1E]
+    ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
+
+Source signature=197F7FB2
+
+Units:
+    C:\Users\Jannier\Documents\G-PIC\CDC Bootloader JACSS\config18F4550Trainer (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      config18F4550Trainer.err
+    Ext Symbols: config18F4550Trainer.esym
+    Symbols:     config18F4550Trainer.sym

@@ -1,0 +1,17 @@
+NOTA: Para el correcto funcionamiento de los programas 
+de ejemplo proporcionados con la tarjeta de desarrollo  
+es necesario copiar todos el contenido de la carpeta
+ “Librerias” y pegarlo en la carpeta: 
+"C:\Program Files (x86)\PICC\Drivers" (o equivalente).
+
+PRECAUCION: Presionar el botón BOOT cuando el Pin_A4 
+funciona como salida puede dañar el microcontrolador. 
+Este botón solo debe ser presionado cuando el Pin_A4 
+funciona como entrada o cuando el botón de RESET está 
+siendo presionado (por ejemplo, para introducir al modo 
+bootloader).
+
+contacto
+Ing. Jannier Abreu Bernat
+jani00r@hotmail.com
+9991187973
