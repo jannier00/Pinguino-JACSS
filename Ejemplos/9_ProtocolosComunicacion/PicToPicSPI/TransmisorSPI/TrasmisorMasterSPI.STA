@@ -13,10 +13,10 @@ Stack used: 1 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    36    10 100  TrasmisorMasterSPI.c
-  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
 ----- -----
-  631    10 Total
+  640    10 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

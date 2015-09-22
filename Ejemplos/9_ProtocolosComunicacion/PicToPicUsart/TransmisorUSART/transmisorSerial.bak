@@ -22,7 +22,6 @@ void main() {
          { 
             putc(c);//Envía el caracter vía serie por la USART del PIC
             delay_us(100);    //Pausa de 1 s.
-            //putc('\0');
          }
       }
 }

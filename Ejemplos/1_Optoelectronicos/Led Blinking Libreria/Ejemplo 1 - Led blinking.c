@@ -3,7 +3,7 @@
    Enciende un led por 1 segundo, luego lo apaga por 1 segundo, de forma
    repetitiva
 */
-#include <Cabecera JACSS.c>             //Incluye las librerias necesarias
+#include <Cabecera_JACSS.c>             //Incluye las librerias necesarias
 
 #define ledPin Pin_A4               //Etiqueta al Pin_A4 con el nombre de ledPin
 

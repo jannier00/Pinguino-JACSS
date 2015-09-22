@@ -9,8 +9,8 @@
 char message;     //  This will hold one byte of the serial message
 
 void main() {  
-   SET_TRIS_A(0b00000000);    //Ponemos todo como salida
-   OUTPUT_B(0x00); //Limpimos puerto B poniendolo a 0
+   SET_TRIS_A(0x00);    //Ponemos todo como salida
+   OUTPUT_B(0b00010000); //Limpimos puerto B poniendolo a 0
    SETUP_ADC_PORTS(NO_ANALOGS); //Apagamo los analogicos para que sean digitales
    usbInit();     //Inicializa la comunicacion
 
@@ -18,10 +18,10 @@ void main() {
       if (usbAvailable() > 0) { //  Check if there is a new message
          message = usbRead();    //  Put the serial input into the message
 
-         if (message == 'R'){  //  If a capitol R is received...
+         if (message == 'r'){  //  If a capitol R is received...
          output_high (ledPin); //redLED = 255;       //  Set redLED to 255 (on)
          }
-         if (message == 'r'){  //  If a lowercase r is received...
+         if (message == 'R'){  //  If a lowercase r is received...
          output_low (ledPin);         //  Set redLED to 0 (off)
          }
 

@@ -10,7 +10,7 @@ float V=0.0;
 
 void main() 
 { 
- setup_adc_ports(AN1); 
+ setup_adc_ports(AN0); 
  setup_adc(ADC_CLOCK_INTERNAL); 
  usbInit();
  delay_ms(2000);

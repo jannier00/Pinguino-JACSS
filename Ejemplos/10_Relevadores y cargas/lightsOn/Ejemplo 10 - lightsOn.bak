@@ -7,7 +7,7 @@
    apaga.
    
    Hardware
-   G-PiC Lite!       ULN2803
+   Pinguino JACSS    ULN2803
    Pin_B0            Pin 1
    GND               Pin 9
                      Pin 10 - Conectado a fuente de voltaje externa @ 5V
@@ -20,7 +20,7 @@
    -  Conectar la otra terminal de la lampara al neutro de la toma de CA
    -  Conectar la terminal NO (Normally Open) a la fase de la toma de CA 
 */
-#include <G-PIC Lite!.c>
+#include <Cabecera JACSS.c>
 
 #define buttonPin Pin_A4
 #define lampPin   Pin_B0

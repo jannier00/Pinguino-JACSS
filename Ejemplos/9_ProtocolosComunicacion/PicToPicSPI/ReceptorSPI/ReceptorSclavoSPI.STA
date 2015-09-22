@@ -12,17 +12,17 @@ Stack used: 6 worst case (out of 31 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   37     9  12  ReceptorSclavoISP.c
-  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-  238    69  88  ..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c
+   37     9  12  ReceptorSclavoSPI.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+  238    69  88  C:\Program Files (x86)\PICC\drivers\flex_lcd.c
 ----- -----
-  870    78 Total
+  879    78 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     40   2   1             @delay_ms1
-0     20   1   0   331  2.8  @const67
+0     20   1   0             @const67
 0     70   4   1   328  2.7  lcd_send_nibble
 0     50   3   1   362  2.3  lcd_read_nibble
 0     36   2   3   165  3.3  lcd_read_byte
@@ -34,16 +34,16 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    236  15   9             @PRINTF_LD_89
 
 Program metrics:
-    Functions               9
+    Functions               8
     Statements              78
     Comments                205
-    Volume (V)              4161
-    Difficilty (D)          31.9
-    Effort to implement (E) 132883
-    Time to implement (T)   2 hours, 3 minutes
+    Volume (V)              3559
+    Difficilty (D)          28.9
+    Effort to implement (E) 102940
+    Time to implement (T)   1 hours, 35 minutes
     Est Delivered Bugs (B)  1
     Cyclomatic Complexity   10
-    Maintainability (MI)    149
+    Maintainability (MI)    152
 
  Segment     Used  Free
 -----------  ----  ----

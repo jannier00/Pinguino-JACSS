@@ -9,10 +9,10 @@
 ///     LCD_DATA7        PIN_B7                                              ///
 ////////////////////////////////////////////////////////////////////////////////
 #include <18F4550.h>
-//#device adc = 10 
+//#device adc = 10
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)  //#use delay(clock=20000000)
-#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader
 #include <lcd.c> 
 
 void main() {
@@ -20,7 +20,7 @@ void main() {
    lcd_init();
    printf(lcd_putc,"\f");  //BORRAMOS PANTALLA
 
-   while (1) {
+   while (TRUE) {
       lcd_gotoxy(1,1);
       printf(lcd_putc,"HOLA MUNDO");
       delay_ms(200);

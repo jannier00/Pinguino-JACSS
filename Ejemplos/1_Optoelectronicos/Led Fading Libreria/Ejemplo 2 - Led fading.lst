@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               12-mar-13 13:18
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:37
 
-               Filename: C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Optoelectronicos\Led Fading Libreria\Ejemplo 2 - Led fading.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Fading Libreria\Ejemplo 2 - Led fading.lst
 
                ROM used: 1066 bytes (3%)
                          Largest free fragment is 23506
@@ -68,7 +68,7 @@ CCS PCH C Compiler, Version 4.120, 5967               12-mar-13 13:18
 ....................    requiera PWM. 
 .................... */ 
 ....................  
-.................... #include <Cabecera JACSS.c> 
+.................... #include <Cabecera_JACSS.c> 
 .................... #include <18F4550.h> 
 .................... //////// Standard Header file for the PIC18F4550 device //////////////// 
 .................... #device PIC18F4550 
@@ -950,7 +950,7 @@ CCS PCH C Compiler, Version 4.120, 5967               12-mar-13 13:18
 .................... // 
 .................... //NOTA: Se emplea para lecturas de 8 bits de resolucion 
 .................... //****************************************************************************// 
-.................... #define AN0  0 
+.................... #define A0  0 
 .................... #define A1  1 
 .................... #define A2  2 
 .................... #define A3  3 

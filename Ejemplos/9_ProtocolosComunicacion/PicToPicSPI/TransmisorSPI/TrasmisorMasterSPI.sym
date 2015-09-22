@@ -36,17 +36,17 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicSPI\
+    E:\Pinguino JACSS\Ejemplos\9_ProtocolosComunicacion\PicToPicSPI\TransmisorSPI\
 
 Project Files:
-    TrasmisorMasterSPI.c                                    [17-jun-13 15:43  CRC=91CCAEE0]
-    ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
-    ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
+    TrasmisorMasterSPI.c                                    [22-sep-15 12:48  CRC=1511FBFD]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h [06-mar-15 10:37  CRC=58FDE936]
 
-Source signature=727EEFF4
+Source signature=647206B3
 
 Units:
-    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicSPI\TrasmisorMasterSPI (main)
+    E:\Pinguino JACSS\Ejemplos\9_ProtocolosComunicacion\PicToPicSPI\TransmisorSPI\TrasmisorMasterSPI (main)
 
 Compiler Settings:
     Processor:      PIC18F4550

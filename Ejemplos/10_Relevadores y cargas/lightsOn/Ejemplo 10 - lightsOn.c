@@ -20,7 +20,7 @@
    -  Conectar la otra terminal de la lampara al neutro de la toma de CA
    -  Conectar la terminal NO (Normally Open) a la fase de la toma de CA 
 */
-#include <Cabecera JACSS.c>
+#include <Cabecera_JACSS.c>
 
 #define buttonPin Pin_A4
 #define lampPin   Pin_B0

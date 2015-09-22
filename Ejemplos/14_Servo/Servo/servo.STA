@@ -13,10 +13,10 @@ Stack used: 1 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    38    20 100  servo.c
-  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
 ----- -----
-  633    20 Total
+  642    20 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

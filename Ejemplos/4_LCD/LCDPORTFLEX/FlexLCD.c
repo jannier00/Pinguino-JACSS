@@ -12,15 +12,15 @@
 //#device adc = 10 
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)  //#use delay(clock=20000000)
-#include <usb_bootloader.h>//Comenta esta línea si no usas Bootloader
+#include <usb/usb_bootloader.h>//Comenta esta línea si no usas Bootloader
 
-#define LCD_DB4   PIN_B4
-#define LCD_DB5   PIN_B5
-#define LCD_DB6   PIN_B6      //CONFIGURAMOS LOS PINES PARA LA LCD
-#define LCD_DB7   PIN_B7
-#define LCD_RS    PIN_B1
-#define LCD_RW    PIN_B2
-#define LCD_E     PIN_B0
+#define LCD_DB4   PIN_D4
+#define LCD_DB5   PIN_D5
+#define LCD_DB6   PIN_D6      //CONFIGURAMOS LOS PINES PARA LA LCD
+#define LCD_DB7   PIN_D7
+#define LCD_RS    PIN_C0
+#define LCD_RW    PIN_C1
+#define LCD_E     PIN_C2
 
 #include <flex_lcd.c> 
 

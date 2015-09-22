@@ -4,7 +4,7 @@
    motor de CD. El motor enciende 3 segundos y se apaga 3 segundos
    
    Hardware
-   G-PIC Lite!       L293D o SN754410 
+   Pinguino JACSS       L293D o SN754410 
    Pin_C1            Pin 1
    Pin_B0            Pin 2
    Pin_B1            Pin 7
@@ -14,7 +14,7 @@
    Importante: Verificar la hoja de datos del puente H para saber cómo 
    conectarlo correctamente
 */
-#include <G-PIC Lite!.c>
+#include <Cabecera JACSS.c>
 
 #define Enable12  Pin_C1         //PWM por hardware en el Pin_C1
 #define motor1A   Pin_B0         //Pin de control del puente H

@@ -13,11 +13,11 @@ Stack used: 2 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    20     6   3  Ejemplo 1 - Led blinking.c
-   44     5   3  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Cabecera JACSS.c
-  462     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-   58     7   4  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Arduino Functions.c
-  346   170  90  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\analogWrite.c
+   44     5   3  C:\Program Files (x86)\PICC\drivers\Cabecera_JACSS.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  133     0   0  C:\Program Files (x86)\PICC\drivers\usb_bootloader.h
+   58     7   4  C:\Program Files (x86)\PICC\drivers\Arduino Functions.c
+  346   170  90  C:\Program Files (x86)\PICC\drivers\analogWrite.c
 ----- -----
  1063   188 Total
 

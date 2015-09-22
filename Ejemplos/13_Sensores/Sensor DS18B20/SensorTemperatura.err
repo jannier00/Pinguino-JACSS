@@ -1,7 +1,9 @@
->>> Warning 203 "C:\Program Files (x86)\PICC\drivers\usb\pic18_usb.c" Line 531(1,1): Condition always TRUE
->>> Warning 203 "SensorTemperatura.c" Line 30(1,1): Condition always TRUE
->>> Warning 216 "SensorTemperatura.c" Line 38(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_token_reset)
->>> Warning 216 "SensorTemperatura.c" Line 38(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_tbe)
->>> Warning 216 "SensorTemperatura.c" Line 38(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_cdc_flush_out_buffer)
+>>> Warning 203 "C:\Program Files (x86)\PICC\drivers\pic18_usb.c" Line 623(1,1): Condition always TRUE
+>>> Warning 229 "C:\Program Files (x86)\PICC\drivers\usb\usb_cdc.h" Line 508(1,1): Subscript out of range
+>>> Warning 229 "C:\Program Files (x86)\PICC\drivers\usb\usb_cdc.h" Line 509(1,1): Subscript out of range
+>>> Warning 203 "SensorTemperatura.c" Line 32(1,1): Condition always TRUE
+>>> Warning 216 "SensorTemperatura.c" Line 40(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_token_reset)
+>>> Warning 216 "SensorTemperatura.c" Line 40(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_tbe)
+>>> Warning 216 "SensorTemperatura.c" Line 40(2,3): Interrupts disabled during call to prevent re-entrancy:  (usb_cdc_flush_out_buffer)
       Memory usage:   ROM=19%      RAM=21% - 23%
-      0 Errors,  5 Warnings.
+      0 Errors,  7 Warnings.

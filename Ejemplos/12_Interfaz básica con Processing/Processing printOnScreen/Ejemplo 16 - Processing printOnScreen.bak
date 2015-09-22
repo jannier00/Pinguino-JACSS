@@ -21,8 +21,8 @@
    Pin_A0   Terminal Vout del LM35
    
 */
-#include <G-PiC Lite!.c>
-#include <G-PiC Lite! CDC.c>
+#include <Cabecera JACSS.c>
+#include <JACSS CDC.c>
 
 #define lm35Pin         A1             //Entrada analogica para el LM35
 

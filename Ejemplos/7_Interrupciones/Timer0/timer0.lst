@@ -1,9 +1,9 @@
-CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:42
 
-               Filename: C:\Users\PROGRA\Documents\Codigos CCS\InterrupTimer0\timer0.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\7_Interrupciones\Timer0\timer0.lst
 
-               ROM used: 324 bytes (1%)
-                         Largest free fragment is 24248
+               ROM used: 322 bytes (1%)
+                         Largest free fragment is 24250
                RAM used: 36 (2%) at main() level
                          37 (2%) worst case
                Stack:    2 worst case (1 in main + 1 for interrupts)
@@ -56,6 +56,7 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 20A4:  MOVFF  06,FE0
 20A8:  MOVFF  05,FD8
 20AC:  RETFIE 0
+.................... //Programa que utiliza en timer0 para contar aproximadamente 1s 
 .................... #include <18F4550.h> 
 .................... //////// Standard Header file for the PIC18F4550 device //////////////// 
 .................... #device PIC18F4550 
@@ -84,7 +85,7 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 20EE:  NOP   
 20F0:  DECFSZ FEF,F
 20F2:  BRA    20D8
-20F4:  GOTO   2136 (RETURN)
+20F4:  GOTO   2134 (RETURN)
 .................... #include <stdlib.h> 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////        (C) Copyright 1996,2007 Custom Computer Services           //// 
@@ -1892,7 +1893,7 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 ....................  
 .................... #endif 
 ....................  
-.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... #include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                                                                   //// 
 .................... ////                     USB_BOOTLOADER.H                              //// 
@@ -1978,7 +1979,9 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 ....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
 ....................  #endif 
 ....................  
-....................    #define  USB_CONFIG_PID       0x0034 
+....................    #define  USB_CONFIG_VID       0x04D8 
+....................     
+....................    #define  USB_CONFIG_PID       0x0002 
 ....................  
 ....................    #define USB_STRINGS_OVERWRITTEN 
 ....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
@@ -1994,32 +1997,39 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
 ....................             0x09,0x04,   //Microsoft Defined for US-English 
 ....................       //string 1  - manufacturer 
-....................             8, //length of string index 
+....................             12, //length of string index 
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................       //string 2 - product 
+....................             24, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................             ' ',0, 
+....................             'J',0, 
+....................             'A',0, 
 ....................             'C',0, 
 ....................             'S',0, 
-....................       //string 2 - product 
-....................             30, //length of string index 
-....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
-....................             'D',0, 
-....................             'C',0, 
-....................             ' ',0, 
-....................             'B',0, 
-....................             'o',0, 
-....................             'o',0, 
-....................             't',0, 
-....................             'l',0, 
-....................             'o',0, 
-....................             'a',0, 
-....................             'd',0, 
-....................             'e',0, 
-....................             'r',0 
+....................             'S',0, 
 ....................    }; 
 .................... #endif   //_bootloader 
 ....................  
 .................... #ifndef _bootloader 
+....................  #define  USB_CONFIG_VID       0x04D8 
+....................  #define  USB_CONFIG_PID       0x0002 
 ....................  //in the application, this moves the reset and isr vector out of the bootload 
 ....................  //space.  it then reserves the loader space from being used by the application. 
 ....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
@@ -2048,7 +2058,7 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 20BE:  INCF   21,F
 20C0:  BTFSC  FD8.2
 20C2:  INCF   22,F
-....................          cont=0;  
+....................          cont=0; //Reinicio contador 
 20C4:  CLRF   20
 20C6:  CLRF   1F
 ....................       }  
@@ -2080,39 +2090,37 @@ CCS PCH C Compiler, Version 4.120, 5967               17-dic-13 10:55
 ....................    enable_interrupts(global);//Habilito interrupción USART 
 211A:  MOVLW  C0
 211C:  IORWF  FF2,F
-....................    enable_interrupts(int_rda); 
-211E:  BSF    F9D.5
 ....................    enable_interrupts(INT_RTCC); 
-2120:  BSF    FF2.5
+211E:  BSF    FF2.5
 ....................    SETUP_ADC_PORTS(NO_ANALOGS); //Apagamo los analogicos para que sean digitales 
-2122:  MOVF   FC1,W
-2124:  ANDLW  C0
-2126:  IORLW  0F
-2128:  MOVWF  FC1
+2120:  MOVF   FC1,W
+2122:  ANDLW  C0
+2124:  IORLW  0F
+2126:  MOVWF  FC1
 ....................    setup_adc(ADC_OFF); 
-212A:  BCF    FC2.0
+2128:  BCF    FC2.0
 ....................    setup_timer_0 (RTCC_DIV_16); 
-212C:  MOVLW  83
-212E:  MOVWF  FD5
+212A:  MOVLW  83
+212C:  MOVWF  FD5
 ....................    delay_ms(100); 
-2130:  MOVLW  64
-2132:  MOVWF  23
-2134:  BRA    20CE
+212E:  MOVLW  64
+2130:  MOVWF  23
+2132:  BRA    20CE
 ....................  
 ....................     
 ....................    while(1){ 
-....................    if (segundos==180) output_bit(ledPin, 0);  
-2136:  MOVF   21,W
-2138:  SUBLW  B4
-213A:  BNZ   2144
-213C:  MOVF   22,F
-213E:  BNZ   2144
-2140:  BCF    F89.4
-2142:  BCF    F92.4
+....................    if (segundos==180) output_bit(ledPin, 0); //si pasan 180s  3m enciendo el LED 
+2134:  MOVF   21,W
+2136:  SUBLW  B4
+2138:  BNZ   2142
+213A:  MOVF   22,F
+213C:  BNZ   2142
+213E:  BCF    F89.4
+2140:  BCF    F92.4
 ....................    }   
-2144:  BRA    2136
+2142:  BRA    2134
 .................... } 
-2146:  SLEEP 
+2144:  SLEEP 
 
 Configuration Fuses:
    Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO

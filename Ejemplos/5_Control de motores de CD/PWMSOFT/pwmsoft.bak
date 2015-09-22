@@ -6,9 +6,9 @@
 //#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
 #define ledPin Pin_A4               //Etiqueta al Pin_A4 con el nombre de ledPin
 
-int32 contador=0;
-int32 frec=0;                          // Variable que indica la frecuencia del PWM
-int32 anchura=0;                  // Anchura del PWM
+int16 contador=0;
+int16 frec=0;                          // Variable que indica la frecuencia del PWM
+int16 anchura=0;                  // Anchura del PWM
 
 
 // 1Hz = 1 segundo = 1000mS

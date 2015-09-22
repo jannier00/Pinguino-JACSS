@@ -84,20 +84,20 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Relevadores y cargas\Ejemplo 10 - lightsOn\
+    E:\Pinguino JACSS\Ejemplos\10_Relevadores y cargas\lightsOn\
 
 Project Files:
-    Ejemplo 10 - lightsOn.c                                 [27-ene-13 21:00  CRC=AAEB5401]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Cabecera JACSS.c [12-mar-12 17:35  CRC=3DBE24E2]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Arduino Functions.c [15-mar-12 19:24  CRC=ED898A0E]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\analogWrite.c [12-mar-12 17:20  CRC=FAB0266E]
+    Ejemplo 10 - lightsOn.c                                 [22-sep-15 12:50  CRC=AAEB5401]
+    C:\Program Files (x86)\PICC\drivers\Cabecera_JACSS.c    [12-mar-12 18:35  CRC=3DBE24E2]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb_bootloader.h    [07-abr-09 11:51  CRC=21A70465]
+    C:\Program Files (x86)\PICC\drivers\Arduino Functions.c [01-ago-13 16:15  CRC=ACF8B952]
+    C:\Program Files (x86)\PICC\drivers\analogWrite.c       [12-mar-12 18:20  CRC=FAB0266E]
 
-Source signature=8A9E8C7C
+Source signature=4A0DBBC0
 
 Units:
-    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Relevadores y cargas\Ejemplo 10 - lightsOn\Ejemplo 10 - lightsOn (main)
+    E:\Pinguino JACSS\Ejemplos\10_Relevadores y cargas\lightsOn\Ejemplo 10 - lightsOn (main)
 
 Compiler Settings:
     Processor:      PIC18F4550

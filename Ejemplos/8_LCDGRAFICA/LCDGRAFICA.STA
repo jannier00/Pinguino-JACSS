@@ -13,12 +13,12 @@ Stack used: 5 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
   425   220  33  LCDGRAFICA.c
-  462     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
- 2220   257  39  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h
-  833   183  28  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\nokia_LCD.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+ 2220   257  39  C:\Program Files (x86)\PICC\drivers\math.h
+  833   183  28  C:\Program Files (x86)\PICC\drivers\nokia_LCD.c
 ----- -----
- 4073   660 Total
+ 4082   660 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

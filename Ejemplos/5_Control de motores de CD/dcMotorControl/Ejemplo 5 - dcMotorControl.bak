@@ -4,7 +4,7 @@
    se configura al inicio para la velocidad deseada.
    
    Hardware
-   G-PIC Lite!       SN754410 o L293D
+   Pinguino JACSS      SN754410 o L293D
    Pin_C1            Pin 1
    Pin_B0            Pin 2
    Pin_B1            Pin 7
@@ -16,7 +16,7 @@
    Importante: Verificar la hoja de datos del puente H para saber cómo 
    conectarlo correctamente
 */
-#include <G-PiC lite!.c>
+#include <Cabecera JACSS.c>
 
 #define buttonPin    Pin_A4
 

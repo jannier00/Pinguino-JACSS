@@ -71,18 +71,18 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicISP\
+    E:\Pinguino JACSS\Ejemplos\9_ProtocolosComunicacion\PicToPicSPI\ReceptorSPI\
 
 Project Files:
-    ReceptorSclavoISP.c                                     [14-jun-13 11:59  CRC=29E347A0]
-    ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
-    ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
-    ..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c [11-jun-13 17:29  CRC=A9E4CCCC]
+    ReceptorSclavoSPI.c                                     [22-sep-15 12:48  CRC=B764D067]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h [06-mar-15 10:37  CRC=58FDE936]
+    C:\Program Files (x86)\PICC\drivers\flex_lcd.c          [11-jun-13 17:29  CRC=A9E4CCCC]
 
-Source signature=3CB81DE7
+Source signature=01908B7F
 
 Units:
-    C:\Users\PROGRA\Documents\Codigos CCS\PicToPicISP\ReceptorSclavoISP (main)
+    E:\Pinguino JACSS\Ejemplos\9_ProtocolosComunicacion\PicToPicSPI\ReceptorSPI\ReceptorSclavoSPI (main)
 
 Compiler Settings:
     Processor:      PIC18F4550
@@ -93,12 +93,12 @@ Compiler Settings:
     Float,Double:   32,32
 
 Output Files:
-    Errors:      ReceptorSclavoISP.err
-    Ext Symbols: ReceptorSclavoISP.esym
-    INHX32:      ReceptorSclavoISP.hex
-    Symbols:     ReceptorSclavoISP.sym
-    List:        ReceptorSclavoISP.lst
-    Debug/COFF:  ReceptorSclavoISP.cof
-    Project:     ReceptorSclavoISP.PJT
-    Call Tree:   ReceptorSclavoISP.tre
-    Statistics:  ReceptorSclavoISP.STA
+    Errors:      ReceptorSclavoSPI.err
+    Ext Symbols: ReceptorSclavoSPI.esym
+    INHX32:      ReceptorSclavoSPI.hex
+    Symbols:     ReceptorSclavoSPI.sym
+    List:        ReceptorSclavoSPI.lst
+    Debug/COFF:  ReceptorSclavoSPI.cof
+    Project:     ReceptorSclavoSPI.PJT
+    Call Tree:   ReceptorSclavoSPI.tre
+    Statistics:  ReceptorSclavoSPI.STA

@@ -16,12 +16,5 @@ void main()
       delay_ms(200);               //Espera 1 segundo
       output_bit (ledPin, 1);   //Apaga el led
       delay_ms(200);               //Espera 1 segundo
-      output_bit (ledPin, 0);    //Enciende el led
-      delay_ms(200);               //Espera 1 segundo
-      output_bit (ledPin, 1);   //Apaga el led
-      delay_ms(5000);               //Espera 1 segundo
-      
-      
-      
    }
 }

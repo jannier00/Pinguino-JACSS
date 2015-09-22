@@ -4,7 +4,7 @@
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)
 #include <stdlib.h>
-#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader
 #define ledPin PIN_A4               //Etiqueta al Pin_A4 con el nombre de ledPin
 
 int16 cont=0, segundos=0;

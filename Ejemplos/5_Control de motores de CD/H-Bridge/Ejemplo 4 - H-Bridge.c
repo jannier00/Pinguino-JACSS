@@ -14,7 +14,7 @@
    Importante: Verificar la hoja de datos del puente H para saber cómo 
    conectarlo correctamente
 */
-#include <Cabecera JACSS.c>
+#include <Cabecera_JACSS.c>
 
 #define Enable12  Pin_C1         //PWM por hardware en el Pin_C1
 #define motor1A   Pin_B0         //Pin de control del puente H

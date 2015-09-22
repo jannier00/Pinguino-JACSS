@@ -40,7 +40,7 @@ int16 mide_distancia(void){
 
    while (true){ // lazo infinito
       distancia=mide_distancia(); // AQUI USAMOS NUESTRA FUNCION!!!
-
+      
       printf(usbWrite, "Distance = %Lu cm\n\r", distancia); //Display distance  
       delay_ms(1000);  
    }

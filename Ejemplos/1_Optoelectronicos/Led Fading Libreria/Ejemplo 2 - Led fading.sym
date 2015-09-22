@@ -91,20 +91,20 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Optoelectronicos\Led Fading Libreria\
+    E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Fading Libreria\
 
 Project Files:
-    Ejemplo 2 - Led fading.c                                [02-mar-13 14:48  CRC=4B8EC387]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Cabecera JACSS.c [12-mar-12 17:35  CRC=3DBE24E2]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr-11 15:02  CRC=9D64384A]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 11:51  CRC=21A70465]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\Arduino Functions.c [15-mar-12 19:24  CRC=ED898A0E]
-    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\analogWrite.c [12-mar-12 17:20  CRC=FAB0266E]
+    Ejemplo 2 - Led fading.c                                [22-sep-15 12:37  CRC=4B8EC387]
+    C:\Program Files (x86)\PICC\drivers\Cabecera_JACSS.c    [12-mar-12 18:35  CRC=3DBE24E2]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb_bootloader.h    [07-abr-09 11:51  CRC=21A70465]
+    C:\Program Files (x86)\PICC\drivers\Arduino Functions.c [01-ago-13 16:15  CRC=ACF8B952]
+    C:\Program Files (x86)\PICC\drivers\analogWrite.c       [12-mar-12 18:20  CRC=FAB0266E]
 
-Source signature=2B41FC02
+Source signature=EAB12B46
 
 Units:
-    C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Optoelectronicos\Led Fading Libreria\Ejemplo 2 - Led fading (main)
+    E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Fading Libreria\Ejemplo 2 - Led fading (main)
 
 Compiler Settings:
     Processor:      PIC18F4550

@@ -29,7 +29,7 @@ void main(){
       // Mover a 180º
       for (i=0; i<100; i++){
       output_high(servo);
-      delay_us(2405);
+      delay_us(2450);
       output_low(servo);
       delay_ms(20);
       }

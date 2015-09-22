@@ -1,0 +1,12 @@
+Se actualizo el Bootloader del Pinguino CDC,
+se corrigieron algunos errores para mejorar
+la comunicacion USB.
+
+Solo tienes que cargar el archivo main.hex de la carpeta  V2
+y copiar la carpeta /USB contenida en la carpeta /Librerias,
+a la carpeta de instalacion /Drivers de PIC C compiler.
+
+Modificar los include en el codigo
+#include <usb/usb_bootloader.h>
+#include <JACSS_CDC.c>
+#include <Cabecera_JACSS.c>

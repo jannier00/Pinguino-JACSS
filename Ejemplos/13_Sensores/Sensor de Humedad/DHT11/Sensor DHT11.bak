@@ -7,8 +7,6 @@
 #define DHT11_pin PIN_B0 //Defines pin a utilizar del sensor
 #include <dht11.c>  //esta es la libreria creada
 
-float hum, temp;
-
 void main() 
 { 
    usbInit(); //iniciamos comunicacion USB
@@ -19,8 +17,12 @@ void main()
    while(TRUE) 
    { 
       state = get_data(); 
+      
       switch(state) 
       { 
+            case 1: 
+            { 
+            } 
             case 2: 
             { 
                printf(usbWrite,"\fNo Sensor Found!"); 
@@ -33,14 +35,13 @@ void main()
             } 
             default: 
             { 
-               sprintf(hum,"%u.%02u", values[0], values[1]);
-               sprintf(temp,"%u.%02u",values[2], values[3]); 
+               printf(usbWrite,"R.H:%u.%02u\n\r ", values[0], values[1] );
+               printf(usbWrite,"Tmp:%u.%02u C\n\r ",values[2], values[3]); 
                delay_ms(200);
                break; 
             } 
       } 
-      
       delay_ms(1000); 
-   } 
+   }; 
 } 
 

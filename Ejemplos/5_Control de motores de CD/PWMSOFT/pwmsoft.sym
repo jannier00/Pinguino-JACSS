@@ -57,17 +57,17 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\PROGRA\Dropbox\PWMSOFT\
+    E:\Pinguino JACSS\Ejemplos\5_Control de motores de CD\PWMSOFT\
 
 Project Files:
-    pwmsoft.c                                               [12-nov-13 13:19  CRC=908E132F]
-    ..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h  [13-abr-11 14:02  CRC=9D64384A]
-    ..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr-09 10:51  CRC=21A70465]
+    pwmsoft.c                                               [22-sep-15 12:45  CRC=46F95F68]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h [06-mar-15 10:37  CRC=58FDE936]
 
-Source signature=71405443
+Source signature=96596A1E
 
 Units:
-    C:\Users\PROGRA\Dropbox\PWMSOFT\pwmsoft (main)
+    E:\Pinguino JACSS\Ejemplos\5_Control de motores de CD\PWMSOFT\pwmsoft (main)
 
 Compiler Settings:
     Processor:      PIC18F4550

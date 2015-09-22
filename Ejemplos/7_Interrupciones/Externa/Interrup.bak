@@ -10,7 +10,6 @@
 //******************************************************************************************
 ///////////////////////ASIGNACION DE NOMBRES A LOS RESPECTIVOS PUERTOS//////////////////////
 
-#BYTE PORTA=0xf80
 #BYTE PORTB=0xf81
 #BYTE PORTD=0xf83
 

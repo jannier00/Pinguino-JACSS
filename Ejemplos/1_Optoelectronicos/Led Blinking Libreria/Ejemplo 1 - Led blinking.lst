@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 10:58
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:37
 
-               Filename: C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking Libreria\Ejemplo 1 - Led blinking.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking Libreria\Ejemplo 1 - Led blinking.lst
 
                ROM used: 546 bytes (2%)
                          Largest free fragment is 24026
@@ -61,7 +61,7 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 10:58
 ....................    Enciende un led por 1 segundo, luego lo apaga por 1 segundo, de forma 
 ....................    repetitiva 
 .................... */ 
-.................... #include <Cabecera JACSS.c>             //Incluye las librerias necesarias 
+.................... #include <Cabecera_JACSS.c>             //Incluye las librerias necesarias 
 .................... #include <18F4550.h> 
 .................... //////// Standard Header file for the PIC18F4550 device //////////////// 
 .................... #device PIC18F4550 
@@ -729,7 +729,7 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 10:58
 .................... // 
 .................... //NOTA: Se emplea para lecturas de 8 bits de resolucion 
 .................... //****************************************************************************// 
-.................... #define AN0  0 
+.................... #define A0  0 
 .................... #define A1  1 
 .................... #define A2  2 
 .................... #define A3  3 

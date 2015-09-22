@@ -8,6 +8,8 @@
 #include <1wire.c> 
 #include <ds1820.c> 
 
+/*-------1-wire definitions-------*/ 
+//#define ONE_WIRE_PIN PIN_A0 
 
 void main() 
 { 

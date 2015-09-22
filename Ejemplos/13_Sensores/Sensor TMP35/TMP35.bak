@@ -7,7 +7,6 @@
 
 int16 Vout=0; 
 float  Temp=0.0;
-//setup_timer_2
 void temp_sensor(int8 j) 
 { 
  set_adc_channel(j); 

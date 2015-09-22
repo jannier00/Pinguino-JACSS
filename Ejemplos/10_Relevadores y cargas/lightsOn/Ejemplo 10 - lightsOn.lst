@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 21:00
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:50
 
-               Filename: C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Relevadores y cargas\Ejemplo 10 - lightsOn\Ejemplo 10 - lightsOn.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\10_Relevadores y cargas\lightsOn\Ejemplo 10 - lightsOn.lst
 
                ROM used: 540 bytes (2%)
                          Largest free fragment is 24032
@@ -78,7 +78,7 @@ CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 21:00
 ....................    -  Conectar la otra terminal de la lampara al neutro de la toma de CA 
 ....................    -  Conectar la terminal NO (Normally Open) a la fase de la toma de CA  
 .................... */ 
-.................... #include <Cabecera JACSS.c> 
+.................... #include <Cabecera_JACSS.c> 
 .................... #include <18F4550.h> 
 .................... //////// Standard Header file for the PIC18F4550 device //////////////// 
 .................... #device PIC18F4550 
@@ -746,7 +746,7 @@ CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 21:00
 .................... // 
 .................... //NOTA: Se emplea para lecturas de 8 bits de resolucion 
 .................... //****************************************************************************// 
-.................... #define AN0  0 
+.................... #define A0  0 
 .................... #define A1  1 
 .................... #define A2  2 
 .................... #define A3  3 

@@ -1,9 +1,9 @@
-CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:59
 
-               Filename: C:\Users\PROGRA\Documents\Codigos CCS\Servo\servosLib.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\14_Servo\ServoLib\servosLib.lst
 
-               ROM used: 466 bytes (1%)
-                         Largest free fragment is 24106
+               ROM used: 440 bytes (1%)
+                         Largest free fragment is 24132
                RAM used: 32 (2%) at main() level
                          38 (2%) worst case
                Stack:    3 worst case (1 in main + 2 for interrupts)
@@ -80,7 +80,7 @@ CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
 20E8:  DECFSZ FEF,F
 20EA:  BRA    20DE
 20EC:  RETURN 0
-.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... #include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                                                                   //// 
 .................... ////                     USB_BOOTLOADER.H                              //// 
@@ -166,7 +166,9 @@ CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
 ....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
 ....................  #endif 
 ....................  
-....................    #define  USB_CONFIG_PID       0x0034 
+....................    #define  USB_CONFIG_VID       0x04D8 
+....................     
+....................    #define  USB_CONFIG_PID       0x0002 
 ....................  
 ....................    #define USB_STRINGS_OVERWRITTEN 
 ....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
@@ -182,32 +184,39 @@ CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
 ....................             0x09,0x04,   //Microsoft Defined for US-English 
 ....................       //string 1  - manufacturer 
-....................             8, //length of string index 
+....................             12, //length of string index 
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................       //string 2 - product 
+....................             24, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................             ' ',0, 
+....................             'J',0, 
+....................             'A',0, 
 ....................             'C',0, 
 ....................             'S',0, 
-....................       //string 2 - product 
-....................             30, //length of string index 
-....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
-....................             'D',0, 
-....................             'C',0, 
-....................             ' ',0, 
-....................             'B',0, 
-....................             'o',0, 
-....................             'o',0, 
-....................             't',0, 
-....................             'l',0, 
-....................             'o',0, 
-....................             'a',0, 
-....................             'd',0, 
-....................             'e',0, 
-....................             'r',0 
+....................             'S',0, 
 ....................    }; 
 .................... #endif   //_bootloader 
 ....................  
 .................... #ifndef _bootloader 
+....................  #define  USB_CONFIG_VID       0x04D8 
+....................  #define  USB_CONFIG_PID       0x0002 
 ....................  //in the application, this moves the reset and isr vector out of the bootload 
 ....................  //space.  it then reserves the loader space from being used by the application. 
 ....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
@@ -322,7 +331,7 @@ CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
 217E:  MOVFF  1F,1C
 ....................    return; 
 .................... } 
-2182:  GOTO   21D2 (RETURN)
+2182:  GOTO   21B8 (RETURN)
 ....................  
 ....................  
 .................... int8 grados=0; 
@@ -355,33 +364,15 @@ CCS PCH C Compiler, Version 4.120, 5967               05-mar-14 16:42
 21B0:  BRA    2168
 ....................    while(TRUE) 
 ....................    { 
-....................       if (!input(PIN_A4)){  //Si PIN A4 esta en bajo 
-21B2:  BSF    F92.4
-21B4:  BTFSC  F80.4
-21B6:  BRA    21D2
-....................          while (!input(PIN_A4)); 
-21B8:  BSF    F92.4
-21BA:  BTFSS  F80.4
-21BC:  BRA    21B8
-....................          grados=grados + 2; 
-21BE:  MOVLW  02
-21C0:  ADDWF  1E,F
-....................          if (grados>180)  grados=180; 
-21C2:  MOVF   1E,W
-21C4:  SUBLW  B4
-21C6:  BC    21CC
-21C8:  MOVLW  B4
-21CA:  MOVWF  1E
 ....................          setServo(grados); //Funcion para mover servo en grados 
-21CC:  MOVFF  1E,1F
-21D0:  BRA    217C
-....................       } 
+21B2:  MOVFF  1E,1F
+21B6:  BRA    217C
 ....................    
 ....................    } 
-21D2:  BRA    21B2
+21B8:  BRA    21B2
 ....................        
 .................... } 
-21D4:  SLEEP 
+21BA:  SLEEP 
 
 Configuration Fuses:
    Word  1: CE24   PLL5 CPUDIV1 USBDIV HSPLL FCMEN IESO

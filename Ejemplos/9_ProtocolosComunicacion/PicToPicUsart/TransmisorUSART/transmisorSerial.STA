@@ -13,11 +13,11 @@ Stack used: 2 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    28     9  17  transmisorSerial.c
-  462     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-  135    43  83  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\kbd2.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+  135    43  83  C:\Program Files (x86)\PICC\drivers\kbd2.c
 ----- -----
-  758    52 Total
+  767    52 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

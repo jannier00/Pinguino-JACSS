@@ -13,11 +13,11 @@ Stack used: 6 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    50    12  15  ReceptorEsclavo.c
-  462     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-  238    69  85  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+  238    69  85  C:\Program Files (x86)\PICC\drivers\flex_lcd.c
 ----- -----
-  883    81 Total
+  892    81 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------

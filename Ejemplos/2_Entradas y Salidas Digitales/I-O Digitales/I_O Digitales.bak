@@ -22,7 +22,7 @@ void main()
       output_bit(PIN_B3, 1); //Ponemos en alto B3
       if (!input(PIN_A4)){  //Si PIN A4 esta en bajo
          printf(usbWrite,"\rPIN A4 esta en bajo \r\n");  //Imprime en consola
-         printf(usbWrite,"PUERTO B ESTATUS\r\n 0x%b \r\n", input_b()); //Leemos puerto B y lo imprimimos en cosola        
+         printf(usbWrite,"PUERTO B ESTATUS\r\n 0x%X \r\n", input_b()); //Leemos puerto B y lo imprimimos en cosola        
          delay_ms(1000);  // Retardo de 1s.
       }
    }

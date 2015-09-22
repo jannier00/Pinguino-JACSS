@@ -1,0 +1,77 @@
+[PROJECT]
+Target=main.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.044
+Compiler=PCH
+[Target Data]
+FileList=main.c
+[main.c]
+Type=4
+[mru-list]
+1=main.c
+
+[defines]
+buildcount=4
+
+[ProjectLog]
+Days=4
+D1=10-04-2015
+D1_L=4
+D1_L1=[39713]Stopped Editing.
+D1_L2=[40398]Started Editing.
+D1_L3=[40685]Stopped Editing.
+TotalEdit=8
+TotalDebug=0
+D1_E=6
+D1_D=0
+D1_L4=[40685]Project Closed.
+D2=29-05-2015
+D2_L=4
+D2_L1=[39543]Project Opened.
+D2_L2=[39556]Started Editing.
+D2_L3=[39577]Stopped Editing.
+D2_E=1
+D2_D=0
+D2_L4=[39577]Project Closed.
+D3=01-06-2015
+D3_L=2
+D3_L1=[33651]Project Opened.
+D3_L2=[33666]Project Closed.
+D4=10-06-2015
+D4_L=4
+D4_L1=[42598]Project Opened.
+D4_L2=[42686]Started Editing.
+D4_L3=[42738]Stopped Editing.
+D4_E=1
+D4_D=0
+D4_L4=[42738]Project Closed.
+
+[Opened Files]
+1=main.c
+t1=1
+2=config18F4550Trainer.c
+t2=1
+3=..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+t3=1
+4=usb\usb_bootloader.h
+t4=1
+5=usb\usb_cdc.h
+t5=1
+6=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\pic18_usb.h
+t6=1
+7=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_hw_layer.h
+t7=1
+Count=12
+8=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_desc_cdc.h
+t8=1
+9=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb.h
+t9=1
+10=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb.c
+t10=1
+11=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\pic18_usb.c
+t11=1
+12=..\..\..\..\..\..\Program Files (x86)\PICC\drivers\ctype.h
+t12=1
+[Units]
+Count=1
+1=main (main)

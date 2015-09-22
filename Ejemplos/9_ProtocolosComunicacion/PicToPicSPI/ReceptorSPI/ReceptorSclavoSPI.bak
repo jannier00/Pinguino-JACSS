@@ -26,8 +26,7 @@ void main()
    for(;;)
    {
       if(spi_data_is_in())      //si hay un dato en el spi
-      {       
-         //output_d(spi_read());  
+      {        
          dato=(spi_read()); 
          lcd_gotoxy(1,1);
          printf(lcd_putc," %Ld   ",dato);

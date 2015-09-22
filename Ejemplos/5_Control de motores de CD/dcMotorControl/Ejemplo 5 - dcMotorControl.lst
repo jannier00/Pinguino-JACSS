@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 20:56
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:45
 
-               Filename: C:\Users\Jannier\Documents\G-PIC\Pinguino JACSS\Ejemplos\Control de motores de CD\b) dcMotorControl\Ejemplo 5 - dcMotorControl.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\5_Control de motores de CD\dcMotorControl\Ejemplo 5 - dcMotorControl.lst
 
                ROM used: 1052 bytes (3%)
                          Largest free fragment is 23520
@@ -74,7 +74,7 @@ CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 20:56
 ....................    Importante: Verificar la hoja de datos del puente H para saber cómo  
 ....................    conectarlo correctamente 
 .................... */ 
-.................... #include <Cabecera JACSS.c> 
+.................... #include <Cabecera_JACSS.c> 
 .................... #include <18F4550.h> 
 .................... //////// Standard Header file for the PIC18F4550 device //////////////// 
 .................... #device PIC18F4550 
@@ -956,7 +956,7 @@ CCS PCH C Compiler, Version 4.120, 5967               27-ene-13 20:56
 .................... // 
 .................... //NOTA: Se emplea para lecturas de 8 bits de resolucion 
 .................... //****************************************************************************// 
-.................... #define AN0  0 
+.................... #define A0  0 
 .................... #define A1  1 
 .................... #define A2  2 
 .................... #define A3  3 

@@ -25,11 +25,11 @@ void main()                      //Inicia el programa principal
       
       for (duty=0; duty < 100; duty++){ 
       analogWrite(11,duty);      //Habilita la salida PWM con un valor de 0 a 100
-      delay_ms(1);             //Espera 100ms}  
+      delay_ms(100);             //Espera 100ms}  
       }
       for (duty=100; duty >0; duty--){ 
       analogWrite(11,duty);      //Habilita la salida PWM con un valor de 0 a 100
-      delay_ms(1);             //Espera 100ms}  
+      delay_ms(100);             //Espera 100ms}  
    }
 
 }

@@ -1,4 +1,6 @@
->>> Warning 203 "C:\Program Files (x86)\PICC\drivers\usb\pic18_usb.c" Line 531(1,1): Condition always TRUE
+>>> Warning 203 "C:\Program Files (x86)\PICC\drivers\pic18_usb.c" Line 623(1,1): Condition always TRUE
+>>> Warning 229 "C:\Program Files (x86)\PICC\drivers\usb\usb_cdc.h" Line 508(1,1): Subscript out of range
+>>> Warning 229 "C:\Program Files (x86)\PICC\drivers\usb\usb_cdc.h" Line 509(1,1): Subscript out of range
 >>> Warning 216 "ReceptorSerial.c" Line 37(0,1): Interrupts disabled during call to prevent re-entrancy:  (usb_token_reset)
       Memory usage:   ROM=14%      RAM=20% - 22%
-      0 Errors,  2 Warnings.
+      0 Errors,  4 Warnings.

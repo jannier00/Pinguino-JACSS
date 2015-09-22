@@ -2,8 +2,8 @@
 #device ADC = 10 
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)  //#use delay(clock=20000000)
-#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
-#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
+#include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <JACSS_CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
 
 int16 Vout=0; 
 float  Temp=0.0;

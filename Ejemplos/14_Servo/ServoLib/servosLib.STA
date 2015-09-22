@@ -1,9 +1,9 @@
 
-ROM used: 466 (1%)
-          470 (1%) including unused fragments
+ROM used: 440 (1%)
+          444 (1%) including unused fragments
 
           1 Average locations per line
-          16 Average locations per statement
+          19 Average locations per statement
 
 RAM used: 32 (2%) at main() level
           38 (2%) worst case
@@ -12,40 +12,40 @@ Stack used: 3 worst case (out of 31 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   27    12  40  servosLib.c
-  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-   40    18  60  servoSof.c
+   22     5  22  servosLib.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+   40    18  78  C:\Program Files (x86)\PICC\drivers\servoSof.c
 ----- -----
-  662    30 Total
+  666    23 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     32   3   1             @delay_us1
-0    122  13   1   351  6.2  TIMER2_isr
-0     32   3   5   172  2.3  @MUL1616
+0     32   4   1             @delay_us1
+0    122  14   1   351  6.2  TIMER2_isr
+0     32   4   5             @MUL1616
 0     20   2   0    78  2.0  initServo
 0     10   1   1    33  2.0  setServo
-0     80   9   0   221  4.0  MAIN
+0     54   6   0    61  1.5  MAIN
 
 Program metrics:
-    Functions               5
-    Statements              30
-    Comments                164
-    Volume (V)              1234
-    Difficilty (D)          16.5
-    Effort to implement (E) 20342
-    Time to implement (T)   19 minutes
+    Functions               4
+    Statements              23
+    Comments                163
+    Volume (V)              712
+    Difficilty (D)          11.5
+    Effort to implement (E) 8212
+    Time to implement (T)   8 minutes
     Est Delivered Bugs (B)  0
-    Cyclomatic Complexity   5
-    Maintainability (MI)    139
+    Cyclomatic Complexity   3
+    Maintainability (MI)    93
 
  Segment     Used  Free
 -----------  ----  ----
 00000-01FFE     0  8192  
 02000-02006     4  4  
 02008-020AC   166  0  
-020AE-07FFE   296  24106  
+020AE-07FFE   270  24132  
 
 
 

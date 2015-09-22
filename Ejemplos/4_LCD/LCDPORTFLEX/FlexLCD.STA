@@ -13,16 +13,16 @@ Stack used: 6 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    42    10  13  FlexLCD.c
-  462     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
-  238    69  87  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\flex_lcd.c
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
+  238    69  87  C:\Program Files (x86)\PICC\drivers\flex_lcd.c
 ----- -----
-  875    79 Total
+  884    79 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     40   3   1             @delay_ms1
-0     20   2   0   253  3.2  @const67
+0     20   2   0             @const67
 0     70   6   1   328  2.7  lcd_send_nibble
 0     50   4   1   362  2.3  lcd_read_nibble
 0     36   3   3   165  3.3  lcd_read_byte
@@ -36,16 +36,16 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0      6   1   0             @const103
 
 Program metrics:
-    Functions               9
+    Functions               8
     Statements              79
     Comments                237
-    Volume (V)              4042
-    Difficilty (D)          30.7
-    Effort to implement (E) 124135
-    Time to implement (T)   1 hours, 55 minutes
+    Volume (V)              3556
+    Difficilty (D)          27.4
+    Effort to implement (E) 97370
+    Time to implement (T)   1 hours, 30 minutes
     Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   9
-    Maintainability (MI)    154
+    Cyclomatic Complexity   8
+    Maintainability (MI)    144
 
  Segment     Used  Free
 -----------  ----  ----

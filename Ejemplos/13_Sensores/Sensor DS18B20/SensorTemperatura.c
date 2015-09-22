@@ -3,8 +3,8 @@
 //#device ADC = 10 //Define la resolucion del ADC, comentar en caso de usar 8
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)
-#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
-#include <JACSS CDC.c>
+#include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <JACSS_CDC.c>
 #include <1wire.c> 
 #include <ds1820.c> 
 

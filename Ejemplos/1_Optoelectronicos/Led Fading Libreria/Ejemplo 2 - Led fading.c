@@ -10,7 +10,7 @@
    requiera PWM.
 */
 
-#include <Cabecera JACSS.c>
+#include <Cabecera_JACSS.c>
 
 #define ledPin Pin_A4            //Define una etiqueta para el pin del led
 int8 duty;                   //Declara una variable para el ciclo de trabajo

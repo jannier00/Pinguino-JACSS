@@ -29,7 +29,7 @@
 #IFNDEF __USB_DESCRIPTORS__
 #DEFINE __USB_DESCRIPTORS__
 
-#include "usb\usb.h"
+#include <usb.h>
 
 
 //////////////////////////////////////////////////////////////////
@@ -181,8 +181,8 @@
          0x00, //subclass code ==5
          0x00, //protocol code ==6
          USB_MAX_EP0_PACKET_LENGTH, //max packet size for endpoint 0. (SLOW SPEED SPECIFIES 8) ==7
-         0xD8,0x04, //vendor id (0x04D8 is Microchip, or is it 0x0461 ??)  ==8,9
-         0x01,0x00, //product id   ==10,11
+         0x61,0x04, //vendor id (0x04D8 is Microchip, or is it 0x0461 ??)  ==8,9
+         0x34,0x00, //product id   ==10,11
          0x00,0x01, //device release number  ==12,13
          0x01, //index of string description of manufacturer. therefore we point to string_1 array (see below)  ==14
          0x02, //index of string descriptor of the product  ==15
@@ -210,17 +210,20 @@ char const USB_STRING_DESC[]={
          USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING)
          0x09,0x04,   //Microsoft Defined for US-English
    //string 1  - manufacturer
-         12, //length of string index
+         8, //length of string index
          USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING)
-         'J',0,
-            'A',0,
-            'C',0,
-            'S',0,
-            'S',0,
+            'P',0,
+            'I',0,
+            'N',0,
+            'G',0,
+            'U',0,
+            'I',0,
+            'N',0,
+            'O',0,
    //string 2 - product
-         24, //length of string index
+         38, //length of string index
          USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING)
-         'P',0,
+            'P',0,
             'I',0,
             'N',0,
             'G',0,

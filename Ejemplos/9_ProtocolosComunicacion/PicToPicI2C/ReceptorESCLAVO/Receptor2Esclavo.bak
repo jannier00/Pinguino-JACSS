@@ -6,7 +6,7 @@
 //       El PIC maestro lee teclado y envía el dato al PIC esclavo via I2C    //
 //                      que lo mostrará en un lcd.                            //
 //                                                                            //
-//                            (c) RobotyPic                                   //
+//                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 #include <18F4550.h>
 //#device adc = 10 

@@ -1,0 +1,32 @@
+[PROJECT]
+Target=hola mundo.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.044
+Compiler=PCH
+[Target Data]
+FileList=hola mundo.c
+[hola mundo.c]
+Type=4
+[mru-list]
+1=hola mundo.c
+
+[defines]
+buildcount=4
+
+[Opened Files]
+1=hola mundo.c
+t1=1
+2=C:\Program Files\PICC\Drivers\JACSS_CDC.c
+t2=1
+Count=2
+
+[ProjectLog]
+Days=1
+D1=22-09-2015
+D1_L=3
+D1_L1=[44582]Stopped Editing.
+D1_L2=[44633]Started Editing.
+D1_L3=[44933]Stopped Editing.
+[Units]
+Count=1
+1=hola mundo (main)

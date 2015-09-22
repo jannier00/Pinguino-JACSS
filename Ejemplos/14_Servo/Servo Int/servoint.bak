@@ -36,7 +36,7 @@ void main()
    {
       if (!input(PIN_A4)){  //Si PIN A4 esta en bajo
          while (!input(PIN_A4));
-         grados=grados + 10;
+         grados=grados + 5;
       }
   
    }

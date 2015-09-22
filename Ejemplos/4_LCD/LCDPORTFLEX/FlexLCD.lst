@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:40
 
-               Filename: C:\Users\Jannier\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\4_LCD\LCDPORTFLEX\FlexLCD.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\4_LCD\LCDPORTFLEX\FlexLCD.lst
 
                ROM used: 592 bytes (2%)
                          Largest free fragment is 23980
@@ -49,7 +49,7 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 204A:  DECFSZ FEF,F
 204C:  BRA    2032
 204E:  RETURN 0
-.................... #include <usb_bootloader.h>//Comenta esta línea si no usas Bootloader 
+.................... #include <usb/usb_bootloader.h>//Comenta esta línea si no usas Bootloader 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                                                                   //// 
 .................... ////                     USB_BOOTLOADER.H                              //// 
@@ -135,7 +135,9 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 ....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
 ....................  #endif 
 ....................  
-....................    #define  USB_CONFIG_PID       0x0034 
+....................    #define  USB_CONFIG_VID       0x04D8 
+....................     
+....................    #define  USB_CONFIG_PID       0x0002 
 ....................  
 ....................    #define USB_STRINGS_OVERWRITTEN 
 ....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
@@ -151,32 +153,39 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
 ....................             0x09,0x04,   //Microsoft Defined for US-English 
 ....................       //string 1  - manufacturer 
-....................             8, //length of string index 
+....................             12, //length of string index 
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................       //string 2 - product 
+....................             24, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................             ' ',0, 
+....................             'J',0, 
+....................             'A',0, 
 ....................             'C',0, 
 ....................             'S',0, 
-....................       //string 2 - product 
-....................             30, //length of string index 
-....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
-....................             'D',0, 
-....................             'C',0, 
-....................             ' ',0, 
-....................             'B',0, 
-....................             'o',0, 
-....................             'o',0, 
-....................             't',0, 
-....................             'l',0, 
-....................             'o',0, 
-....................             'a',0, 
-....................             'd',0, 
-....................             'e',0, 
-....................             'r',0 
+....................             'S',0, 
 ....................    }; 
 .................... #endif   //_bootloader 
 ....................  
 .................... #ifndef _bootloader 
+....................  #define  USB_CONFIG_VID       0x04D8 
+....................  #define  USB_CONFIG_PID       0x0002 
 ....................  //in the application, this moves the reset and isr vector out of the bootload 
 ....................  //space.  it then reserves the loader space from being used by the application. 
 ....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
@@ -184,13 +193,13 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 .................... #endif 
 ....................  
 ....................  
-.................... #define LCD_DB4   PIN_B4 
-.................... #define LCD_DB5   PIN_B5 
-.................... #define LCD_DB6   PIN_B6      //CONFIGURAMOS LOS PINES PARA LA LCD 
-.................... #define LCD_DB7   PIN_B7 
-.................... #define LCD_RS    PIN_B1 
-.................... #define LCD_RW    PIN_B2 
-.................... #define LCD_E     PIN_B0 
+.................... #define LCD_DB4   PIN_D4 
+.................... #define LCD_DB5   PIN_D5 
+.................... #define LCD_DB6   PIN_D6      //CONFIGURAMOS LOS PINES PARA LA LCD 
+.................... #define LCD_DB7   PIN_D7 
+.................... #define LCD_RS    PIN_C0 
+.................... #define LCD_RW    PIN_C1 
+.................... #define LCD_E     PIN_C2 
 ....................  
 .................... #include <flex_lcd.c>  
 .................... // flex_lcd.c 
@@ -237,37 +246,37 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 ....................  output_bit(LCD_DB4, !!(nibble & 1)); 
 2050:  BTFSC  0F.0
 2052:  BRA    2058
-2054:  BCF    F8A.4
+2054:  BCF    F8C.4
 2056:  BRA    205A
-2058:  BSF    F8A.4
-205A:  BCF    F93.4
+2058:  BSF    F8C.4
+205A:  BCF    F95.4
 ....................  output_bit(LCD_DB5, !!(nibble & 2)); 
 205C:  BTFSC  0F.1
 205E:  BRA    2064
-2060:  BCF    F8A.5
+2060:  BCF    F8C.5
 2062:  BRA    2066
-2064:  BSF    F8A.5
-2066:  BCF    F93.5
+2064:  BSF    F8C.5
+2066:  BCF    F95.5
 ....................  output_bit(LCD_DB6, !!(nibble & 4)); 
 2068:  BTFSC  0F.2
 206A:  BRA    2070
-206C:  BCF    F8A.6
+206C:  BCF    F8C.6
 206E:  BRA    2072
-2070:  BSF    F8A.6
-2072:  BCF    F93.6
+2070:  BSF    F8C.6
+2072:  BCF    F95.6
 ....................  output_bit(LCD_DB7, !!(nibble & 8)); 
 2074:  BTFSC  0F.3
 2076:  BRA    207C
-2078:  BCF    F8A.7
+2078:  BCF    F8C.7
 207A:  BRA    207E
-207C:  BSF    F8A.7
-207E:  BCF    F93.7
+207C:  BSF    F8C.7
+207E:  BCF    F95.7
 ....................  
 ....................  delay_cycles(1); 
 2080:  NOP   
 ....................  output_high(LCD_E); 
-2082:  BCF    F93.0
-2084:  BSF    F8A.0
+2082:  BCF    F94.2
+2084:  BSF    F8B.2
 ....................  delay_us(2); 
 2086:  MOVLW  07
 2088:  MOVWF  00
@@ -275,8 +284,8 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 208C:  BRA    208A
 208E:  BRA    2090
 ....................  output_low(LCD_E); 
-2090:  BCF    F93.0
-2092:  BCF    F8A.0
+2090:  BCF    F94.2
+2092:  BCF    F8B.2
 .................... } 
 2094:  RETURN 0
 ....................  
@@ -301,35 +310,35 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 2096:  CLRF   10
 ....................  
 .................... output_high(LCD_E); 
-2098:  BCF    F93.0
-209A:  BSF    F8A.0
+2098:  BCF    F94.2
+209A:  BSF    F8B.2
 .................... delay_cycles(1); 
 209C:  NOP   
 ....................  
 .................... retval_0 = input(LCD_DB4); 
-209E:  BSF    F93.4
+209E:  BSF    F95.4
 20A0:  BCF    10.0
-20A2:  BTFSC  F81.4
+20A2:  BTFSC  F83.4
 20A4:  BSF    10.0
 .................... retval_1 = input(LCD_DB5); 
-20A6:  BSF    F93.5
+20A6:  BSF    F95.5
 20A8:  BCF    10.1
-20AA:  BTFSC  F81.5
+20AA:  BTFSC  F83.5
 20AC:  BSF    10.1
 .................... retval_2 = input(LCD_DB6); 
-20AE:  BSF    F93.6
+20AE:  BSF    F95.6
 20B0:  BCF    10.2
-20B2:  BTFSC  F81.6
+20B2:  BTFSC  F83.6
 20B4:  BSF    10.2
 .................... retval_3 = input(LCD_DB7); 
-20B6:  BSF    F93.7
+20B6:  BSF    F95.7
 20B8:  BCF    10.3
-20BA:  BTFSC  F81.7
+20BA:  BTFSC  F83.7
 20BC:  BSF    10.3
 ....................  
 .................... output_low(LCD_E); 
-20BE:  BCF    F93.0
-20C0:  BCF    F8A.0
+20BE:  BCF    F94.2
+20C0:  BCF    F8B.2
 ....................  
 .................... return(retval); 
 20C2:  MOVFF  10,01
@@ -347,8 +356,8 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 .................... int8 high; 
 ....................  
 .................... output_high(LCD_RW); 
-20C8:  BCF    F93.2
-20CA:  BSF    F8A.2
+20C8:  BCF    F94.1
+20CA:  BSF    F8B.1
 .................... delay_cycles(1); 
 20CC:  NOP   
 ....................  
@@ -377,8 +386,8 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 .................... void lcd_send_byte(int8 address, int8 n) 
 .................... { 
 .................... output_low(LCD_RS); 
-20EC:  BCF    F93.1
-20EE:  BCF    F8A.1
+20EC:  BCF    F94.0
+20EE:  BCF    F8B.0
 ....................  
 .................... #ifdef USE_LCD_RW 
 .................... while(bit_test(lcd_read_byte(),7)) ; 
@@ -394,28 +403,28 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 20FA:  MOVF   0C,F
 20FC:  BZ    2104
 ....................    output_high(LCD_RS); 
-20FE:  BCF    F93.1
-2100:  BSF    F8A.1
+20FE:  BCF    F94.0
+2100:  BSF    F8B.0
 .................... else 
 2102:  BRA    2108
 ....................    output_low(LCD_RS); 
-2104:  BCF    F93.1
-2106:  BCF    F8A.1
+2104:  BCF    F94.0
+2106:  BCF    F8B.0
 ....................  
 ....................  delay_cycles(1); 
 2108:  NOP   
 ....................  
 .................... #ifdef USE_LCD_RW 
 .................... output_low(LCD_RW); 
-210A:  BCF    F93.2
-210C:  BCF    F8A.2
+210A:  BCF    F94.1
+210C:  BCF    F8B.1
 .................... delay_cycles(1); 
 210E:  NOP   
 .................... #endif 
 ....................  
 .................... output_low(LCD_E); 
-2110:  BCF    F93.0
-2112:  BCF    F8A.0
+2110:  BCF    F94.2
+2112:  BCF    F8B.2
 ....................  
 .................... lcd_send_nibble(n >> 4); 
 2114:  SWAPF  0D,W
@@ -439,18 +448,18 @@ CCS PCH C Compiler, Version 4.120, 5967               03-abr.-14 16:31
 .................... int8 i; 
 ....................  
 .................... output_low(LCD_RS); 
-212E:  BCF    F93.1
-2130:  BCF    F8A.1
+212E:  BCF    F94.0
+2130:  BCF    F8B.0
 ....................  
 .................... #ifdef USE_LCD_RW 
 .................... output_low(LCD_RW); 
-2132:  BCF    F93.2
-2134:  BCF    F8A.2
+2132:  BCF    F94.1
+2134:  BCF    F8B.1
 .................... #endif 
 ....................  
 .................... output_low(LCD_E); 
-2136:  BCF    F93.0
-2138:  BCF    F8A.0
+2136:  BCF    F94.2
+2138:  BCF    F8B.2
 ....................  
 .................... delay_ms(15); 
 213A:  MOVLW  0F

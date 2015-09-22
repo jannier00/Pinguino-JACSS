@@ -13,29 +13,29 @@ Stack used: 2 worst case (out of 31 total available)
 Lines Stmts  %   Files
 ----- ----- ---  -----
    45    23 100  servoint.c
-  462     0   0  ..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
-  133     0   0  ..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h
+  462     0   0  C:\Program Files (x86)\PICC\devices\18F4550.h
+  142     0   0  C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h
 ----- -----
-  640    23 Total
+  649    23 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     32   4   1             @delay_us1
 0    122  14   1   351  6.2  TIMER2_isr
-0     32   4   5   154  2.6  @MUL1616
+0     32   4   5             @MUL1616
 0     80   9   0   223  4.1  MAIN
 
 Program metrics:
-    Functions               3
+    Functions               2
     Statements              23
     Comments                154
-    Volume (V)              955
-    Difficilty (D)          12.7
-    Effort to implement (E) 12108
-    Time to implement (T)   11 minutes
+    Volume (V)              689
+    Difficilty (D)          9.9
+    Effort to implement (E) 6798
+    Time to implement (T)   6 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   4
-    Maintainability (MI)    58
+    Maintainability (MI)    143
 
  Segment     Used  Free
 -----------  ----  ----

@@ -4,9 +4,10 @@
 #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
 #USE DELAY (Clock = 20000000)
 
+#USE RS232 (BAUD = 57600, UART1)
 
 #INCLUDE <math.h>
-#INCLUDE "nokia_lcd.c"
+#INCLUDE "nokia_LCD.c"
 
 char const logonokia [168]={ // 83x15
 0xFF,0xFF,0xFF,0xFF,0x1F,0x1F,0x7F,0xFE,0xFC,0xF0,0xE0,0xC0,0x00,0x00,0x00,0xFF,
@@ -86,13 +87,7 @@ void main(void)
       
    while(true) 
    {   
-      /*printf("Libreria para ");
-      printf("LCD Nokia 3310");
-      printf("con PIC18F2550/CCS ");
-      printf("              ");
-      printf("          2009");
-      printf("      JeremyLF");
-*/
+      
       nokia_borra_pantalla();
 
       nokia_texto(0, 0, NORMAL, str1);

@@ -34,17 +34,17 @@ User Memory space:
 User Memory space: 
 
 Project Directory:
-    C:\Users\JANNIER\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking\
+    E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking\
 
 Project Files:
-    Blinking LED.c                                          [12-mar.-13 14:22  CRC=D91717B9]
-    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [13-abr.-11 16:02  CRC=9D64384A]
-    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\drivers\usb_bootloader.h [07-abr.-09 12:51  CRC=21A70465]
+    Blinking LED.c                                          [22-sep-15 12:34  CRC=35DE6035]
+    C:\Program Files (x86)\PICC\devices\18F4550.h           [13-abr-11 16:02  CRC=9D64384A]
+    C:\Program Files (x86)\PICC\drivers\usb\usb_bootloader.h [06-mar-15 10:37  CRC=58FDE936]
 
-Source signature=B9C958CD
+Source signature=853E6AEB
 
 Units:
-    C:\Users\JANNIER\Documents\Proyectos Ingenieria\pinguino HACK\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking\Blinking LED (main)
+    E:\Pinguino JACSS\Ejemplos\1_Optoelectronicos\Led Blinking\Blinking LED (main)
 
 Compiler Settings:
     Processor:      PIC18F4550

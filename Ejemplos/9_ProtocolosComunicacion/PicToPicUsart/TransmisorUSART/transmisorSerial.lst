@@ -1,6 +1,6 @@
-CCS PCH C Compiler, Version 4.120, 5967               10-jun-13 16:12
+CCS PCH C Compiler, Version 4.120, 5967               22-sep-15 12:49
 
-               Filename: C:\Users\Jannier\Documents\G-PIC\Programas\PicToPicUsart\transmisorSerial.lst
+               Filename: E:\Pinguino JACSS\Ejemplos\9_ProtocolosComunicacion\PicToPicUsart\TransmisorUSART\transmisorSerial.lst
 
                ROM used: 376 bytes (1%)
                          Largest free fragment is 24196
@@ -38,7 +38,7 @@ CCS PCH C Compiler, Version 4.120, 5967               10-jun-13 16:12
 212A:  DECFSZ FEF,F
 212C:  BRA    2120
 212E:  GOTO   2178 (RETURN)
-.................... #include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
+.................... #include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                                                                   //// 
 .................... ////                     USB_BOOTLOADER.H                              //// 
@@ -124,7 +124,9 @@ CCS PCH C Compiler, Version 4.120, 5967               10-jun-13 16:12
 ....................    #org APPLICATION_START+0x10, APPLICATION_END {} 
 ....................  #endif 
 ....................  
-....................    #define  USB_CONFIG_PID       0x0034 
+....................    #define  USB_CONFIG_VID       0x04D8 
+....................     
+....................    #define  USB_CONFIG_PID       0x0002 
 ....................  
 ....................    #define USB_STRINGS_OVERWRITTEN 
 ....................    char USB_STRING_DESC_OFFSET[]={0,4,12}; 
@@ -140,39 +142,46 @@ CCS PCH C Compiler, Version 4.120, 5967               10-jun-13 16:12
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
 ....................             0x09,0x04,   //Microsoft Defined for US-English 
 ....................       //string 1  - manufacturer 
-....................             8, //length of string index 
+....................             12, //length of string index 
 ....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................       //string 2 - product 
+....................             24, //length of string index 
+....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
+....................             'P',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'G',0, 
+....................             'U',0, 
+....................             'I',0, 
+....................             'N',0, 
+....................             'O',0, 
+....................             ' ',0, 
+....................             'J',0, 
+....................             'A',0, 
 ....................             'C',0, 
 ....................             'S',0, 
-....................       //string 2 - product 
-....................             30, //length of string index 
-....................             0x03, //USB_DESC_STRING_TYPE, //descriptor type 0x03 (STRING) 
-....................             'C',0, 
-....................             'D',0, 
-....................             'C',0, 
-....................             ' ',0, 
-....................             'B',0, 
-....................             'o',0, 
-....................             'o',0, 
-....................             't',0, 
-....................             'l',0, 
-....................             'o',0, 
-....................             'a',0, 
-....................             'd',0, 
-....................             'e',0, 
-....................             'r',0 
+....................             'S',0, 
 ....................    }; 
 .................... #endif   //_bootloader 
 ....................  
 .................... #ifndef _bootloader 
+....................  #define  USB_CONFIG_VID       0x04D8 
+....................  #define  USB_CONFIG_PID       0x0002 
 ....................  //in the application, this moves the reset and isr vector out of the bootload 
 ....................  //space.  it then reserves the loader space from being used by the application. 
 ....................  #build(reset=APPLICATION_START, interrupt=APPLICATION_ISR) 
 ....................  #org 0, LOADER_END {} 
 .................... #endif 
 ....................  
-.................... //#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion. 
+.................... //#include <JACSS_CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion. 
 .................... #include <kbd2.c>  //Libreria para Teclado Matricial 4x4 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... ////                     KBD_LIB.C by Redraven                         //// 

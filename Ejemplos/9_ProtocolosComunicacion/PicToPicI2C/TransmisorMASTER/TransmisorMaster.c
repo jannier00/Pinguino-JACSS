@@ -12,7 +12,7 @@
 //#device adc = 10 
 #fuses HSPLL,NOWDT,NOPROTECT,NOLVP,NODEBUG,USBDIV,PLL5,CPUDIV1,VREGEN,NOPBADEN
 #use delay(clock=48000000)  //#use delay(clock=20000000)
-#include <usb_bootloader.h> //Comenta esta línea si no usas Bootloader
+#include <usb/usb_bootloader.h> //Comenta esta línea si no usas Bootloader
 //#include <JACSS CDC.c>  //Libreria que genera el puerto COM virtual para comunicacion.
 #include <kbd2_1.c>  //Libreria para Teclado Matricial 4x4
 #use i2c(MASTER, SDA=PIN_C6, SLOW, SCL=PIN_C7, NOFORCE_SW)
